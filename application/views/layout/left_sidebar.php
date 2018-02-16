@@ -19,12 +19,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	            	<i class="fa fa-dashboard"></i> <span>Dashboard</span>
 	          	</a>
         	</li>
-          <li class="<?php echo active_link_method('create') ?>">
-              <a href="<?php echo base_url('laporan_masyarakat/create') ?>">
+          <li class="<?php echo active_link_method('index','laporan_masyarakat') ?>">
+              <a href="<?php echo base_url('laporan_masyarakat') ?>">
                 <i class="fa fa-pencil"></i> <span>Buat Laporan Masyarakat</span>
               </a>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('laporan_masyarakat')); ?>">
+           <li class="<?php echo active_link_method('data_laporan','laporan_masyarakat') ?>">
+              <a href="<?php echo base_url('laporan_masyarakat/data_laporan') ?>">
+                <i class="fa fa-file-text"></i> <span>Data Laporan Masyarakat</span> <span class="label label-danger pull-right">4</span>
+              </a>
+          </li>
+
+          <li class="treeview <?php echo active_link_multiple(array('')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>INTELIJEN</span>
                   <span class="pull-right-container">
@@ -32,8 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="<?php echo active_link_controller('laporan_masyarakat') ?>">
-                    <a href="<?php echo base_url('laporan_masyarakat') ?>"><i class="fa fa-angle-double-right"></i> Data Laporan Masyarakat</a>
+                <li class="<?php echo active_link_controller('') ?>">
+                    <a href="<?php echo base_url('') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara</a>
                 </li>
                 <li class="">
                     <a href=""><i class="fa fa-angle-double-right"></i> Surat Perintah Penugasan</a>

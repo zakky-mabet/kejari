@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach($laporan_masyarakat as $row) : ?>
+						<?php foreach($data_laporan as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
 							<td><?php echo highlight_phrase($row->nomor, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
@@ -47,11 +47,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php if (!$row->instruksi) { echo '<span class="text-red">Belum di Instruksikan<span>!'; } else { echo $row->instruksi; }   ?></td>
 							<td class="text-left">
 								
-								<a href="<?php echo base_url('laporan_masyarakat/instruksi_disposisi/'.$row->ID_laporan) ?>" data-toggle="tooltip" data-placement="top" title="Instruksikan dan Disposisikan Laporan ini." class="btn btn-xs btn-success" style="margin-right: 10px">
+								<a href="<?php echo base_url('data_laporan/instruksi_disposisi/'.$row->ID_laporan) ?>" data-toggle="tooltip" data-placement="top" title="Instruksikan dan Disposisikan Laporan ini." class="btn btn-xs btn-success" style="margin-right: 10px">
 									<i class="fa fa-send"></i>
 								</a>
 								<?php if (!$row->instruksi): ?>
-									<a href="<?php echo base_url('laporan_masyarakat/update/'.$row->ID_laporan) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting Laporan ini." style="margin-right: 10px">
+									<a href="<?php echo base_url('data_laporan/update/'.$row->ID_laporan) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting Laporan ini." style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
 								<?php endif ?>
@@ -62,6 +62,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</td>
 						</tr>
 						<?php endforeach; ?>
+						<tr>
+							<td colspan="6"><small class="pull-right">Ditampilkan <?php echo count($data_laporan) . " dari " . $num_data_laporan . " data"; ?></small></td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

@@ -42,20 +42,6 @@ class Mlaporan_masyarakat extends CI_Model {
 		}
 	}
 
-	public function get($param = 0 , $type = '')
-	{
-		if($type == 'row')
-		{
-			return $this->db->get_where('laporan_masyarakat', array('ID' => $param))->row();
-		} 
-		elseif($type == 'cek_disposisi')
-		{
-			return $this->db->get_where('disposisi', array('id_laporan_masyarakat' => $param))->num_rows();
-		} else{
-			return $this->db->get_where('laporan_masyarakat', array('ID' => $param))->num_rows();
-		}
-	}
-
 	public function create()
 	{
 		$data = array(
@@ -64,7 +50,8 @@ class Mlaporan_masyarakat extends CI_Model {
 			'asal' => $this->input->post('asal'),
 			'deskripsi' => $this->input->post('deskripsi'),
 			'user_id' => $this->input->post('user_id'),
-		);
+			'status_instrksi' => 'belum'
+		); 
 
 		$this->db->insert('laporan_masyarakat', $data);
 
@@ -83,65 +70,65 @@ class Mlaporan_masyarakat extends CI_Model {
 
 	}
 
-	public function update($param = 0) 
-	{
-		$data = array(
-			'nomor' => $this->input->post('nomor'),
-			'tanggal_masuk' => $this->input->post('tanggal_masuk'),
-			'asal' => $this->input->post('asal'),
-			'deskripsi' => $this->input->post('deskripsi'),
-			'user_id' => $this->input->post('user_id'),
-		);
+	// public function update($param = 0) 
+	// {
+	// 	$data = array(
+	// 		'nomor' => $this->input->post('nomor'),
+	// 		'tanggal_masuk' => $this->input->post('tanggal_masuk'),
+	// 		'asal' => $this->input->post('asal'),
+	// 		'deskripsi' => $this->input->post('deskripsi'),
+	// 		'user_id' => $this->input->post('user_id'),
+	// 	);
 
-		$this->db->update('laporan_masyarakat', $data );
+	// 	$this->db->update('laporan_masyarakat', $data );
 
-		if($this->db->affected_rows())
-		{
-			$this->template->alert(
-				' Data Laporan Masyarakat berhasil diubah.', 
-				array('type' => 'success','icon' => 'check')
-			);
-		} else {
-			$this->template->alert(
-				' Gagal menyimpan data.', 
-				array('type' => 'warning','icon' => 'times')
-			);
-		}
-	}
+	// 	if($this->db->affected_rows())
+	// 	{
+	// 		$this->template->alert(
+	// 			' Data Laporan Masyarakat berhasil diubah.', 
+	// 			array('type' => 'success','icon' => 'check')
+	// 		);
+	// 	} else {
+	// 		$this->template->alert(
+	// 			' Gagal menyimpan data.', 
+	// 			array('type' => 'warning','icon' => 'times')
+	// 		);
+	// 	}
+	// }
 
-	public function instruksi_disposisi($param)
-	{
-		$disposisi = array(
-			'id_laporan_masyarakat' => $param,
-			'instruksi' => $this->input->post('instruksi'),
-		);
+	// public function instruksi_disposisi($param)
+	// {
+	// 	$disposisi = array(
+	// 		'id_laporan_masyarakat' => $param,
+	// 		'instruksi' => $this->input->post('instruksi'),
+	// 	);
 
-		$this->db->insert('disposisi', $disposisi);
+	// 	$this->db->insert('disposisi', $disposisi);
 
-		$id_disposisi = $this->db->insert_id();
+	// 	$id_disposisi = $this->db->insert_id();
 
-		$terusan_disposisi = array(
-			'id_disposisi' => $id_disposisi,
-			'group_id' => $this->input->post('group_id'),
-			'tanggal_dispsisi_masuk' => date('Y-m-d H:i:s')
-		);
+	// 	$terusan_disposisi = array(
+	// 		'id_disposisi' => $id_disposisi,
+	// 		'group_id' => $this->input->post('group_id'),
+	// 		'tanggal_dispsisi_masuk' => date('Y-m-d H:i:s')
+	// 	);
 
-		$this->db->insert('terusan_disposisi', $terusan_disposisi);
+	// 	$this->db->insert('terusan_disposisi', $terusan_disposisi);
 
-		if($this->db->affected_rows())
-		{
-			$this->template->alert(
-				' Instruksi dan disposisi telah dikirim.', 
-				array('type' => 'success','icon' => 'check')
-			);
-		} else {
-			$this->template->alert(
-				' Gagal menyimpan data.', 
-				array('type' => 'warning','icon' => 'times')
-			);
-		}
+	// 	if($this->db->affected_rows())
+	// 	{
+	// 		$this->template->alert(
+	// 			' Instruksi dan disposisi telah dikirim.', 
+	// 			array('type' => 'success','icon' => 'check')
+	// 		);
+	// 	} else {
+	// 		$this->template->alert(
+	// 			' Gagal menyimpan data.', 
+	// 			array('type' => 'warning','icon' => 'times')
+	// 		);
+	// 	}
 
-	}
+	// }
 	
 
 }
