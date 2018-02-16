@@ -1,0 +1,67 @@
+.top2x {
+	margin-top: 20px;
+}
+.navbar-brand {
+	padding: 6px;
+}
+.navbar-toggle {
+  color: #fff;
+  border: 0;
+  margin: 0;
+  padding: 15px 15px;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+.navbar-default .navbar-toggle:focus {
+    background-color: transparent;
+}
+.navbar-nav li  {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+.navbar-nav li a.download {
+	border-radius: 10px;
+	margin-top: 10px;
+	padding: 5px 20px;
+	border: 2px solid white
+}
+
+
+@media screen and (min-width: 600px) {
+	.phone {
+		margin-top: 100px;
+	}
+}
+.box-register {
+	padding: 20px;
+	background-color: white !important;
+	margin-bottom: 30px;
+}
+@media screen and (max-width: 600px) {
+	.navbar-nav li a.download {
+		margin-left: 10px;
+		border: 0px !important;
+	}
+	.content-wrapper .container {
+		margin-left: -15px;
+		padding: 0px !important;
+	}
+}
+
+.btn-primary {
+	font-size: 13pt;
+	border: 0px;
+	padding: 5px;
+	font-weight: bold;
+	background-color: #1A237E;
+    transition: all .2s ease-in-out;
+	-webkit-box-shadow: 2px 5px 5px -2px rgba(0,0,0,0.1);
+	-moz-box-shadow: 2px 5px 5px -2px rgba(0,0,0,0.1);
+	box-shadow: 2px 5px 5px -2px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+	background-color: #30388A
+}
