@@ -106,7 +106,6 @@ class Kepangkatan extends Admin_panel
 		}
 
 		$this->data['title'] = "Detail Kepangkatan";
-		//$this->data['kepangkatan'] = $this->mkepangkatan->detail_kepangkatan($param);
 		$this->data['get'] = $this->db->get_where('kepegawaian', array('kepegawaian.ID'=> $param))->row();
 		$this->template->view('kepegawaian/create-kepangkatan', $this->data);	
 		

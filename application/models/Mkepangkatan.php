@@ -158,6 +158,18 @@ class Mkepangkatan extends CI_Model
 		return $this->db->get_where('kepangkatan', array('ID' => $param))->row();
 	}
 	
+	public function detail_pegawai($param = 0)
+	{
+		$this->db->select('
+							kepegawaian.nip,
+							kepegawaian.nama AS nama_pegawai, kepegawaian.foto, kepegawaian.nrp, kepegawaian.tempat_lahir, kepegawaian.tgl_lahir,
+							kepegawaian.jns_kelamin, kepegawaian.alamat, kepegawaian.agama, kepegawaian.pendidikan_terakhir
+						');
+
+		$this->db->where('kepegawaian.ID', $param);
+
+		return $this->db->get('kepegawaian')->row();
+	}
 
 }
 
