@@ -28,3 +28,17 @@
 #cboxNext:hover{background-position:bottom right}
 #cboxClose{position:absolute;top:5px;right:5px;display:block;background:url(http://www.jacklmoore.com/colorbox/example3/images/controls.png) no-repeat top center;width:38px;height:19px;text-indent:-9999px}
 #cboxClose:hover{background-position:bottom center}
+
+.hoverTable{
+				width:100%; 
+				border-collapse:collapse; 
+			}
+.hoverTable td{ 
+				padding:7px; border:#4e95f4 1px solid;
+				}
+/* Define the default color for all the table rows */
+
+/* Define the hover highlight color for the table row */
+.hoverTable tr:hover 	{
+ 						 background-color: #D8E9A7;
+						}

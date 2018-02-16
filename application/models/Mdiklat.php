@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mdiklat extends CI_Model {
+class Mdiklat extends CI_Model 
+{
 
 	public function __construct()
 	{
@@ -26,7 +27,7 @@ class Mdiklat extends CI_Model {
 					 ->or_like('nrp', $this->input->get('query'))
 					 ->or_like('nama', $this->input->get('query'));
 		// tabel join
-		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai');
+		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
 
 		$this->db->join('kepegawaian', 'riwayat_diklat.nip = kepegawaian.nip', 'left');
 		
@@ -41,8 +42,8 @@ class Mdiklat extends CI_Model {
 
 	public function create()
 	{
-		$config['upload_path'] = './public/diklat-file/';
-		$config['allowed_types'] = 'pdf|jpg|png';
+		$config['upload_path'] = './public/diklat-file/images/';
+		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']  = '5120';
 		$config['max_width']  = '4000';
 		$config['max_height']  = '3000';
@@ -89,8 +90,8 @@ class Mdiklat extends CI_Model {
 	{
 		$get = $this->get($param);
 
-		$config['upload_path'] = './public/diklat-file/';
-		$config['allowed_types'] = 'pdf|jpg|png';
+		$config['upload_path'] = './public/diklat-file/images/';
+		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']  = '5120';
 		$config['max_width']  = '4000';
 		$config['max_height']  = '3000';
@@ -100,11 +101,11 @@ class Mdiklat extends CI_Model {
 		if($this->upload->do_upload('foto')) 
 		{
 			if($get->foto != FALSE)
-				@unlink("public/diklat-file/{$get->foto}");
+				@unlink("public/diklat-file/images/{$get->foto}");
 
 			$foto = $this->upload->file_name;
 		} else {
-			$foto = $get->foto;
+			$foto = $get->lampiran;
 		}
 
 		$riwayat_diklat = array(
@@ -140,8 +141,8 @@ class Mdiklat extends CI_Model {
 	{
 		$get = $this->get($param);
 
-		if($get->foto != FALSE)
-			@unlink("public/diklat-file/{$get->foto}");
+		if($get->lampiran != FALSE)
+			@unlink("public/diklat-file/images/{$get->lampiran}");
 
 		$this->db->delete('riwayat_diklat', array('ID' => $param));
 
@@ -153,17 +154,20 @@ class Mdiklat extends CI_Model {
 
 	public function detail_pegawai($param = 0)
 	{
-		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.foto, kepegawaian.nrp, kepegawaian.tempat_lahir, kepegawaian.tgl_lahir, kepegawaian.jns_kelamin, kepegawaian.alamat, kepegawaian.agama, kepegawaian.pendidikan_terakhir');
+		$this->db->select('
+							kepegawaian.nip,
+							kepegawaian.nama AS nama_pegawai, kepegawaian.foto, kepegawaian.nrp, kepegawaian.tempat_lahir, kepegawaian.tgl_lahir,
+							kepegawaian.jns_kelamin, kepegawaian.alamat, kepegawaian.agama, kepegawaian.pendidikan_terakhir
+						');
 
-		$this->db->join('riwayat_diklat', 'kepegawaian.nip = riwayat_diklat.nip', 'left');
+		$this->db->where('kepegawaian.ID', $param);
 
-		return $this->db->get_where('kepegawaian', array('kepegawaian.nip' => $param))->row();
-
-	
+		return $this->db->get('kepegawaian')->row();
 	}
 
 	public function get($param = 0)
 	{
+
 		return $this->db->get_where('riwayat_diklat', array('ID' => $param))->row();
 	}
 

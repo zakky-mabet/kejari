@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Diklat extends Admin_panel {
+class Diklat extends Admin_panel 
+{
 
 	public $per_page;
 
@@ -25,12 +26,11 @@ class Diklat extends Admin_panel {
 
 
 		$this->page = $this->input->get('page');
-		
 		$this->query = $this->input->get('query');
 
 
 		$this->load->js(base_url("public/app/diklat/diklat.js"));
-		//$this->load->css(base_url("public/app/diklat/diklat.css"));
+		$this->load->css(base_url("public/app/diklat/diklat.css"));
 	}
 
 	public function index()
@@ -59,6 +59,8 @@ class Diklat extends Admin_panel {
 
 	public function create()
 	{
+		
+
 		$this->page_title->push("Kepegawaian", "Tambahkan Data Riwayat Diklat");
 
 		$this->breadcrumbs->unshift(3, 'Data Riwayat Diklat', "diklat/index");
@@ -84,7 +86,8 @@ class Diklat extends Admin_panel {
 	}
 
 	public function update($param = 0)
-	{
+	{	
+
 		$this->page_title->push("Kepegawaian", "Ubah Data Riwayat Diklat");
 
 		$this->breadcrumbs->unshift(3, 'Data Riwayat Diklat', "diklat/index");
@@ -116,8 +119,6 @@ class Diklat extends Admin_panel {
 
 		$this->breadcrumbs->unshift(4, 'Detail', "diklat/create");
 
-
-		
 		$this->data['title'] = "Detail Riwayat Diklat";
 		$this->data['kepegawaian'] = $this->mdiklat->detail_pegawai($param);
 		$this->template->view('diklat/detail_pegawai', $this->data);

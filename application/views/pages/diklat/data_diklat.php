@@ -39,12 +39,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th  class="text-center"></th>
 						</tr>
 					</thead>
-					<tbody>
-						<?php foreach($riwayat_diklat as $row) : ?>
+					<tbody class="hoverTable">
+						<?php foreach($riwayat_diklat as $row ) : ?>
 						<tr style="vertical-align: top">
-							<td class="text-center"><?php echo ++$this->page ?>.</td>
+							<td><?php echo ++$this->page ?>.</td>
 							<td class="text-center"><?php echo $row->nip ?></td>
-							<td><a href="<?php echo base_url('diklat/detail_pegawai/'.$row->nip) ?>"><?php  echo $row->nama_pegawai ?></a></td>
+							<td><a href="<?php echo base_url('diklat/detail_pegawai/'.$row->id_pegawai) ?>"><?php  echo $row->nama_pegawai ?></a></td>
 							<td class="text-center"><?php echo ucwords($row->nama); ?></td>
 							<td class="text-center"><?php echo date_id($row->tgl_mulai); ?></td>
 							<td class="text-center"><?php echo date_id($row->tgl_selesai); ?></td>
@@ -80,7 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a id="delete-yes" class="btn btn-outline"> Iya </a>
+                <a id="delete-yes" class="btn btn-outline"> Ya </a>
             </div>
         </div>
     </div>
