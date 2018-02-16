@@ -22,7 +22,6 @@ class Kepegawaian extends Admin_panel
 		$this->per_page = (!$this->input->get('per_page')) ? 20 : $this->input->get('per_page');
 
 		$this->page = $this->input->get('page');
-		
 		$this->query = $this->input->get('query');
 
 		$this->load->js(base_url("public/app/kepegawaian.js"));
@@ -102,18 +101,6 @@ class Kepegawaian extends Admin_panel
 		$this->data['title'] = "Ubah Kepegawaian";
 		$this->data['get'] = $this->mkepegawaian->get($param);
 		$this->template->view('kepegawaian/update-kepegawaian', $this->data);	
-	}
-
-	// ini adalah tabel detail kepangkatan
-	public function detail_kepangkatan()
-	{
-		$this->page_title->push("Kepegawaian", "Detail Kepangkatan");
-
-		$this->breadcrumbs->unshift(3, 'Detail Kepangkatan', "kepegawaian/create");
-
-		$this->data['title'] = "Detail Kepangkatan";
-		//$this->data['get'] = $this->mkepegawaian->get($param);
-		$this->template->view('kepegawaian/detail-kepangkatan', $this->data);	
 	}
 
 	public function delete($param = 0)

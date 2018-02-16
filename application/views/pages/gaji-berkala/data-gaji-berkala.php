@@ -31,11 +31,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('kepegawaian') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url() ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('kepegawaian/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url('kepegawaian') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo base_url('gaji_berkala/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
+						<a href="<?php echo base_url() ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -45,49 +45,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="bg-green">
 						<tr>
 							<th rowspan="2">No.</th>
-							<th rowspan="2" class="text-center">NIP</th>
-							<th rowspan="2" class="text-center">NRP</th>
-							<th rowspan="2" class="text-center">Pangkat</th>
-							<th rowspan="2" class="text-center">Jabatan</th>
-							<th rowspan="2" class="text-center">Nama Lengkap</th>
-							<th rowspan="2" class="text-center">Tempat, Tanggal</th>
-							<th rowspan="2" class="text-center">Agama</th>
-							<th rowspan="2" class="text-center">Jenis Kelamin</th>
-							<th rowspan="2" class="text-center">Pendidikan Terakhir</th>
-							<th colspan="2" class="text-center">TMT</th>
+							<th  class="text-center">NIP</th>
+							<th  class="text-center">Nama</th>
+							<th  class="text-center">Tanggal Mulai Terdaftar</th>
+							<th  class="text-center">Batas Akhir</th>
+							<th  class="text-center">Nomor SK</th>
+							<th  class="text-center">Pendidikan Terakhir</th>
 							<th rowspan="2" class="text-center"></th>
 						</tr>
-						<tr>
-							<th class="text-center">TMT</th>
-							<th class="text-center">YAD</th>
-						</tr>
-
 					</thead>
 					<tbody class="hoverTable">
-						<?php foreach($kepegawaian as $row) : ?>
 						<tr style="vertical-align: top">
-							<td><?php echo ++$this->page ?>.</td>
-							<td><?php echo $row->nip ?></td>
-							<td><?php echo $row->nrp ?></td>
-							<td></td>
-							<td></td>
-							<td><a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->nama ?></td>
-							<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
-							<td><?php echo strtoupper($row->agama) ?></td>
-							<td><?php echo strtoupper($row->jns_kelamin) ?></td>
-							<td><?php echo $row->pendidikan_terakhir ?></td>
-							<td></td>
-							<td></td>
-							<td class="text-center">
-								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
-									<i class="fa fa-pencil"></i>
-								</a>
-								<a href="javascript:void(0)" id="delete-pegawai" data-id="<?php echo $row->ID ?>"  class="btn btn-xs btn-danger">
-									<i class="fa fa-trash-o"></i>
-								</a>
-							</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
+							<td>yuranda</td>
 						</tr>
-						<?php endforeach; ?>
 					</tbody>
 				</table>
 			</div>
@@ -97,7 +74,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
-
+<pre>
+	
+	<?php echo print_r($this->data) ?>
+</pre>
 
 <div class="modal fade in modal-danger" id="modal-delete" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
@@ -109,12 +89,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a id="delete-yes" class="btn btn-outline"> Iya </a>
+                <a id="delete-yes" class="btn btn-outline"> Ya </a>
             </div>
         </div>
     </div>
-</div>
-
+</div> 
 <?php
 /* End of file main-anggota.php */
 /* Location: ./application/views/pages/anggota/main-anggota.php */
