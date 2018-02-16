@@ -108,8 +108,9 @@ class Laporan_masyarakat extends Admin_panel {
 			show_404();
 		}
 		if ($this->mlaporan_masyarakat->get($param, 'cek_disposisi') == 1) {
+			
 			show_404();
-		}
+		} 
 
 		$this->page_title->push("Laporan Masyarakat", "Buat Instruksi dan Disposisi");
 
