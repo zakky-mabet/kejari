@@ -56,14 +56,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</thead>
 					<tbody class="hoverTable">
 						<tr style="vertical-align: top">
-							<td>yuranda</td>
-							<td>yuranda</td>
-							<td>yuranda</td>
-							<td>yuranda</td>
-							<td>yuranda</td>
-							<td>yuranda</td>
-							<td>yuranda</td>
-							<td>yuranda</td>
+							<td></td>
+							<td></td>
+							<td><?php echo $row->tmt ?></td>
+							<td><?php echo $row->batas_akhir ?></td>
+							<td><?php echo $row->no_sk ?></td>
+							<td><?php echo $row->lampiran_sk ?></td>
+							<td><?php echo $row->keterangan ?></td>
+							<td></td>
 						</tr>
 					</tbody>
 				</table>
@@ -74,11 +74,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
-<pre>
-	
-	<?php echo print_r($this->data) ?>
-</pre>
-
 <div class="modal fade in modal-danger" id="modal-delete" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
