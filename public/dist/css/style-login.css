@@ -42,7 +42,9 @@
   padding: 20px;
   border-top: 0;
   color: #666;
-  border-radius: 20px;
+  border-radius: 10px;
+  border-left:2pt solid #00923F;
+  border-right:2pt solid #00923F;
 }
 .login-box-body .form-control-feedback,
 .register-box-body .form-control-feedback {
@@ -75,3 +77,6 @@
 .btn-primary:active {
   background-color: #10542A
 }
+
+.padding-btn {   padding-top: 20px;
+  padding-bottom: 20px; }

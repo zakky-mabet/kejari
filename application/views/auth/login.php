@@ -13,13 +13,26 @@
   <link rel="stylesheet" href="<?php echo base_url('public/plugins/iCheck/square/blue.css') ?>">
   <link rel="icon" href="<?php echo base_url('public/images/favicon.ico') ?>" type="image/x-icon" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+  <style type="text/css" media="screen"> 
+    body { 
+          background-image: url('<?php echo base_url('public/images/BG.png') ?>'); 
+          background-attachment: fixed; 
+          background-repeat: no-repeat; 
+          -webkit-background-size: cover; 
+          -moz-background-size: cover; -o-background-size: cover; 
+          background-size: cover; 
+
+        } 
+      .arial { font-family: arial; font-weight: normal; }
+      .bg-color { background-color: #eaeaea; }
+  </style>
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="bg-color">
+<div class="login-box ">
   <div class="login-logo text-center">
-    <img src="<?php echo base_url('public/images/mainlogo.png') ?>" class="img-responsive" alt="Logo">
+    <img width="200" src="<?php echo base_url('public/images/mainlogo.png') ?>" class="img-responsive" alt="Logo">
   </div>
-  <div class="login-box-body">
+  <div class="login-box-body" style="box-shadow:1px 2px 15px black">
     <?php echo form_open("auth/login");?>
       <div class="form-group">
         <?php if($message) : ?>
@@ -49,6 +62,7 @@
         </div>
         <div class="col-xs-12">
           <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+          <p style="padding-top: 20px" class="text-center"> <a href="<?php echo base_url() ?>" title="Back to Log in Options">Back to Log in Options</a></p>
         </div>
       </div>
     <?php echo form_close();?>

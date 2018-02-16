@@ -13,6 +13,6 @@ class Welcome extends Admin_panel
 	public function index()
 	{
 		$this->data['title'] = "Dashboard";
-		$this->template->view('main', $this->data);
+		$this->template->view('dashboard', $this->data);
 	}
 }
