@@ -17,7 +17,7 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 						<select name="nip" class="form-control select">
 							<option value="">-- NIP - Nama Pegawai --</option>
 							<?php foreach ($this->mgaji_berkala->get_all_gaji() as $key => $value): ?>
-                                <option value="<?php echo $value->nip; ?>"><?php echo $value->nama; ?></option>
+                                <option value="<?php echo $value->nip; ?>"><?php echo $value->nip." - ". $value->nama; ?></option>
                             <?php endforeach;?>
 						</select>
 						<p class="help-block"><?php echo form_error('nip', '<small class="text-red">', '</small>'); ?></p>

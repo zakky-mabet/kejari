@@ -88,7 +88,7 @@ class Mgaji_berkala extends CI_Model
 	{
 		$get = $this->get($param);
 
-		$config['upload_path'] = '.public/images/gaji-berkala/';
+		$config['upload_path'] = './public/images/gaji-berkala/';
 		$config['allowed_types'] = 'gif|jpg|png';
 		$config['max_size']  = '5120';
 		$config['max_width']  = '4000';
