@@ -26,20 +26,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<?php echo form_close(); ?>
 			<div class="box-body no-padding">
-				<table class="table table-bordered table-stripped">
+				<table class="table table-bordered table-stripped" >
 					<thead class="bg-green">
-						<tr>
-							<th rowspan="2">No.</th>
-							<th rowspan="2" class="text-center">NIP</th>
-							<th rowspan="2" class="text-center">NRP</th>
-							<th rowspan="2" class="text-center">Pangkat</th>
-							<th rowspan="2" class="text-center">Jabatan</th>
-							<th rowspan="2" class="text-center">Nama Lengkap</th>
-							<th rowspan="2" class="text-center">Tempat, Tanggal</th>
-							<th rowspan="2" class="text-center">Agama</th>
-							<th rowspan="2" class="text-center">Jenis Kelamin</th>
-							<th rowspan="2" class="text-center">Pendidikan Terakhir</th>
-							<th colspan="2" class="text-center">TMT</th>
+						<tr >
+							<th rowspan="2" style="vertical-align: middle;">No.</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NIP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NRP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Pangkat</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Jabatan</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Nama Lengkap</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Tempat, Tanggal</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Agama</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Jenis Kelamin</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">Pendidikan Terakhir</th>
+							<th colspan="2" class="text-center" style="vertical-align: middle;">TMT</th>
 							<th rowspan="2" class="text-center"></th>
 						</tr>
 						<tr>
@@ -73,6 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							</td>
 						</tr>
 						<?php endforeach; ?>
+						
 					</tbody>
 				</table>
 			</div>

@@ -63,9 +63,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo $row->no_sk ?></td>
 							<td class="text-center"><?php echo $row->keterangan ?></td>							
 							<td>						
-								<button  class="btn" data-toggle="modal" data-target="#exampleModalCenter">
-								 <img width="80%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded" alt="User Image">
-								</button>
+							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
+							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
+							</button>
 							</td>
 							<td>
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
-						
+			
 				</table>
 			</div>
 		</div>
@@ -88,6 +88,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+
+<script>
+	$('button#lihat-gambar').unbind().click(function(argument) {
+		$('div#exampleModalCenter').modal('show');
+		$('img#setImage').attr('src', $(this).data('src'))
+	})
+</script>
 
 <div class="modal fade in modal-danger" id="modal-delete" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
@@ -105,14 +112,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
-
 <!-- Modal Gambar -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">    
-	<img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded" alt="User Image">
+	<img width="100%" src="" id="setImage" class="img-rounded" alt="User Image">
   </div>
 </div> 
+
 <?php
 /* End of file main-anggota.php */
 /* Location: ./application/views/pages/anggota/main-anggota.php */
