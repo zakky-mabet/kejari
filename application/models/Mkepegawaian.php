@@ -143,7 +143,7 @@ class Mkepegawaian extends CI_Model
 		$this->db->delete('kepegawaian', array('ID' => $param));
 
 		$this->template->alert(
-			' Data kepegawaian berhasil disimpan.', 
+			' Data kepegawaian berhasil Hapus.', 
 			array('type' => 'success','icon' => 'check')
 		);
 	}

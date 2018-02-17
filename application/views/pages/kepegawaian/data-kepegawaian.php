@@ -109,7 +109,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a id="delete-yes" class="btn btn-outline"> Iya </a>
+                <a id="delete-yes" class="btn btn-outline"> YA </a>
             </div>
         </div>
     </div>

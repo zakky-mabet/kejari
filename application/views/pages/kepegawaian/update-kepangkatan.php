@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$get = $this->db->get_where('kepegawaian', array('nip'=> $pangkat->nip))->row();
 ?>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>

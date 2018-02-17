@@ -2,10 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="row">
-<div class="col-md-8 col-md-offset-2 col-xs-12">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-  <strong><?php echo $this->session->flashdata('alert'); ?></strong>
-</div>
+<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<?php echo form_open(current_url(), array('method' => 'GET')); ?>

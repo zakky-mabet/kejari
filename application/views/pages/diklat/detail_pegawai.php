@@ -69,6 +69,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th width="150px" class="text-center">Tanggal Mulai</th>
 							<th width="150px" class="text-center">Tanggal Selesai</th>
 							<th width="100px" class="text-center">Tingkat</th>
+							<th>keterangan</th>
 							<th width="100px" class="text-center">Lampiran</th>
 							<th></th>
 						</tr>
@@ -82,7 +83,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo date_id($row->tgl_mulai) ?></td>
 							<td class="text-center"><?php echo date_id($row->tgl_selesai) ?></td>
 							<td class="text-center"><?php echo $row->tingkat ?></td>
-
+							<td class="text-center"><?php echo $row->keterangan ?></td>
 							<td>
 								<button  class="btn" data-toggle="modal" data-target="#exampleModalCenter">
 								 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">

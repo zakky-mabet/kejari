@@ -55,12 +55,12 @@ class Mkepangkatan extends CI_Model
 		$kepangkatan = array(
 			'nip' => $this->input->post('nip'),
 			'tmt' => $this->input->post('date'),
-			'pangkat' => $this->input->post('pangkat'),
+			'id_pangkat' => $this->input->post('id_pangkat'),
 			'batas_akhir' => $btsAkhir->format('Y-m-d'),
 			'no_sk' => $this->input->post('no_sk'),
 			'lampiran_sk' => $foto,
-			'golongan' => $this->input->post('golongan'),
-			'ruang' => $this->input->post('ruang'),
+			//'golongan' => $this->input->post('golongan'),
+			//'ruang' => $this->input->post('ruang'),
 			'keterangan' => $this->input->post('keterangan'),
 			
 		);
@@ -158,18 +158,15 @@ class Mkepangkatan extends CI_Model
 		return $this->db->get_where('kepangkatan', array('ID' => $param))->row();
 	}
 	
-	public function detail_pegawai($param = 0)
-	{
-		$this->db->select('
-							kepegawaian.nip,
-							kepegawaian.nama AS nama_pegawai, kepegawaian.foto, kepegawaian.nrp, kepegawaian.tempat_lahir, kepegawaian.tgl_lahir,
-							kepegawaian.jns_kelamin, kepegawaian.alamat, kepegawaian.agama, kepegawaian.pendidikan_terakhir
-						');
+	public function get_all_pangkat()
+    {
+        // join tabel
+		$this->db->select('*');
+		$this->db->from('pangkat');
+		return $this->db->get()->result();
 
-		$this->db->where('kepegawaian.ID', $param);
-
-		return $this->db->get('kepegawaian')->row();
-	}
+		
+    }
 
 }
 

@@ -122,8 +122,8 @@ class Kepangkatan extends Admin_panel
 		$this->form_validation->set_rules('date', 'TMT', 'trim|required');
 		$this->form_validation->set_rules('pangkat', 'Pangkat', 'trim|required');
 		$this->form_validation->set_rules('no_sk', 'Nomor SK', 'trim|required');
-		$this->form_validation->set_rules('golongan', 'Golongan', 'trim|required');
-		$this->form_validation->set_rules('ruang', 'Ruang', 'trim|required');
+		// $this->form_validation->set_rules('golongan', 'Golongan', 'trim|required');
+		// $this->form_validation->set_rules('ruang', 'Ruang', 'trim|required');
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
