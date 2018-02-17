@@ -84,6 +84,71 @@ class Mgaji_berkala extends CI_Model
 
 	}
 
+	public function update($param = 0)
+	{
+		$get = $this->get($param);
+
+		$config['upload_path'] = '.public/images/gaji-berkala/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']  = '5120';
+		$config['max_width']  = '4000';
+		$config['max_height']  = '3000';
+		
+		$this->upload->initialize($config);
+		
+		if($this->upload->do_upload('foto')) 
+		{
+			$foto = $this->upload->file_name;
+		} else {
+			$foto = '';
+		}
+
+		$btsAkhir = new DateTime($this->input->post('date'));
+		$btsAkhir->modify('+23 month');
+
+		$gaji_berkala = array(
+			'nip' => $this->input->post('nip'),
+			'tmt' => $this->input->post('date'),
+			'batas_akhir' => $btsAkhir->format('Y-m-d'),
+			'no_sk' => $this->input->post('no_sk'),
+			'lampiran_sk' => $foto,
+			'keterangan' => $this->input->post('keterangan'),
+			
+		);
+
+		$this->db->update('gaji_berkala', $gaji_berkala, array('ID' => $param));
+
+
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data Gaji Berkala di Update.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Gagal menyimpan data.', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+
+	}
+
+	public function delete($param = 0)
+	{
+		$get = $this->get($param);
+
+		if($get->lampiran_sk != FALSE)
+			@unlink("public/images/gaji-berkala/{$get->lampiran_sk}");
+
+		$this->db->delete('gaji_berkala', array('ID' => $param));
+
+		$this->template->alert(
+			' Data Riwayat Diklat berhasil di Hapus.', 
+			array('type' => 'success','icon' => 'check')
+		);
+	}
+
 	public function get_all_gaji()
     {
         // join tabel
@@ -93,7 +158,18 @@ class Mgaji_berkala extends CI_Model
 		
     }
 
+    public function get($param = 0)
+	{
+		//amnil data dari data base di join dengan 2 tabel
+		//$this->db->select('gaji_berkala.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.pendidikan_terakhir');
 
+		//$this->db->group_by('gaji_berkala.nip');
+
+		//$this->db->join('kepegawaian', 'gaji_berkala.nip = kepegawaian.nip', 'left');
+
+		return $this->db->get_where('gaji_berkala', array('ID'=> $param) )->row();
+
+	}
 
 }
 

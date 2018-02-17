@@ -83,7 +83,7 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 					<label for="pangkat" class="control-label col-md-3 col-xs-12">Pangkat : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">
-							<select name="pangkat" class="form-control">
+							<select name="id_pangkat" class="form-control">
 							<option value="">-- Plih Nama Pangkat --</option>
 							<?php foreach($this->mkepangkatan->get_all_pangkat() as $key => $value) : ?>
                                 <option value="<?php echo $value->ID; ?>" <?php if($pangkat->id_pangkat==$value->ID ) echo "selected"; ?>>

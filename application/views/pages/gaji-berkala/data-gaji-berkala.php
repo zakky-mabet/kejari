@@ -17,10 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </style> 
 <div class="row">
-<div class="col-md-8 col-md-offset-2 col-xs-12">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-  <strong><?php echo $this->session->flashdata('alert'); ?></strong>
-</div>
+<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<?php echo form_open(current_url(), array('method' => 'GET')); ?>
@@ -50,7 +47,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th  class="text-center">Tanggal Mulai Terdaftar</th>
 							<th  class="text-center">Batas Akhir</th>
 							<th  class="text-center">Nomor SK</th>
-							
 							<th rowspan="2" class="text-center"></th>
 						</tr>
 					</thead>
@@ -63,12 +59,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
 							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
 							<td class="text-center"><?php echo $row->no_sk ?></td>
-							
 							<td class="text-center">
-								<a href="<?php echo base_url()?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-diklat" data-id="" class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo  $row->ID ?>" class="btn btn-xs btn-danger">
 									<i class="fa fa-trash-o"></i>
 								</a>
 
@@ -85,6 +80,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+
 <div class="modal fade in modal-danger" id="modal-delete" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
