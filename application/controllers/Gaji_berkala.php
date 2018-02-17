@@ -43,7 +43,7 @@ class Gaji_berkala extends Admin_panel
 		$this->pagination->initialize($config);
 
 		$this->data['title'] = "Gaji Berkala";
-		$this->data['kepegawaian'] = $this->mgaji_berkala->get_all($this->per_page, $this->page, 'result');
+		$this->data['gaji_berkala'] = $this->mgaji_berkala->get_all($this->per_page, $this->page, 'result');
 		$this->template->view('gaji-berkala/data-gaji-berkala', $this->data);
 		
 	}

@@ -99,7 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="<?php echo active_link_method('index','kepegawaian').active_link_method('update','kepegawaian').active_link_method('detail_kepangkatan','kepangkatan').active_link_method('create','kepangkatan').active_link_method('create_pangkat','kepangkatan').active_link_method('update','kepangkatan.')?>">
+                <li class="<?php echo active_link_method('index','kepegawaian').active_link_method('update','kepegawaian').active_link_method('detail_kepangkatan','kepangkatan').active_link_method('create','kepangkatan').active_link_method('create_pangkat','kepangkatan').active_link_method('update','kepangkatan')?>">
                     <a href="<?php echo base_url('kepegawaian') ?>"><i class="fa fa-angle-double-right"></i> Data Kepegawaian</a>
                 </li>
                 <li class="<?php echo active_link_method('create','kepegawaian') ?>">
@@ -108,7 +108,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="">
                     <a href=""><i class="fa fa-angle-double-right"></i> Kenaikan Pangkat</a>
                 </li>
-                <li class="<?php echo active_link_method('index','gaji_berkala') ?>">
+                <li class="<?php echo active_link_method('index','gaji_berkala').active_link_method('create','gaji_berkala') ?>">
                     <a href="<?php echo base_url('gaji_berkala') ?>"><i class="fa fa-angle-double-right"></i> Gaji Berkala</a>
                 </li>
                 <li class="<?php echo active_link_method('index','diklat').active_link_method('create','diklat').active_link_method('update','diklat').active_link_method('detail_pegawai','diklat') ?>">

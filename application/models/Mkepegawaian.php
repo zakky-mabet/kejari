@@ -79,6 +79,7 @@ class Mkepegawaian extends CI_Model
 		return $this->db->get_where('kepegawaian', array('ID' => $param))->row();
 	}
 
+
 	public function update($param = 0)
 	{
 		$get = $this->get($param);
@@ -143,7 +144,7 @@ class Mkepegawaian extends CI_Model
 		$this->db->delete('kepegawaian', array('ID' => $param));
 
 		$this->template->alert(
-			' Data kepegawaian berhasil disimpan.', 
+			' Data kepegawaian berhasil Hapus.', 
 			array('type' => 'success','icon' => 'check')
 		);
 	}

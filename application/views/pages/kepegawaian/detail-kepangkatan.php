@@ -88,8 +88,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					 <?php foreach($this->mkepangkatan->detail_kepangkatan($get->nip) as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td class="text-center"><?php echo $row->pangkat ?></td>
-							<td class="text-center"><?php echo $row->golongan ?></td>
+							<td class="text-center"><?php echo $this->mkepangkatan->pangkat($row->id_pangkat)->nama_pangkat ?></td>
+							<td class="text-center"><?php echo $this->mkepangkatan->pangkat($row->id_pangkat)->golongan ?></td>
 							<td class="text-center"><?php echo $row->no_sk ?></td>
 							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
 							<td class="text-center"><?php echo date_id($row->batas_akhir) ?> </td>
@@ -120,7 +120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                <a id="delete-yes" class="btn btn-outline"> Iya </a>
+                <a id="delete-yes" class="btn btn-outline"> YA </a>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ class Mgaji_berkala extends CI_Model
 					 ->or_like('nrp', $this->input->get('query'))
 					 ->or_like('nama', $this->input->get('query'));
 		// tabel join
-		$this->db->select('gaji_berkala.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
+		$this->db->select('gaji_berkala.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai, kepegawaian.pendidikan_terakhir');
 
 		$this->db->join('kepegawaian', 'gaji_berkala.nip = kepegawaian.nip', 'left');
 		
@@ -26,8 +26,14 @@ class Mgaji_berkala extends CI_Model
 		{
 			return $this->db->get('gaji_berkala', $limit, $offset)->result();
 		} else {
+
 			return $this->db->get('gaji_berkala')->num_rows();
 		}
+	}
+
+	public function gaji($param = 0)
+	{
+		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
 	}
 
 	public function create()

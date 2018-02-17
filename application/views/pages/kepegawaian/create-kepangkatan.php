@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$pangkat = $this->db->get('pangkat')->result();
+
 ?>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
@@ -79,10 +81,16 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				</div>
 
 				<div class="form-group">
+					
 					<label for="pangkat" class="control-label col-md-3 col-xs-12">Pangkat : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">
-						<input type="text" name="pangkat" class="form-control" value="<?php echo set_value('pangkat'); ?>">
-						<p class="help-block"><?php echo form_error('pangkat', '<small class="text-red">', '</small>'); ?></p>
+						<select name="id_pangkat" class="form-control">
+							<option value="">-- Pilih Nama Pangkat --</option>
+							<?php foreach($pangkat as $key => $value) : ?>
+                                <option value="<?php echo $value->ID; ?>"><?php echo $value->nama_pangkat; ?></option>
+                            <?php endforeach;?>
+						</select>
+						<p class="help-block"><?php echo form_error('id_pangkat', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>
 				<div class="form-group">
@@ -96,20 +104,6 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 					<label for="telepon" class="control-label col-md-3 col-xs-12">Lampiran SK : <strong class="text-blue">*</strong></label>
 					<div class="col-md-6">
 						<input type="file" name="foto" class="form-control">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="golongan" class="control-label col-md-3 col-xs-12">Golongan : <strong class="text-blue">*</strong></label>
-					<div class="col-md-8">
-						<input type="text" name="golongan" class="form-control" value="<?php echo set_value('golongan'); ?>">
-						<p class="help-block"><?php echo form_error('golongan', '<small class="text-red">', '</small>'); ?></p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="ruang" class="control-label col-md-3 col-xs-12">Ruang : <strong class="text-blue">*</strong></label>
-					<div class="col-md-8">
-						<input type="text" name="ruang" class="form-control" value="<?php echo set_value('ruang'); ?>">
-						<p class="help-block"><?php echo form_error('ruang', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>
 				<div class="form-group">
