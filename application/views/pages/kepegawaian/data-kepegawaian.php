@@ -47,6 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th rowspan="2">No.</th>
 							<th rowspan="2" class="text-center">NIP</th>
 							<th rowspan="2" class="text-center">NRP</th>
+							<th rowspan="2" class="text-center">Pangkat</th>
 							<th rowspan="2" class="text-center">Jabatan</th>
 							<th rowspan="2" class="text-center">Nama Lengkap</th>
 							<th rowspan="2" class="text-center">Tempat, Tanggal</th>
@@ -68,8 +69,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo ++$this->page ?>.</td>
 							<td><?php echo $row->nip ?></td>
 							<td><?php echo $row->nrp ?></td>
+							<td><a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->pangkat ?></td>
 							<td></td>
-							<td><a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->nama ?></td>
+							<td><?php echo $row->nama ?></td>
 							<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
 							<td><?php echo strtoupper($row->agama) ?></td>
 							<td><?php echo strtoupper($row->jns_kelamin) ?></td>
