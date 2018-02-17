@@ -54,7 +54,7 @@ class Mkepangkatan extends CI_Model
 		}
 
 		$btsAkhir = new DateTime($this->input->post('date'));
-		$btsAkhir->modify('+36 month');
+		$btsAkhir->modify('+47 month');
 
 		$kepangkatan = array(
 			'nip' => $this->input->post('nip'),

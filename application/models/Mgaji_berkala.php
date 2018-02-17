@@ -54,7 +54,7 @@ class Mgaji_berkala extends CI_Model
 		}
 
 		$btsAkhir = new DateTime($this->input->post('date'));
-		$btsAkhir->modify('+36 month');
+		$btsAkhir->modify('+23 month');
 
 		$gaji_berkala = array(
 			'nip' => $this->input->post('nip'),
