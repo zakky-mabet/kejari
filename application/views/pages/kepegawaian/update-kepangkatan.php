@@ -1,16 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+$get = $this->db->get_where('kepegawaian', array('nip'=> $pangkat->nip))->row();
+
 ?>
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
     <div class="col-md-4">
 		<div class="box box-primary">
 			<div class="box-body box-profile">
-				<div class="text-center pull-left image">
+				<div class="profile-user-img img-responsive img-circle">
 			 <?php if($get->foto != FALSE) : ?>
-	              <img width="60%" src="<?php echo base_url('public/images/pegawai/'.$get->foto) ?>" class="img-circle" alt="User Image">
+	              <img width="100%" src="<?php echo base_url('public/images/pegawai/'.$get->foto) ?>" class="img-circle" alt="User Image">
 	          <?php else : ?>
-	          	  <img width="60%" src="<?php echo base_url('public/images/users/default.png') ?>" class="img-circle" alt="User Image">
+	          	  <img width="100%" src="<?php echo base_url('public/images/users/default.png') ?>" class="img-circle" alt="User Image">
 	          <?php endif; ?>
 	        	</div>
         	<br>
@@ -19,32 +21,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				    <table class="table" style="font-family: arial;">
 						<tbody>
 							<tr>
-								<th class=" text-right">NIP :</th>
-								<td><?php echo $get->nip ?></td>
+								<th class="small text-right">NIP :</th>
+								<td class="small"><?php echo $get->nip ?></td>
 							</tr>
 							<tr>
-								<th width="160" class=" text-right">NRP :</th>
-								<td><?php echo $get->nrp ?></td>
+								<th width="160" class="small text-right">NRP :</th>
+								<td class="small"><?php echo $get->nrp ?></td>
 							</tr>
 							<tr>
-								<th class=" text-right">Tempat, Tanggal Lahir :</th>
-								<td><?php echo ucwords($get->tempat_lahir).','. date_id($get->tgl_lahir) ?></td>
+								<th class="small text-right">Tempat, Tanggal Lahir :</th>
+								<td class="small"><?php echo ucwords($get->tempat_lahir).','. date_id($get->tgl_lahir) ?></td>
 							</tr>
 							<tr>
-								<th class=" text-right">Jenis Kelamin :</th>
-								<td><?php echo ucwords($get->jns_kelamin) ?></td>
+								<th class="small text-right">Jenis Kelamin :</th>
+								<td class="small"><?php echo ucwords($get->jns_kelamin) ?></td>
 							</tr>
 							<tr>
-								<th class=" text-right">Alamat :</th>
-								<td><?php echo ucwords($get->alamat) ?></td>
+								<th class="small text-right">Alamat :</th>
+								<td class="small"><?php echo ucwords($get->alamat) ?></td>
 							</tr>
 							<tr>
-								<th class=" text-right">Agama :</th>
-								<td><?php echo ucwords($get->agama) ?></td>
+								<th class="small text-right">Agama :</th>
+								<td class="small"><?php echo ucwords($get->agama) ?></td>
 							</tr>
 							<tr>
-								<th class=" text-right">Pendidikan Terakhir :</th>
-								<td><?php echo ucwords($get->pendidikan_terakhir) ?></td>
+								<th class="small text-right">Pendidikan Terakhir :</th>
+								<td class="small"><?php echo ucwords($get->pendidikan_terakhir) ?></td>
 							</tr>
 						</tbody>
 					</table>
@@ -81,7 +83,13 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 					<label for="pangkat" class="control-label col-md-3 col-xs-12">Pangkat : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">
-						<input type="text" name="pangkat" class="form-control" value="<?php echo $pangkat->pangkat ?>">
+							<select name="pangkat" class="form-control">
+							<option value="">-- Plih Nama Pangkat --</option>
+							<?php foreach($this->mkepangkatan->get_all_pangkat() as $key => $value) : ?>
+                                <option value="<?php echo $value->ID; ?>" <?php if($pangkat->id_pangkat==$value->ID ) echo "selected"; ?>>
+                                	<?php echo $value->nama_pangkat ?></option>
+                            <?php endforeach;?>
+						</select>
 						<p class="help-block"><?php echo form_error('pangkat', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>
@@ -98,20 +106,7 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 						<input type="file" name="foto" class="form-control" value="<?php echo $pangkat->lampiran_sk ?>">
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="golongan" class="control-label col-md-3 col-xs-12">Golongan : <strong class="text-blue">*</strong></label>
-					<div class="col-md-8">
-						<input type="text" name="golongan" class="form-control" value="<?php echo $pangkat->golongan ?>">
-						<p class="help-block"><?php echo form_error('golongan', '<small class="text-red">', '</small>'); ?></p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="ruang" class="control-label col-md-3 col-xs-12">Ruang : <strong class="text-blue">*</strong></label>
-					<div class="col-md-8">
-						<input type="text" name="ruang" class="form-control" value="<?php echo $pangkat->ruang ?>">
-						<p class="help-block"><?php echo form_error('ruang', '<small class="text-red">', '</small>'); ?></p>
-					</div>
-				</div>
+
 				<div class="form-group">
 					<label for="alamat" class="control-label col-md-3">Keterangan : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">

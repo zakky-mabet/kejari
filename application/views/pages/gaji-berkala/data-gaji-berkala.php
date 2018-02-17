@@ -50,22 +50,33 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th  class="text-center">Tanggal Mulai Terdaftar</th>
 							<th  class="text-center">Batas Akhir</th>
 							<th  class="text-center">Nomor SK</th>
-							<th  class="text-center">Pendidikan Terakhir</th>
+							
 							<th rowspan="2" class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody class="hoverTable">
+						<?php foreach($gaji_berkala as $row ) : ?>
 						<tr style="vertical-align: top">
-							<td></td>
-							<td></td>
-							<td><?php echo $row->tmt ?></td>
-							<td><?php echo $row->batas_akhir ?></td>
-							<td><?php echo $row->no_sk ?></td>
-							<td><?php echo $row->lampiran_sk ?></td>
-							<td><?php echo $row->keterangan ?></td>
-							<td></td>
+							<td class="text-center"><?php echo ++$this->page ?>.</td>
+							<td class="text-center"><?php echo $row->nip ?></td>
+							<td class="text-center"><?php echo $row->nama_pegawai ?></td>
+							<td class="text-center"><?php echo $row->tmt ?></td>
+							<td class="text-center"><?php echo $row->batas_akhir ?></td>
+							<td class="text-center"><?php echo $row->no_sk ?></td>
+							
+							<td class="text-center">
+								<a href="<?php echo base_url()?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+									<i class="fa fa-pencil"></i>
+								</a>
+								<a href="javascript:void(0)" id="delete-diklat" data-id="" class="btn btn-xs btn-danger">
+									<i class="fa fa-trash-o"></i>
+								</a>
+
+							</td>
 						</tr>
+						<?php endforeach; ?>
 					</tbody>
+						
 				</table>
 			</div>
 		</div>

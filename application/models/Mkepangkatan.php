@@ -29,7 +29,11 @@ class Mkepangkatan extends CI_Model
 	public function detail_kepangkatan($param = 0)
 	{
 		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
-	
+	}
+
+	public function pangkat($param = 0)
+	{
+		return $this->db->get_where('pangkat', array('ID' => $param))->row();
 	}
 
 	public function create()
@@ -59,8 +63,6 @@ class Mkepangkatan extends CI_Model
 			'batas_akhir' => $btsAkhir->format('Y-m-d'),
 			'no_sk' => $this->input->post('no_sk'),
 			'lampiran_sk' => $foto,
-			//'golongan' => $this->input->post('golongan'),
-			//'ruang' => $this->input->post('ruang'),
 			'keterangan' => $this->input->post('keterangan'),
 			
 		);
