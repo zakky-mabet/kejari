@@ -10,6 +10,7 @@
  **/
 echo form_open(current_url(), array('class' => 'form-horizontal'));
 echo form_hidden('user_id', $user->id );
+echo form_hidden('ID', $get->ID );
 ?>
 			<div class="box-body" style="margin-top: 10px;">
 				<div class="form-group">
@@ -43,7 +44,9 @@ echo form_hidden('user_id', $user->id );
 
 			<div class="box-footer with-border">
 				<div class="col-md-4 col-xs-5">
-					
+					<a href="<?php echo site_url('laporan_masyarakat/data_laporan') ?>" class="btn btn-app pull-right">
+						<i class="ion ion-reply"></i> Kembali
+					</a>
 				</div>
 				<div class="col-md-6 col-xs-6">
 					<button type="submit" class="btn btn-app pull-right">

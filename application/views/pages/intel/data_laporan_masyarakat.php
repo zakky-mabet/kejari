@@ -16,11 +16,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('laporan_masyarakat') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('laporan_masyarakat/data_laporan') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('laporan_masyarakat/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url('laporan_masyarakat') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo base_url('laporan_masyarakat') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
+						<a href="<?php echo base_url('laporan_masyarakat/data_laporan') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -37,6 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th width="100"></th>
 						</tr>
 					</thead>
+
 					<tbody>
 						<?php foreach($data_laporan as $row) : ?>
 						<tr style="vertical-align: top">
@@ -46,12 +47,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo highlight_phrase($row->asal, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
 							<td><?php if (!$row->instruksi) { echo '<span class="text-red">Belum di Instruksikan<span>!'; } else { echo $row->instruksi; }   ?></td>
 							<td class="text-left">
-								
-								<a href="<?php echo base_url('data_laporan/instruksi_disposisi/'.$row->ID_laporan) ?>" data-toggle="tooltip" data-placement="top" title="Instruksikan dan Disposisikan Laporan ini." class="btn btn-xs btn-success" style="margin-right: 10px">
+
+								<?php if ($this->mlaporan_masyarakat->get($row->ID_laporan, 'cek_disposisi') == 0) { ?>
+									<a href="<?php echo base_url('laporan_masyarakat/instruksi_disposisi/'.$row->ID_laporan) ?>" data-toggle="tooltip" data-placement="top" title="Instruksikan dan Disposisikan Laporan ini." class="btn btn-xs btn-success" style="margin-right: 10px">
 									<i class="fa fa-send"></i>
 								</a>
+								<?php } else {?>
+									<a href="<?php echo base_url('laporan_masyarakat/update_instruksi/'.$row->ID) ?>" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Sunting Instruksi Laporan ini." style="margin-right: 10px">
+										<i class="fa fa-pencil"></i>
+								<?php } ?>
+
 								<?php if (!$row->instruksi): ?>
-									<a href="<?php echo base_url('data_laporan/update/'.$row->ID_laporan) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting Laporan ini." style="margin-right: 10px">
+									<a href="<?php echo base_url('laporan_masyarakat/update/'.$row->ID_laporan) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting Laporan ini." style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
 								<?php endif ?>

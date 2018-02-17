@@ -26,10 +26,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </li>
            <li class="<?php echo active_link_method('data_laporan','laporan_masyarakat') ?>">
               <a href="<?php echo base_url('laporan_masyarakat/data_laporan') ?>">
-                <i class="fa fa-file-text"></i> <span>Data Laporan Masyarakat</span> <span class="label label-danger pull-right">4</span>
+                <i class="fa fa-file-text"></i> <span>Data Laporan Masyarakat</span> <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?> Data Laporan Masyarakat Belum di Instruksikan" class="label label-danger pull-right"><?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?></span>
               </a>
           </li>
-
+          
           <li class="treeview <?php echo active_link_multiple(array('')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>INTELIJEN</span>

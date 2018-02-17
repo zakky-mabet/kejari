@@ -37,7 +37,7 @@ class Laporan_masyarakat extends Admin_panel {
 
 		$this->breadcrumbs->unshift(2, 'Buat', "laporan_masyarakat/index");
 
-		$this->form_validation->set_rules('nomor', 'Nomor', 'trim|required');
+		$this->form_validation->set_rules('nomor', 'Nomor', 'trim|required|callback_validate_nomor');
 		$this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'trim|required');
 		$this->form_validation->set_rules('asal', 'Asal', 'trim|required');
 		$this->form_validation->set_rules('deskripsi', 'Prihal', 'trim|required');
@@ -54,7 +54,46 @@ class Laporan_masyarakat extends Admin_panel {
 		$this->template->view('intel/create_laporan_masyarakat', $this->data);
 	}
 
-	public static function data_laporan()
+	/**
+	 * Check Nomor Laporan Masyarakat
+	 *
+	 * @return string
+	 **/
+	public function validate_nomor()
+	{
+		if($this->mlaporan_masyarakat->nomor_cek($this->input->post('ID')) == TRUE)
+		{
+			$this->form_validation->set_message('validate_nomor', 'Maaf Nomor ini telah digunakan.');
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public function update($param = 0)
+	{
+		$this->page_title->push("Laporan Masyarakat", "Sunting Laporan Masyarakat");
+
+		$this->breadcrumbs->unshift(2, 'Sunting', "laporan_masyarakat/update");
+
+		$this->form_validation->set_rules('nomor', 'Nomor', 'trim|required|callback_validate_nomor');
+		$this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'trim|required');
+		$this->form_validation->set_rules('asal', 'Asal', 'trim|required');
+		$this->form_validation->set_rules('deskripsi', 'Prihal', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mlaporan_masyarakat->update($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['get'] = $this->mlaporan_masyarakat->get($param);
+		$this->data['title'] = "Sunting Laporan Masyarakat";
+		$this->template->view('intel/update_laporan_masyarakat', $this->data);
+	}
+
+	public function data_laporan()
 	{
 		$this->page_title->push("Laporan Masyarakat", "Data Laporan Masyarakat");
 
@@ -73,39 +112,43 @@ class Laporan_masyarakat extends Admin_panel {
 		$this->data['data_laporan'] = $this->mlaporan_masyarakat->get_all($this->per_page, $this->page, 'result');
 		$this->template->view('intel/data_laporan_masyarakat', $this->data);
 	}
+
+	public function delete($param = 0)
+	{
+		$this->mlaporan_masyarakat->delete($param);
+
+		redirect('laporan_masyarakat/data_laporan');
+	}
 	
+	public function instruksi_disposisi($param = 0)
+	{
+		if (!$param) {
+			show_404();
+		}
 
-	// public function instruksi_disposisi($param = 0)
-	// {
+		if ($this->mlaporan_masyarakat->get($param, 'num_rows') == 0) {
+			show_404();
+		}
+		if ($this->mlaporan_masyarakat->get($param, 'cek_disposisi') == 1) {
+			show_404();
+		} 
 
-	// 	if (!$param) {
-	// 		show_404();
-	// 	}
+		$this->page_title->push("Laporan Masyarakat", "Buat Instruksi dan Disposisi");
 
-	// 	if ($this->mlaporan_masyarakat->get($param) == 0) {
-	// 		show_404();
-	// 	}
-	// 	if ($this->mlaporan_masyarakat->get($param, 'cek_disposisi') == 1) {
-			
-	// 		show_404();
-	// 	} 
+		$this->breadcrumbs->unshift(3, 'Buat', "laporan_masyarakat/instruksi_disposisi");
 
-	// 	$this->page_title->push("Laporan Masyarakat", "Buat Instruksi dan Disposisi");
-
-	// 	$this->breadcrumbs->unshift(3, 'Buat', "laporan_masyarakat/instruksi_disposisi");
-
-	// 	$this->form_validation->set_rules('instruksi', 'Instruksi', 'trim|required');
-	// 	$this->form_validation->set_rules('group_id', 'Disposisi', 'trim|required');
+		$this->form_validation->set_rules('instruksi', 'Instruksi', 'trim|required');
+		$this->form_validation->set_rules('group_id', 'Disposisi', 'trim|required');
 
 
-	// 	if ($this->form_validation->run() == TRUE)
-	// 	{
-	// 		$this->mlaporan_masyarakat->instruksi_disposisi($param);
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mlaporan_masyarakat->instruksi_disposisi($param);
 
-	// 		redirect(current_url());
-	// 	}
-	// 	$this->data['title'] = "Buat Instruksi dan Disposisi";
-	// 	$this->template->view('intel/instruksi_disposisi', $this->data);
-	// }
+			redirect(current_url());
+		}
+		$this->data['title'] = "Buat Instruksi dan Disposisi";
+		$this->template->view('intel/instruksi_disposisi', $this->data);
+	}
 
 }

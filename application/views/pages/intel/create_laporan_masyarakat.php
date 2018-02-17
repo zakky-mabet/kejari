@@ -26,7 +26,7 @@ echo form_hidden('user_id', $user->id );
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="asal" class="control-label col-md-3 col-xs-12">Asal :<strong class="text-red">*</strong></label>
+                    <label for="asal" class="control-label col-md-3 col-xs-12">Asal : <strong class="text-red">*</strong></label>
                     <div class="col-md-8">
                     <input type="text"  class="form-control" name="asal" value="<?php echo set_value('asal') ?>">
                         <p class="help-block"><?php echo form_error('asal', '<small class="text-red">', '</small>'); ?></p>            
