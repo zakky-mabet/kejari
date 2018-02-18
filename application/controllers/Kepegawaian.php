@@ -76,6 +76,14 @@ class Kepegawaian extends Admin_panel
 
 	public function update($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mkepegawaian->cek_data($param) == 0) {
+			show_404();
+		}
+
 		$this->page_title->push("Kepegawaian", "Ubah Data Kepegawaian");
 
 		$this->breadcrumbs->unshift(3, 'Ubah', "kepegawaian/create");

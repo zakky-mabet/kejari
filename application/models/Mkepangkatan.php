@@ -30,6 +30,11 @@ class Mkepangkatan extends CI_Model
 	{
 		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
 	}
+	// cara cek bahwa data ada atau tidak
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('pangkat', array('ID' => $param) )->num_rows();
+	}
 
 	public function pangkat($param = 0)
 	{

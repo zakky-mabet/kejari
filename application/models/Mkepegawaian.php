@@ -92,6 +92,12 @@ class Mkepegawaian extends CI_Model
 	}
 
 
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('kepegawaian', array('ID' => $param) )->num_rows();
+	}
+
+
 	public function update($param = 0)
 	{
 		$get = $this->get($param);
