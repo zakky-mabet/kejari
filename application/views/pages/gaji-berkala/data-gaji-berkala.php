@@ -1,21 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<style>
-.hoverTable{
-			width:100%; 
-			border-collapse:collapse; 
-			}
-.hoverTable td
-			{ 
-			padding:7px; border:#4e95f4 1px solid;
-			}
-.hoverTable tr:hover
-			{
- 			background-color: #D8E9A7;
-			}
-
-</style> 
+?> 
 <div class="row">
 <div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
@@ -71,7 +56,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" data-placement="top" title="Hapus">
+								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" 
+									data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 

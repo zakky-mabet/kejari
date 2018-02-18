@@ -47,10 +47,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo date_id($row->tgl_selesai); ?></td>
 							<td class="text-center"><?php echo ucwords($row->tingkat); ?></td>
 							<td class="text-center">
-								<a href="<?php echo base_url('diklat/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting.">
+								<a href="<?php echo base_url('diklat/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting" >
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-diklat" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" data-placement="top" title="Hapus">
+								<a href="javascript:void(0)" id="delete-diklat" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>
