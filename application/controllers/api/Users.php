@@ -16,7 +16,7 @@ class Users extends CI_Controller
 	{
 		if($_SERVER['REQUEST_METHOD']=='POST')
 		{
-			$account = $this->_get_account($this->input->post('email'));
+			$account = $this->_get_account($this->input->post('nip'));
 
 			if($account == TRUE)
 			{
@@ -67,7 +67,8 @@ class Users extends CI_Controller
 	 **/
 	private function _get_account($param = 0)
 	{
-		$query = $this->db->get_where('users', array('email' => $param, 'active' => 1));
+		$this->db->join('kepegawaian', 'users.nip = kepegawaian.nip', 'left');
+		$query = $this->db->get_where('users', array('users.nip' => $param, 'active' => 1));
 
 		if($query->num_rows() == 1)
 		{
