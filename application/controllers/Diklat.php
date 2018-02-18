@@ -60,7 +60,6 @@ class Diklat extends Admin_panel
 	public function create()
 	{
 		
-
 		$this->page_title->push("Kepegawaian", "Tambahkan Data Riwayat Diklat");
 
 		$this->breadcrumbs->unshift(3, 'Data Riwayat Diklat', "diklat/index");
@@ -87,6 +86,13 @@ class Diklat extends Admin_panel
 
 	public function update($param = 0)
 	{	
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mdiklat->cek_data($param) == 0) {
+			show_404();
+		}
 
 		$this->page_title->push("Kepegawaian", "Ubah Data Riwayat Diklat");
 
@@ -113,6 +119,14 @@ class Diklat extends Admin_panel
 
 	public function detail_pegawai($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mdiklat->cek_detail($param) == 0) {
+			show_404();
+		}
+
 		$this->page_title->push("Kepegawaian", "Detail Data Riwayat Diklat");
 
 		$this->breadcrumbs->unshift(3, 'Data Riwayat Diklat', "diklat/index");

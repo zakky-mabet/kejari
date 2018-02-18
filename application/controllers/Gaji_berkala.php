@@ -72,6 +72,13 @@ class Gaji_berkala extends Admin_panel
 
 	public function update($param = 0 )
 	{ 
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mgaji_berkala->cek_data($param) == 0) {
+			show_404();
+		}
 		$this->page_title->push("Gaji Berkala", "Ubah Data Gaji Berkala");
 
 		$this->breadcrumbs->unshift(3, 'Ubah Data', "gaji-berkala/create");

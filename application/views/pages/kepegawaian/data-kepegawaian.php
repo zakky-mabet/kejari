@@ -63,13 +63,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo strtoupper($row->agama) ?></td>
 							<td><?php echo strtoupper($row->jns_kelamin) ?></td>
 							<td><?php echo $row->pendidikan_terakhir ?></td>
+
 							<td><?php echo $row->tmt_pangkat ?></td>
 							<td><?php echo $row->bts_pangkat ?></td>
 							<td>
 								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+
+							<td></td>
+							<td></td>
+							<td class="text-center">
+								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
+
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-pegawai" data-id="<?php echo $row->ID ?>"  class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-pegawai" data-id="<?php echo $row->ID ?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>

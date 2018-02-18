@@ -110,7 +110,7 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 					<label for="alamat" class="control-label col-md-3">Keterangan : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">
-						<textarea name="keterangan" rows="3" class="form-control"><?php echo $pangkat->keterangan ?></textarea>
+						<textarea name="keterangan" rows="8" class="form-control"><?php echo $pangkat->keterangan ?></textarea>
 						<p class="help-block"><?php echo form_error('keterangan', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>

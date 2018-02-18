@@ -11,6 +11,25 @@ class Mdiklat extends CI_Model
 		$this->load->library(array('upload'));
 	}
 
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('riwayat_diklat', array('ID' => $param) )->num_rows();
+	}
+
+	public function cek_detail($param = 0)
+	{
+		$this->db->select('
+							kepegawaian.nip,
+							kepegawaian.nama AS nama_pegawai, kepegawaian.foto, kepegawaian.nrp, kepegawaian.tempat_lahir, kepegawaian.tgl_lahir,
+							kepegawaian.jns_kelamin, kepegawaian.alamat, kepegawaian.agama, kepegawaian.pendidikan_terakhir
+						');
+
+		$this->db->where('kepegawaian.ID', $param);
+
+		return $this->db->get('kepegawaian')->num_rows();
+		return $this->db->get_where('riwayat_diklat', array('ID' => $param) )->num_rows();
+	}
+
 	public function get_all_pegawai()
     {
         // join tabel

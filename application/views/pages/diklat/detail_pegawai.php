@@ -60,8 +60,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <div class="col-md-8 pull-right">
       <div class="nav-tabs-custom">
-        <div class="tab-content">
-	      <table class="table-stripped">
+        <div class="box-body">
+	      <table class="table table-bordered table-stripped">
 					<thead class="bg-green">
 						<tr>
 							<th width="20px" class="text-center">No</th>
@@ -77,13 +77,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</thead>
 					<tbody>
 						<?php foreach($this->db->get_where('riwayat_diklat', array('nip' => $kepegawaian->nip))->result() as $row) : ?>
-						<tr>
+						<tr >
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
 							<td class="text-center"><?php echo $row->nama ?></td>
 							<td class="text-center"><?php echo date_id($row->tgl_mulai) ?></td>
 							<td class="text-center"><?php echo date_id($row->tgl_selesai) ?></td>
 							<td class="text-center"><?php echo $row->tingkat ?></td>
-							<td class="text-center"><?php echo $row->keterangan ?></td>
+							<td><?php echo $row->keterangan ?></td>
 							<td>
 								<button  class="btn" data-toggle="modal" data-target="#exampleModalCenter">
 								 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">

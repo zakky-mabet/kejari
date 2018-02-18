@@ -35,6 +35,11 @@ class Mgaji_berkala extends CI_Model
 	{
 		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
 	}
+		// cara cek bahwa data ada atau tidak
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('gaji_berkala', array('ID' => $param) )->num_rows();
+	}
 
 	public function create()
 	{
