@@ -21,12 +21,12 @@ class Gaji_berkala extends Admin_panel
 
 		$this->per_page = (!$this->input->get('per_page')) ? 20 : $this->input->get('per_page');
 
-		$this->data['gaji_berkala'] = $this->mgaji_berkala->get_all($this->per_page, $this->page, 'result');
+		$this->data['gaji_berkala'] = $this->mgaji_berkala->get($this->per_page, $this->page, 'result');
 
 		$this->page = $this->input->get('page');
 		$this->query = $this->input->get('query');
 
-		$this->load->js(base_url("public/app/diklat/diklat.js"));
+		$this->load->js(base_url("public/app/gaji.js"));
 		$this->load->css(base_url("public/app/diklat/diklat.css"));
 	}
 
@@ -68,6 +68,37 @@ class Gaji_berkala extends Admin_panel
 
 		$this->data['title'] = "Tambahkan Data Gaji Berkala";
 		$this->template->view('gaji-berkala/create-gaji', $this->data);
+	}
+
+	public function update($param = 0 )
+	{ 
+		$this->page_title->push("Gaji Berkala", "Ubah Data Gaji Berkala");
+
+		$this->breadcrumbs->unshift(3, 'Ubah Data', "gaji-berkala/create");
+
+		$this->form_validation->set_rules('nip', 'NIP - Pegawai', 'trim|required');
+		$this->form_validation->set_rules('date', 'Tanggal Mulai Terdaftar', 'trim|required');
+		$this->form_validation->set_rules('no_sk', 'Nomor SK', 'trim|required');
+		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mgaji_berkala->update($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['title'] = "Tambahkan Data Gaji Berkala";
+		//terhubung dengan model gaji dengan nama get
+		$this->data['gaji'] = $this->mgaji_berkala->get($param);
+		$this->template->view('gaji-berkala/update-gaji', $this->data);
+	}
+
+	public function delete($param = 0)
+	{
+		$this->mgaji_berkala->delete($param);
+
+		redirect('gaji_berkala');
 	}
 
 }

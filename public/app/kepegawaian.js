@@ -7,6 +7,8 @@
 
 $(document).ready(function() {
 
+	 $(".select2").select2();
+	
 	$('a#delete-pegawai').click(function() 
 	{
 		$('div#modal-delete').modal('show');

@@ -10,7 +10,7 @@ class Firebase_push
 {
 	protected $ci;
 
-	private $api_key = "AAAAl6uTq-s:APA91bFEczw3CZGZaZ8hPiPaEwL-IH9gaODaNXYmI6BbhVALwJt6Zk05heK3jxt786lWiEfiIvh9pXdk0LF2dmB8cEkMYUf3WsYWN39hos-dfmmB5TtdQiHnfEGdnwSC6wOl1w7qoqNq";
+	private $api_key = "AAAAUCJXdIc:APA91bEldjhnbsMu36-Gf8oYzYjcJ3p_dP1RD3i5fWhAF33xRQnCV_0l43OA6HQfaHARty7eQVSY_QrX8rm1_oXtB5yf_Yp0tWM02rbU2bDsdqCxCBe4-cYuoP-gQFE2dURhEWVkAq8J";
 	private $url = 'https://fcm.googleapis.com/fcm/send';
 
 	public $ID;
@@ -18,6 +18,7 @@ class Firebase_push
 	public $message;
 	public $to;
 	public $activityName;
+	public $sender;
 
 	public function __construct()
 	{
@@ -48,6 +49,12 @@ class Firebase_push
 		return $this;
 	}
 
+	public function setSender($param = "")
+	{
+		$this->sender = $param;
+		return $this;
+	}
+
 	public function setActivityName($param = 'MainActivity')
 	{
 		$this->activityName = $param;
@@ -61,10 +68,13 @@ class Firebase_push
 			'notification' => array(
 				'title'	=> $this->title,
 				'body' => $this->message,
-				'activity' => $this->activityName,
+				'class' => $this->activityName,
 				'ID' => $this->ID,
 				'vibrate' => "1",
-				'sound'	=> "default"
+				'sound'	=> "notification.mp3"
+			),
+			'data' => array(
+				'ID' => $this->ID
 			)
 		);
 	}

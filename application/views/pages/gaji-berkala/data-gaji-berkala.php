@@ -17,10 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </style> 
 <div class="row">
-<div class="col-md-8 col-md-offset-2 col-xs-12">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-  <strong><?php echo $this->session->flashdata('alert'); ?></strong>
-</div>
+<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<?php echo form_open(current_url(), array('method' => 'GET')); ?>
@@ -50,25 +47,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th  class="text-center">Tanggal Mulai Terdaftar</th>
 							<th  class="text-center">Batas Akhir</th>
 							<th  class="text-center">Nomor SK</th>
-							
-							<th rowspan="2" class="text-center"></th>
+							<th class="text-center">Keterangan</th>
+							<th  width="100px" class="text-center">Lampiran</th>
+							<th width="8%" class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody class="hoverTable">
 						<?php foreach($gaji_berkala as $row ) : ?>
-						<tr style="vertical-align: top">
+						<tr>
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
 							<td class="text-center"><?php echo $row->nip ?></td>
 							<td class="text-center"><?php echo $row->nama_pegawai ?></td>
-							<td class="text-center"><?php echo $row->tmt ?></td>
-							<td class="text-center"><?php echo $row->batas_akhir ?></td>
+							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
+							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
 							<td class="text-center"><?php echo $row->no_sk ?></td>
-							
-							<td class="text-center">
-								<a href="<?php echo base_url()?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+							<td class="text-center"><?php echo $row->keterangan ?></td>							
+							<td>						
+							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
+							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
+							</button>
+							</td>
+							<td>
+								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-diklat" data-id="" class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
 									<i class="fa fa-trash-o"></i>
 								</a>
 
@@ -76,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
-						
+			
 				</table>
 			</div>
 		</div>
@@ -85,6 +88,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </div>
+
+<script>
+	$('button#lihat-gambar').unbind().click(function(argument) {
+		$('div#exampleModalCenter').modal('show');
+		$('img#setImage').attr('src', $(this).data('src'))
+	})
+</script>
+
 <div class="modal fade in modal-danger" id="modal-delete" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -99,7 +110,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
     </div>
+</div>
+
+<!-- Modal Gambar -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">    
+	<img width="100%" src="" id="setImage" class="img-rounded" alt="User Image">
+  </div>
 </div> 
+
 <?php
 /* End of file main-anggota.php */
 /* Location: ./application/views/pages/anggota/main-anggota.php */

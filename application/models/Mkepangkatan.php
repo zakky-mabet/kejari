@@ -54,7 +54,7 @@ class Mkepangkatan extends CI_Model
 		}
 
 		$btsAkhir = new DateTime($this->input->post('date'));
-		$btsAkhir->modify('+36 month');
+		$btsAkhir->modify('+47 month');
 
 		$kepangkatan = array(
 			'nip' => $this->input->post('nip'),
@@ -111,12 +111,10 @@ class Mkepangkatan extends CI_Model
 		$kepangkatan = array(
 			'nip' => $this->input->post('nip'),
 			'tmt' => $this->input->post('date'),
-			'pangkat' => $this->input->post('pangkat'),
+			'id_pangkat' => $this->input->post('id_pangkat'),
 			'batas_akhir' => $btsAkhir->format('Y-m-d'),
 			'no_sk' => $this->input->post('no_sk'),
 			'lampiran_sk' => $foto,
-			'golongan' => $this->input->post('golongan'),
-			'ruang' => $this->input->post('ruang'),
 			'keterangan' => $this->input->post('keterangan'),
 			
 		);

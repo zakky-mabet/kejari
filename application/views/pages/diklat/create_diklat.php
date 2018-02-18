@@ -14,10 +14,10 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 					<label for="name" class="control-label col-md-3 col-xs-12">Pegawai : <strong class="text-red">*</strong></label>
 					<div class="col-md-8">
-						<select name="nip" class="form-control">
-							<option value="0">-- NIP - Nama Pegawai --</option>
+						<select name="nip" class="form-control select2">
+							<option selected="selected" value="0">-- NIP - Nama Pegawai --</option>
 							<?php foreach ($this->mdiklat->get_all_pegawai() as $key => $value): ?>
-                                <option value="<?php echo $value->nip; ?>"><?php echo $value->nama; ?></option>
+                                <option value="<?php echo $value->nip; ?>"><?php echo $value->nip.' - '. $value->nama; ?></option>
                             <?php endforeach;?>
 						</select>
 						<p class="help-block"><?php echo form_error('nip', '<small class="text-red">', '</small>'); ?></p>

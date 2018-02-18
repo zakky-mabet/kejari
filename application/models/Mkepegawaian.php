@@ -12,10 +12,22 @@ class Mkepegawaian extends CI_Model
 
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
-		if($this->input->get('query') != '')
-			$this->db->like('nip', $this->input->get('query'))
-					 ->or_like('nrp', $this->input->get('query'))
-					 ->or_like('nama', $this->input->get('query'));
+		// tabel join berdasarkan data yang terakhir
+		$this->db->select("kepegawaian.*, 	(SELECT nama_pangkat FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
+																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
+																	DESC LIMIT 1) AS pangkat,
+											(SELECT tmt FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
+																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
+																	DESC LIMIT 1) AS tmt_pangkat,
+											(SELECT batas_akhir FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
+																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
+																	DESC LIMIT 1) AS bts_pangkat
+											");
+
+		if($this->input->post('query') != '')
+			$this->db->like('nip', $this->input->post('query'))
+					 ->or_like('nrp', $this->input->post('query'))
+					 ->or_like('nama', $this->input->post('query'));
 
 		if($type == 'result')
 		{

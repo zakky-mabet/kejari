@@ -50,10 +50,8 @@ class Kepangkatan extends Admin_panel
 		$this->breadcrumbs->unshift(5, 'Tambahkan Kepangkatan', "kepegawaian/create_kepangkatan");
 
 		$this->form_validation->set_rules('date', 'TMT', 'trim|required');
-		$this->form_validation->set_rules('pangkat', 'Pangkat', 'trim|required');
+		$this->form_validation->set_rules('id_pangkat', 'Pangkat', 'trim|required');
 		$this->form_validation->set_rules('no_sk', 'Nomor SK', 'trim|required');
-		$this->form_validation->set_rules('golongan', 'Golongan', 'trim|required');
-		$this->form_validation->set_rules('ruang', 'Ruang', 'trim|required');
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
@@ -119,7 +117,7 @@ class Kepangkatan extends Admin_panel
 		$this->breadcrumbs->unshift(4, 'Ubah Data Kepangkatan', "kepegawaian/create");
 
 		$this->form_validation->set_rules('date', 'TMT', 'trim|required');
-		$this->form_validation->set_rules('pangkat', 'Pangkat', 'trim|required');
+		$this->form_validation->set_rules('id_pangkat', 'Pangkat', 'trim|required');
 		$this->form_validation->set_rules('no_sk', 'Nomor SK', 'trim|required');
 		$this->form_validation->set_rules('keterangan', 'keterangan', 'trim|required');
 

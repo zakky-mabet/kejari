@@ -91,7 +91,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('kepegawaian','kepangkatan','diklat','gaji_berkala')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('kepegawaian','kepangkatan','diklat','gaji_berkala','kenaikan_pangkat')); ?>">
               <a href="#">
                   <i class="fa fa-users"></i> <span>Kepegawaian</span>
                   <span class="pull-right-container">
@@ -105,10 +105,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="<?php echo active_link_method('create','kepegawaian') ?>">
                     <a href="<?php echo base_url('kepegawaian/create') ?>"><i class="fa fa-angle-double-right"></i> Tambah Pegawai</a>
                 </li>
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Kenaikan Pangkat</a>
+                <li class="<?php echo active_link_method('index','kenaikan_pangkat').active_link_method('create','kenaikan_pangkat') ?>">
+                    <a href="<?php echo base_url('kenaikan_pangkat/create') ?>"><i class="fa fa-angle-double-right"></i> Kenaikan Pangkat</a>
                 </li>
-                <li class="<?php echo active_link_method('index','gaji_berkala').active_link_method('create','gaji_berkala') ?>">
+                <li class="<?php echo active_link_method('index','gaji_berkala').active_link_method('create','gaji_berkala').active_link_method('update','gaji_berkala') ?>">
                     <a href="<?php echo base_url('gaji_berkala') ?>"><i class="fa fa-angle-double-right"></i> Gaji Berkala</a>
                 </li>
                 <li class="<?php echo active_link_method('index','diklat').active_link_method('create','diklat').active_link_method('update','diklat').active_link_method('detail_pegawai','diklat') ?>">
