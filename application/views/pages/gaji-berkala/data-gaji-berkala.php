@@ -61,7 +61,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
 							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
 							<td class="text-center"><?php echo $row->no_sk ?></td>
-							<td class="text-center"><?php echo $row->keterangan ?></td>							
+							<td><?php echo $row->keterangan ?></td>							
 							<td>						
 							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
 							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
