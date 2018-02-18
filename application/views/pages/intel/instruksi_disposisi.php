@@ -1,30 +1,33 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
-	<div class="col-md-10 col-md-offset-1 col-xs-12">
+	<div class="col-md-8 col-md-offset-2 col-xs-12">
 		<div class="box box-primary">
 			<?php
-			echo form_open(current_url(), array('class' => 'form-horizontal'));
+			echo form_open(current_url(), array('class' => ''));
 			?>
 			<div class="box-body" style="margin-top: 10px;">
+				
+
 				<div class="form-group">
-					<label for="instruksi" class="control-label col-md-3 col-xs-12">Instruksi : <strong class="text-red">*</strong></label>
-					<div class="col-md-8">
-						<textarea name="instruksi" rows="8" class="form-control"><?php echo set_value('instruksi') ?></textarea>
-						<p class="help-block"><?php echo form_error('instruksi', '<small class="text-red">', '</small>'); ?></p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="group_id" class="control-label col-md-3 col-xs-12">Disposisi : <strong class="text-red"></strong> <a href="#" data-toggle="tooltip" data-placement="top" title="Disposisi dipilih secara otomatis"><i class="fa fa-info-circle"></i></a></label>
-					<div class="col-md-8">
-						<div class="radio radio-inline radio-primary">
-							<input name="group_id" type="radio" value="4" checked="checked"> <label for="group_id">SEKSI INTELIJEN</label>
-						</div>
-						<p class="help-block"><?php echo form_error('group_id', '<small class="text-red">', '</small>'); ?></p>
-					</div>
-				</div>
+                	<label>Instruksi : <strong class="text-red">*</strong></label>
+                	<textarea name="instruksi" rows="8" autofocus placeholder="Tulis Instruksi di sini." class="textarea form-control"><?php echo set_value('instruksi') ?></textarea>
+					<p class="help-block"><?php echo form_error('instruksi', '<small class="text-red">', '</small>'); ?></p>
+              </div>
+
+              <div class="form-group">
+                	<label>Disposisi/ Diteruskan  : <strong class="text-red">*</strong> </label>
+                		<p><input type="checkbox" name="group_id" value="4" class="minimal" checked >  SEKSI INTELIJEN </p>
+<!--                 		<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDSUS </p>
+                		<input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDUM <p></p>
+                		<input type="checkbox" class="minimal" disabled="disabled" >  SEKSI DATUN	 -->
+
+					<p class="help-block"><?php echo form_error('group_id', '<small class="text-red">', '</small>'); ?></p>
+              </div>
+
+				
 				<div class="box-footer with-border">
 					<div class="col-md-4 col-xs-5">
-						<a href="<?php echo site_url('laporan_masyarakat') ?>" class="btn btn-app pull-right">
+						<a href="<?php echo site_url('laporan_masyarakat/data_laporan') ?>" class="btn btn-app pull-right">
 							<i class="ion ion-reply"></i> Kembali
 						</a>
 					</div>
