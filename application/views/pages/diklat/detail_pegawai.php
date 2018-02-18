@@ -85,9 +85,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center" style="vertical-align: middle;"><?php echo $row->tingkat ?></td>
 							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>
 							<td>
-								<button  class="btn" data-toggle="modal" data-target="#exampleModalCenter">
-								 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">
-								</button>
+							<button  class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>">
+							 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">
+							</button>
 							</td>
 						</tr>
 					<?php endforeach; ?>
@@ -97,12 +97,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div>
     </div>
 </div>
-
+<script>
+	$('button#lihat-gambar').unbind().click(function(argument) {
+		$('div#exampleModalCenter').modal('show');
+		$('img#setImage').attr('src', $(this).data('src'))
+	})
+</script>
 <!-- Modal Gambar -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">    
-	<img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">
+	<img width="100%" src="" id="setImage" class="img-rounded" alt="User Image">
   </div>
 </div>
 <?php

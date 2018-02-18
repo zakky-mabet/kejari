@@ -21,13 +21,9 @@ class Diklat extends Admin_panel
 		$this->load->helper(array('indonesia'));
 
 		$this->per_page = (!$this->input->get('per_page')) ? 20 : $this->input->get('per_page');
-
-		$this->data['riwayat_diklat'] = $this->mdiklat->get_all($this->per_page, $this->page, 'result');
-
-
+		
 		$this->page = $this->input->get('page');
 		$this->query = $this->input->get('query');
-
 
 		$this->load->js(base_url("public/app/diklat/diklat.js"));
 		$this->load->css(base_url("public/app/diklat/diklat.css"));

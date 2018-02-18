@@ -42,9 +42,8 @@ class Mdiklat extends CI_Model
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
 		if($this->input->get('query') != '')
-			$this->db->like('nip', $this->input->get('query'))
-					 ->or_like('nrp', $this->input->get('query'))
-					 ->or_like('nama', $this->input->get('query'));
+			$this->db->like('riwayat_diklat.nip', $this->input->get('query'))
+					 ->or_like('kepegawaian.nama', $this->input->get('query'));
 		// tabel join
 		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
 

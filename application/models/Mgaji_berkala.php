@@ -13,17 +13,15 @@ class Mgaji_berkala extends CI_Model
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
 		if($this->input->get('query') != '')
-			$this->db->like('nip', $this->input->get('query'))
-					 ->or_like('nrp', $this->input->get('query'))
-					 ->or_like('nama', $this->input->get('query'));
-		// tabel join
+			$this->db->like('gaji_berkala.nip', $this->input->get('query'))
+					 ->or_like('kepegawaian.nama', $this->input->get('query'));
+					// tabel join
 		$this->db->select('gaji_berkala.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai, kepegawaian.pendidikan_terakhir');
 
 		$this->db->join('kepegawaian', 'gaji_berkala.nip = kepegawaian.nip', 'left');
 		
-
 		if($type == 'result')
-		{
+		{		
 			return $this->db->get('gaji_berkala', $limit, $offset)->result();
 		} else {
 
