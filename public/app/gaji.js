@@ -6,6 +6,8 @@
 */
 $(document).ready(function() {
 
+	$(".select2").select2();
+	
 	$('a#delete-gaji').click(function() 
 	{
 		$('div#modal-delete').modal('show');

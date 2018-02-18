@@ -19,8 +19,8 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 					<label for="pangkat" class="control-label col-md-3 col-xs-12">Pegawai : <strong class="text-red">*</strong></label>
 					<div class="col-md-8">
-						<select name="nip" class="form-control">
-							<option value="">-- Pilih NIP - Nama Pangkat --</option>
+						<select name="nip" class="form-control select2">
+							<option selected="selected" value="">-- Pilih NIP - Nama Pangkat --</option>
 							<?php foreach($this->mkenaikan_pangkat->get_all_pangkat() as $key => $value) : ?>
                                 <option value="<?php echo $value->nip; ?>"><?php echo $value->nip.' - '. $value->nama; ?></option>
                             <?php endforeach;?>
@@ -31,8 +31,8 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 					<label for="pangkat" class="control-label col-md-3 col-xs-12">Pangkat : <strong class="text-red">*</strong></label>
 					<div class="col-md-8">
-						<select name="id_pangkat" class="form-control">
-							<option value="">-- Pilih Nama Pangkat --</option>
+						<select name="id_pangkat" class="form-control select2">
+							<option selected="selected" value="">-- Pilih Nama Pangkat --</option>
 							<?php foreach($pangkat as $key => $value) : ?>
                                 <option value="<?php echo $value->ID; ?>"><?php echo $value->nama_pangkat; ?></option>
                             <?php endforeach;?>

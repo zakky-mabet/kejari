@@ -14,7 +14,7 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 				<div class="form-group">
 				<label for="pendidikan_terakhir" class="control-label col-md-3 col-xs-12">Nama Pegawai : <strong class="text-red">*</strong></label>
 				<div class="col-md-8">
-					<select name="nip" class="form-control">
+					<select name="nip" class="form-control select2">
 						<?php foreach ($this->mgaji_berkala->get_all_gaji() as $key => $value): ?>
                             <option value="<?php echo $value->nip; ?>" <?php if($value->nip==$gaji->nip ) echo "selected"; ?>>
                             	<?php echo $value->nip." - ".$value->nama ?></option>

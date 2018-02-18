@@ -47,6 +47,7 @@ class Kepegawaian extends Admin_panel
 
 	public function create()
 	{
+		
 		$this->page_title->push("Kepegawaian", "Tambah Data Kepegawaian");
 
 		$this->breadcrumbs->unshift(3, 'Tambahkan', "kepegawaian/create");
