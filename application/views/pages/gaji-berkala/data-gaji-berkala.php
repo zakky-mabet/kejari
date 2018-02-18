@@ -28,31 +28,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 							<th rowspan="2">No.</th>
 							<th  class="text-center">NIP</th>
-							<th  class="text-center">Nama</th>
-							<th  class="text-center">Tanggal Mulai Terdaftar</th>
-							<th  class="text-center">Batas Akhir</th>
-							<th  class="text-center">Nomor SK</th>
-							<th class="text-center">Keterangan</th>
-							<th  width="100px" class="text-center">Lampiran</th>
+							<th  class="text-center">NAMA</th>
+							<th  class="text-center">TANGGAL MULAI TERDAFTAR</th>
+							<th  class="text-center">BATAS AKHIR</th>
+							<th  class="text-center">NOMOR SK</th>
+							<th class="text-center">KETERANGAN</th>
+							<th  width="100px" class="text-center">LAMPIRAN</th>
 							<th width="8%" class="text-center"></th>
 						</tr>
 					</thead>
 					<tbody class="hoverTable">
 						<?php foreach($gaji_berkala as $row ) : ?>
 						<tr>
-							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td class="text-center"><?php echo $row->nip ?></td>
-							<td class="text-center"><?php echo $row->nama_pegawai ?></td>
-							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
-							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
-							<td class="text-center"><?php echo $row->no_sk ?></td>
-							<td><?php echo $row->keterangan ?></td>							
+							<td class="text-center" style="vertical-align: middle;"><?php echo ++$this->page ?>.</td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo $row->nip ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo $row->nama_pegawai ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->tmt) ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->batas_akhir) ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo $row->no_sk ?></td>
+							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>							
 							<td>						
 							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
 							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
 							</button>
 							</td>
-							<td>
+							<td style="vertical-align: middle;">
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>

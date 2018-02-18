@@ -50,6 +50,7 @@ class Mdiklat extends CI_Model
 
 		$this->db->join('kepegawaian', 'riwayat_diklat.nip = kepegawaian.nip', 'left');
 		
+		$this->db->group_by('nip');
 
 		if($type == 'result')
 		{

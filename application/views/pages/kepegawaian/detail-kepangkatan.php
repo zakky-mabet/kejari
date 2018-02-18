@@ -67,10 +67,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="bg-green">
 
 						<tr>
-							<th rowspan="2" class="text-center" >No.</th>
-							<th rowspan="2" class="text-center">Pangkat</th>
-							<th rowspan="2" class="text-center">Golongan</th>
-							<th rowspan="2" class="text-center">Nomor SK</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;" >No.</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">PANGKAT</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">GOLONGAN</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NOMOR SK</th>
 							<th colspan="2" class="text-center">TMT</th>
 							<th></th>
 													

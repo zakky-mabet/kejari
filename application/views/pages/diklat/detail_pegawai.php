@@ -65,25 +65,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="bg-green">
 						<tr>
 							<th width="20px" class="text-center">No</th>
-							<th width="100px" class="text-center">Nama Diklat</th>
-							<th width="150px" class="text-center">Tanggal Mulai</th>
-							<th width="150px" class="text-center">Tanggal Selesai</th>
-							<th width="100px" class="text-center">Tingkat</th>
-							<th>keterangan</th>
-							<th width="100px" class="text-center">Lampiran</th>
+							<th width="100px" class="text-center">NAMA DIKLAT</th>
+							<th width="150px" class="text-center">TANGGAL MULAI</th>
+							<th width="150px" class="text-center">TANGGAL SELESAI</th>
+							<th width="100px" class="text-center">TINGKAT</th>
+							<th>KETERANGAN</th>
+							<th width="100px" class="text-center">LAMPIRAN</th>
 							<th></th>
 						</tr>
 
 					</thead>
-					<tbody>
+					<tbody class="hoverTable">
 						<?php foreach($this->db->get_where('riwayat_diklat', array('nip' => $kepegawaian->nip))->result() as $row) : ?>
-						<tr >
-							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td class="text-center"><?php echo $row->nama ?></td>
-							<td class="text-center"><?php echo date_id($row->tgl_mulai) ?></td>
-							<td class="text-center"><?php echo date_id($row->tgl_selesai) ?></td>
-							<td class="text-center"><?php echo $row->tingkat ?></td>
-							<td><?php echo $row->keterangan ?></td>
+						<tr>
+							<td class="text-center" style="vertical-align: middle;"><?php echo ++$this->page ?>.</td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo $row->nama ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->tgl_mulai) ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->tgl_selesai) ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo $row->tingkat ?></td>
+							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>
 							<td>
 								<button  class="btn" data-toggle="modal" data-target="#exampleModalCenter">
 								 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">

@@ -28,11 +28,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 							<th >No.</th>
 							<th  class="text-center">NIP</th>
-							<th  class="text-center">Nama Pegawai</th>
-							<th  class="text-center">Nama Diklat</th>
-							<th  class="text-center">Tanggal Mulai</th>
-							<th  class="text-center">Tanggal Selsai</th>
-							<th  class="text-center">Tingkat</th>
+							<th  class="text-center">NAMA PEGAWAI</th>
+							<th  class="text-center">NAMA DIKLAT</th>
+							<th  class="text-center">TANGGAL MULAI</th>
+							<th  class="text-center">TANGGAL SELESAI</th>
+							<th  class="text-center">TINGKAT</th>
 							<th  class="text-center"></th>
 						</tr>
 					</thead>

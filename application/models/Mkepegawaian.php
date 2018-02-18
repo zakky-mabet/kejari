@@ -12,6 +12,10 @@ class Mkepegawaian extends CI_Model
 
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
+		if($this->input->post('query') != '')
+			$this->db->like('nip', $this->input->post('query'))
+					 ->or_like('nrp', $this->input->post('query'))
+					 ->or_like('nama', $this->input->post('query'));
 		// tabel join berdasarkan data yang terakhir
 		$this->db->select("kepegawaian.*, 	(SELECT nama_pangkat FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
 																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
@@ -21,14 +25,11 @@ class Mkepegawaian extends CI_Model
 																	DESC LIMIT 1) AS tmt_pangkat,
 											(SELECT batas_akhir FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
 																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
-																	DESC LIMIT 1) AS bts_pangkat
+																	DESC LIMIT 1) AS bts_pangkat,
+											(SELECT jabatan FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
+																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
+																	DESC LIMIT 1) AS jb_pangkat
 											");
-
-		if($this->input->post('query') != '')
-			$this->db->like('nip', $this->input->post('query'))
-					 ->or_like('nrp', $this->input->post('query'))
-					 ->or_like('nama', $this->input->post('query'));
-
 		if($type == 'result')
 		{
 			return $this->db->get('kepegawaian', $limit, $offset)->result();
@@ -65,6 +66,7 @@ class Mkepegawaian extends CI_Model
 			'no_tlp' => $this->input->post('telepon'),
 			'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
 			'alamat' => $this->input->post('alamat'),
+			'jabatan' => $this->input->post('jabatan'),
 			'status_dinas' => 'active',
 			'foto' => $foto
 		);
@@ -132,6 +134,7 @@ class Mkepegawaian extends CI_Model
 			'alamat' => $this->input->post('alamat'),
 			'no_tlp' => $this->input->post('telepon'),
 			'status_dinas' => $this->input->post('status'),
+			'jabatan' => $this->input->post('jabatan'),
 			'foto' => $foto
 		);
 

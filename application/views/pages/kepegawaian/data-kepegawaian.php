@@ -34,19 +34,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th rowspan="2" style="vertical-align: middle;">No.</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">NIP</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">NRP</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Pangkat</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Jabatan</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Nama Lengkap</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Tempat, Tanggal</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Agama</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Jenis Kelamin</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">Pendidikan Terakhir</th>
-							<th colspan="2" class="text-center" style="vertical-align: middle;">TMT</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">PANGKAT</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">JABATAN</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NAMA LENGKAP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">TEMPAT, TANGGAL LAHIR</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">AGAMA</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">JENIS KELAMIN</th>
+							<th  style="vertical-align: middle;">PDK. TERAKHIR</th>
 							<th rowspan="2" class="text-center"></th>
-						</tr>
-						<tr>
-							<th class="text-center">TMT</th>
-							<th class="text-center">YAD</th>
 						</tr>
 
 					</thead>
@@ -57,14 +52,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo $row->nip ?></td>
 							<td><?php echo $row->nrp ?></td>
 							<td><a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->pangkat ?></td>
-							<td></td>
+							<td><?php echo $row->jabatan ?></td>
 							<td><?php echo $row->nama ?></td>
 							<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
 							<td><?php echo strtoupper($row->agama) ?></td>
 							<td><?php echo strtoupper($row->jns_kelamin) ?></td>
-							<td><?php echo $row->pendidikan_terakhir ?></td>
-							<td><?php echo $row->tmt_pangkat ?></td>
-							<td><?php echo $row->bts_pangkat ?></td>
+							<td class="text-center"><?php echo $row->pendidikan_terakhir ?></td>
 							<td>
 								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 
