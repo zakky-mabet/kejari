@@ -50,6 +50,14 @@ class Mlaporan_masyarakat extends CI_Model {
 		} elseif ($type == 'cek_disposisi') {
 
 			return $this->db->get_where('disposisi', array('id_laporan_masyarakat' => $param))->num_rows();
+		}
+		elseif ($type == 'cek_disposisi_ID') {
+
+			return $this->db->get_where('disposisi', array('ID' => $param))->num_rows();
+		}
+		 elseif ($type == 'get_disposisi') {
+
+			return $this->db->get_where('disposisi', array('ID' => $param))->row();
 		} else {
 
 			return $this->db->get_where('laporan_masyarakat', array('ID' => $param))->row();
@@ -86,6 +94,11 @@ class Mlaporan_masyarakat extends CI_Model {
 				array('type' => 'warning','icon' => 'times')
 			);
 		}
+	}
+
+	public function cek_nomor_laporan($param = 0)
+	{
+		return $this->db->get_where('laporan_masyarakat', array('ID' => $param) )->num_rows();
 	}
 
 	public function update($param = 0)
@@ -125,18 +138,13 @@ class Mlaporan_masyarakat extends CI_Model {
 		}	
 	}
 
-
-	public function get_id_disposisi($param = 0)
-	{
-		$this->db->get_where('disposisi', $Value);
-	}
-
-
 	public function delete($param = 0)
 	{
 		$this->db->delete('laporan_masyarakat', array('ID' => $param));
 
-		$this->db->delete('disposisi', array('id_laporan_masyarakat' => $param));
+		$this->db->delete('disposisi', array('ID' => $this->input->get('disposisi')));
+
+		$this->db->delete('terusan_disposisi', array('id_disposisi' => $this->input->get('disposisi')));
 
 		$this->template->alert(
 			' Data Laporan Masyarakat berhasil dihapus.', 
@@ -184,6 +192,33 @@ class Mlaporan_masyarakat extends CI_Model {
 
 	}
 	
+	public function update_instruksi_disposisi($param = 0)
+	{
+		$disposisi = array(
+			'instruksi' => $this->input->post('instruksi'),
+		);
 
+		$this->db->update('disposisi', $disposisi, array('ID' => $param));
+
+		$terusan_disposisi = array(
+			'group_id' => $this->input->post('group_id'),
+			'tanggal_disposisi_masuk' => date('Y-m-d H:i:s')
+		);
+
+		$this->db->update('terusan_disposisi', $terusan_disposisi, array('id_disposisi' => $param));
+
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data berhasil diubah.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Tidak ada data yang diubah.', 
+				array('type' => 'warning','icon' => 'warning')
+			);
+		}
+	}
 }
 

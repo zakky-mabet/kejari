@@ -1,21 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-<style>
-.hoverTable{
-			width:100%; 
-			border-collapse:collapse; 
-			}
-.hoverTable td
-			{ 
-			padding:7px; border:#4e95f4 1px solid;
-			}
-.hoverTable tr:hover
-			{
- 			background-color: #D8E9A7;
-			}
-
-</style> 
 <div class="row">
 <div class="col-md-8 col-md-offset-2 col-xs-12">
   <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>

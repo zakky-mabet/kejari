@@ -18,6 +18,23 @@
     <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap-daterangepicker/daterangepicker.css') ?>">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style>
+      .hoverTable{
+            width:100%; 
+            border-collapse:collapse; 
+            }
+      .hoverTable td
+            { 
+            padding:7px; border:#4e95f4 1px solid;
+            }
+      .hoverTable tr:hover
+            {
+            background-color: #D8E9A7;
+            }
+      tr:last-child {
+        border: none !important;
+      } 
+</style> 
    <?php 
    /**
     * Load js from loader core

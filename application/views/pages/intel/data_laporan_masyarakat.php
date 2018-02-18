@@ -38,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 					</thead>
 
-					<tbody>
+					<tbody class="hoverTable">
 						<?php foreach($data_laporan as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									<i class="fa fa-send"></i>
 								</a>
 								<?php } else {?>
-									<a href="<?php echo base_url('laporan_masyarakat/update_instruksi/'.$row->ID) ?>" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Sunting Instruksi Laporan ini." style="margin-right: 10px">
+									<a href="<?php echo base_url('laporan_masyarakat/update_instruksi_disposisi/'.$row->ID) ?>" class="btn btn-xs btn-success" data-toggle="tooltip" data-placement="top" title="Sunting Instruksi Laporan ini." style="margin-right: 10px">
 										<i class="fa fa-pencil"></i>
 								<?php } ?>
 
@@ -63,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								</a>
 								<?php endif ?>
 								
-								<a href="javascript:void(0)" id="delete" data-toggle="tooltip" data-placement="top" title="Hapus Laporan ini." data-id="<?php echo $row->ID_laporan ?>" class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete" data-toggle="tooltip" data-placement="top" title="Hapus Laporan ini." data-id="<?php echo $row->ID_laporan ?>" data-disposisi="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>

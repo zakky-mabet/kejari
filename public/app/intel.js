@@ -10,10 +10,9 @@ $(document).ready(function() {
 	{
 		$('div#modal-delete').modal('show');
 
-		$('a#delete-yes').attr('href', base_url + 'laporan_masyarakat/delete/' + $(this).data('id'))
+		$('a#delete-yes').attr('href', base_url + 'laporan_masyarakat/delete/' + $(this).data('id')+'?disposisi='+ $(this).data('disposisi') )
 	});
 
-    //Date picker
     $('#datepicker, #datepicker1').datepicker({
       autoclose: true,
       format: "yyyy-mm-dd"

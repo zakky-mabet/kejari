@@ -72,6 +72,13 @@ class Laporan_masyarakat extends Admin_panel {
 
 	public function update($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mlaporan_masyarakat->cek_nomor_laporan($param) == 0) {
+			show_404();
+		}
 		$this->page_title->push("Laporan Masyarakat", "Sunting Laporan Masyarakat");
 
 		$this->breadcrumbs->unshift(2, 'Sunting', "laporan_masyarakat/update");
@@ -145,10 +152,38 @@ class Laporan_masyarakat extends Admin_panel {
 		{
 			$this->mlaporan_masyarakat->instruksi_disposisi($param);
 
-			redirect(current_url());
+			redirect(base_url('laporan_masyarakat/data_laporan'));
 		}
 		$this->data['title'] = "Buat Instruksi dan Disposisi";
 		$this->template->view('intel/instruksi_disposisi', $this->data);
+	}
+
+	public function update_instruksi_disposisi($param = 0)
+	{
+
+		if (!$param) {
+			show_404();
+		}
+		if ($this->mlaporan_masyarakat->get($param, 'cek_disposisi_ID') == 0) {
+			show_404();
+		}
+		$this->page_title->push("Laporan Masyarakat", "Sunting Instruksi dan Disposisi");
+
+		$this->breadcrumbs->unshift(2, 'Sunting', "laporan_masyarakat/update");
+
+		$this->form_validation->set_rules('instruksi', 'Instruksi', 'trim|required');
+		$this->form_validation->set_rules('group_id', 'Disposisi', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mlaporan_masyarakat->update_instruksi_disposisi($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['get'] = $this->mlaporan_masyarakat->get($param,'get_disposisi');
+		$this->data['title'] = "Sunting Instruksi dan Disposisi";
+		$this->template->view('intel/update_instruksi_disposisi', $this->data);
 	}
 
 }
