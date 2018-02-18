@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mlaporan_masyarakat extends CI_Model {
+class Mlaporan_masyarakat extends MY_model {
 
 	public function __construct()
 	{
@@ -81,6 +81,21 @@ class Mlaporan_masyarakat extends CI_Model {
 		); 
 
 		$this->db->insert('laporan_masyarakat', $data);
+
+
+        $this->firebase_push->setTitle("1 Laporan Perkara Masuk")
+                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Laporan perkara kepada anda")
+                            ->setTo($this->get_firebase_token(1)) //Misal Kajari id
+                            ->send();
+
+        $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'penerima' => 1,
+			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Laporan perkara kepada anda",
+			'tanggal' => date('Y-m-d H:i:s'),
+		); 
+
+		$this->db->insert('notifikasi', $notif);
 
 		if($this->db->affected_rows())
 		{
@@ -220,5 +235,7 @@ class Mlaporan_masyarakat extends CI_Model {
 			);
 		}
 	}
+
+	
 }
 

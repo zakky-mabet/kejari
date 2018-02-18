@@ -14,7 +14,6 @@ class Lapmas extends CI_Controller
             $this->firebase_push->setTitle("1 Laporan Perkara Baru")
                                 ->setMessage("Muhammad Zakky mengirim Laporan perkara kepada anda")
                                 ->setID(175)
-                                ->setActivityName('DetailKepegawaianActivity')
                                 ->setTo($this->get_firebase_token(1))
                                 ->send();
 	}
