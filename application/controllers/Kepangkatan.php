@@ -123,7 +123,7 @@ class Kepangkatan extends Admin_panel
 			show_404();
 		}
 
-		if ($this->mkepangkatan->cek_data($param) == 0) {
+		if ($this->mkepangkatan->cek_pangkat($param) == 0) {
 			show_404();
 		}
 		$this->page_title->push("Detail Kepangkatan","Ubah Data Kepangkatan");

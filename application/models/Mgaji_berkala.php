@@ -20,6 +20,8 @@ class Mgaji_berkala extends CI_Model
 
 		$this->db->join('kepegawaian', 'gaji_berkala.nip = kepegawaian.nip', 'left');
 		
+		$this->db->order_by('ID', 'desc');
+
 		if($type == 'result')
 		{		
 			return $this->db->get('gaji_berkala', $limit, $offset)->result();

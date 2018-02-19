@@ -42,7 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 							<td class="text-center" style="vertical-align: middle;"><?php echo ++$this->page ?>.</td>
 							<td class="text-center" style="vertical-align: middle;"><?php echo $row->nip ?></td>
-							<td class="text-center" style="vertical-align: middle;"><?php echo $row->nama_pegawai ?></td>
+							<td style="vertical-align: middle;"><?php echo $row->nama_pegawai ?></td>
 							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->tmt) ?></td>
 							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->batas_akhir) ?></td>
 							<td class="text-center" style="vertical-align: middle;"><?php echo $row->no_sk ?></td>

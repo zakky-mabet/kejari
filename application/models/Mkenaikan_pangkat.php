@@ -14,6 +14,7 @@ class Mkenaikan_pangkat extends CI_Model
         // join tabel
 		$this->db->select('*');
 		$this->db->from('kepegawaian');
+		$this->db->order_by('ID', 'desc');
 		return $this->db->get()->result();
 		
     }
@@ -29,6 +30,7 @@ class Mkenaikan_pangkat extends CI_Model
 
 		$this->db->join('kepegawaian', 'kepangkatan.nip = kepegawaian.nip', 'left');
 		
+		$this->db->order_by('ID', 'desc');
 
 		if($type == 'result')
 		{

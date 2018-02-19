@@ -28,10 +28,16 @@ class Mkepangkatan extends CI_Model
 
 	public function detail_kepangkatan($param = 0)
 	{
+
 		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
 	}
 	// cara cek bahwa data ada atau tidak
 	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('kepegawaian', array('ID' => $param) )->num_rows();
+	}
+
+	public function cek_pangkat($param = 0)
 	{
 		return $this->db->get_where('pangkat', array('ID' => $param) )->num_rows();
 	}
@@ -69,6 +75,7 @@ class Mkepangkatan extends CI_Model
 			'no_sk' => $this->input->post('no_sk'),
 			'lampiran_sk' => $foto,
 			'keterangan' => $this->input->post('keterangan'),
+			'date_create' => date('Y-m-d H:i:s'),
 			
 		);
 
@@ -121,6 +128,7 @@ class Mkepangkatan extends CI_Model
 			'no_sk' => $this->input->post('no_sk'),
 			'lampiran_sk' => $foto,
 			'keterangan' => $this->input->post('keterangan'),
+			'date_create' => date('Y-m-d H:i:s'),
 			
 		);
 

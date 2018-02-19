@@ -48,6 +48,8 @@ class Mdiklat extends CI_Model
 		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
 
 		$this->db->join('kepegawaian', 'riwayat_diklat.nip = kepegawaian.nip', 'left');
+
+		$this->db->order_by('ID', 'desc');
 		
 		$this->db->group_by('nip');
 
