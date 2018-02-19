@@ -30,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </a>
           </li>
           
-          <li class="treeview <?php echo active_link_multiple(array('')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('perkara')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>INTELIJEN</span>
                   <span class="pull-right-container">
@@ -38,8 +38,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="<?php echo active_link_controller('') ?>">
-                    <a href="<?php echo base_url('') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara</a>
+                <li class="<?php echo active_link_method('index', 'perkara') ?>">
+                    <a href="<?php echo base_url('perkara/index') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara Masuk 
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperkara->get_all(null,null,'notifikasi') ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mperkara->get_all(null, null,'notifikasi') ?></span></a>
                 </li>
                 <li class="">
                     <a href=""><i class="fa fa-angle-double-right"></i> Surat Perintah Penugasan</a>

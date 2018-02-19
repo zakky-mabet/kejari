@@ -133,4 +133,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('mlaporan_masyarakat');
+$autoload['model'] = array('mlaporan_masyarakat','mperkara');
