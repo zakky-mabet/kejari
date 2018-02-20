@@ -108,6 +108,21 @@ class Gaji_berkala extends Admin_panel
 		redirect('gaji_berkala');
 	}
 
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mgaji_berkala->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Gaji Berkala";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['gaji_berkala'] = $this->mgaji_berkala->get_all($this->per_page, $this->page, 'result');
+		$this->load->view('pages/gaji-berkala/data_laporan_gaji_berkala_print', $this->data);
+	}
+
 }
 
 /* End of file Gaji_berkala.php */

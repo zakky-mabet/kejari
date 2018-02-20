@@ -121,6 +121,21 @@ class Kepegawaian extends Admin_panel
 
 		redirect('kepegawaian');
 	}
+
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mkepegawaian->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Kepegawaian";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['kepegawaian'] = $this->mkepegawaian->get_all($this->per_page, $this->page, 'result');
+		$this->load->view('pages/kepegawaian/data_laporan_kepegawaian_print', $this->data);
+	}
 }
 
 /* End of file Kepegawaian.php */

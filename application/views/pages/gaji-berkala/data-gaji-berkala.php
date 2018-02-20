@@ -13,11 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url() ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('gaji_berkala') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
 						<a href="<?php echo base_url('gaji_berkala/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url() ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo site_url("gaji_berkala/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td style="vertical-align: middle;"><?php echo $row->nama_pegawai ?></td>
 							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->tmt) ?></td>
 							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->batas_akhir) ?></td>
-							<td class="text-center" style="vertical-align: middle;"><?php echo $row->no_sk ?></td>
+							<td class="text-left" style="vertical-align: middle;"><?php echo $row->no_sk ?></td>
 							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>							
 							<td>						
 							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">

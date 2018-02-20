@@ -19,7 +19,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3 pull-right">
 						<a href="<?php echo base_url('kepegawaian/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url('kepegawaian') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo site_url("kepegawaian/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>

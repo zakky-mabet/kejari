@@ -192,6 +192,25 @@ class Mdiklat extends CI_Model
 		return $this->db->get_where('riwayat_diklat', array('ID' => $param))->row();
 	}
 
+	public function get_cetak($limit = 20, $offset = 0, $type = 'result')
+	{
+		
+		// tabel join
+		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
+
+		$this->db->join('kepegawaian', 'riwayat_diklat.nip = kepegawaian.nip', 'left');
+
+		$this->db->order_by('ID', 'desc');
+		
+
+		if($type == 'result')
+		{
+			return $this->db->get('riwayat_diklat', $limit, $offset)->result();
+		} else {
+			return $this->db->get('riwayat_diklat')->num_rows();
+		}
+	}
+
 }
 
 /* End of file Mdiklat.php */

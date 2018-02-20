@@ -28,8 +28,7 @@
 					<td><?php echo highlight_phrase(date_id($row->tanggal_masuk), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
 					<td><?php echo highlight_phrase($row->asal, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
 					<td><?php if (!$row->instruksi) { echo '<span class="text-red">Belum di Instruksikan<span>!'; } else { echo $row->instruksi; }   ?></td>
-					
-					</tr>
+				</tr>
 					<?php endforeach; ?>
 
 				</tbody>

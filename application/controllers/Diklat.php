@@ -45,6 +45,7 @@ class Diklat extends Admin_panel
 		$config['total_rows'] = $this->mdiklat->get_all(null, null, 'num');
 		// untuk memanggil data dari database
 		$this->data['riwayat_diklat'] = $this->mdiklat->get_all($this->per_page, $this->page, 'result');
+		$this->data['diklat_cetak'] = $this->mdiklat->get_cetak($this->per_page, $this->page, 'result');
 
 		$this->pagination->initialize($config);
 		
@@ -140,6 +141,21 @@ class Diklat extends Admin_panel
 		$this->mdiklat->delete($param);
 
 		redirect('diklat');
+	}
+
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mdiklat->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Riwayat Diklat";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['diklat_cetak'] = $this->mdiklat->get_cetak($this->per_page, $this->page, 'result');
+		$this->load->view('pages/diklat/data_laporan_diklat_print', $this->data);
 	}
 
 }
