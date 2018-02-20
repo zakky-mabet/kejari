@@ -22,6 +22,14 @@
         } 
       .arial { font-family: arial; font-weight: normal; }
       .bg-color { background-color: #eaeaea; }
+      .bg-color { background-color: #eaeaea; }
+
+      .merah-jambu {
+        background-color: #FF1494;
+      }
+      .text-white { color: white }
+      .bg-datun { background-color:  #AEC00A }
+      .bg-bin { background-color: yellow }
   </style>
 </head>
 <body class="bg-color">
@@ -31,12 +39,12 @@
   </div>
   <div class="login-box-body" style="box-shadow:1px 2px 15px black">
     <div class=" text-right">
-      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-user"></i> <b>KAJARI</b></a>
+      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-default btn-flat"><i class="fa fa-user"></i> <b>KAJARI</b></a>
       <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-circle-o"></i> <b>INTELIJEN</b></a>
-      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-circle-o"></i> <b>PIDSUS</b></a>
-      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-circle-o"></i> <b>PIDUM</b></a>
-      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-circle-o"></i> <b>DATUN</b></a>
-      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-success btn-flat"><i class="fa fa-circle-o"></i> <b>BIN</b> </a>
+      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social text-white merah-jambu btn-flat"><i class="fa fa-circle-o"></i> <b>PIDSUS</b></a>
+      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-danger btn-flat"><i class="fa fa-circle-o"></i> <b>PIDUM</b></a>
+      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social text-white bg-datun btn-flat"><i class="fa fa-circle-o"></i> <b>DATUN</b></a>
+      <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social text-muted bg-bin btn-flat"><i class="fa fa-circle-o"></i> <b>BIN</b> </a>
     </div>
   </div>
   <footer style="margin-top: 20px">

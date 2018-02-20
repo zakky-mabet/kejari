@@ -1,6 +1,44 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
-	<div class="col-md-8 col-md-offset-2 col-xs-12">
+	<div class="col-md-4 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-body" style="margin-top: 10px;">
+				<table class="table" >
+					<tr class="bg-green">
+						<th colspan="2" >DATA LAPORAN MASYARAKAT</th>
+					</tr>
+					<tr >
+						<th class="small" width="40%">NOMOR</th>
+						<td class="small"><?php echo $this->mperkara->get_in_create($param)->nomor ?></td>
+					</tr>
+					<tr>
+						<th class="small">TANGGAL MASUK</th>
+						<td class="small"><?php echo date_id($this->mperkara->get_in_create($param)->tanggal_masuk) ?></td>
+					</tr>
+					<tr>
+						<th class="small">ASAL</th>
+						<td class="small"><?php echo $this->mperkara->get_in_create($param)->asal ?></td>
+					</tr>
+					<tr>
+						<th class="small">PRIHAL</th>
+						<td class="small"><?php echo $this->mperkara->get_in_create($param)->deskripsi ?></td>
+					</tr>
+					<tr class="bg-green">
+						<th colspan="2" >DATA INSTRUKSI</th>
+					</tr>
+					<tr>
+						<th class="small">INSTRUKSI KAJARI</th>
+						<td class="small"><?php echo $this->mperkara->get_in_create($param)->instruksi ?></td>
+					</tr>
+					<tr>
+						<th class="small">TANGGAL DI INSTRUKSIKAN</th>
+						<td class="small"><?php echo date_id(substr($this->mperkara->get_in_create($param)->tanggal_disposisi_masuk,0,10)) ?></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-xs-12">
 		<div class="box box-primary">
 			<?php
 			echo form_open(current_url(), array('class' => ''));

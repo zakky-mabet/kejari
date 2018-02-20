@@ -216,5 +216,6 @@ if( ! function_exists('terbilang') )
 	}
 }
 
+
 /* End of file indonesia_helper.php */
 /* Location: ./application/helpers/indonesia_helper.php */

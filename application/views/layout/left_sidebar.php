@@ -26,10 +26,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </li>
            <li class="<?php echo active_link_method('data_laporan','laporan_masyarakat') ?>">
               <a href="<?php echo base_url('laporan_masyarakat/data_laporan') ?>">
-                <i class="fa fa-file-text"></i> <span>Data Laporan Masyarakat</span> <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?> Data Laporan Masyarakat Belum di Instruksikan" class="label label-danger pull-right"><?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?></span>
+                <i class="fa fa-file-text"></i> <span>Data Laporan Masyarakat</span> <?php if ($this->mlaporan_masyarakat->notification_laporan_masyarakat() !=0): ?>
+                  
+                 <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?> Data Laporan Masyarakat Belum di Instruksikan" class="label label-danger pull-right"><?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?></span> <?php endif ?>
               </a>
           </li>
           
+          <li class="treeview <?php echo active_link_multiple(array('dokumen_telaah')); ?>">
+              <a href="#">
+                  <i class="fa fa-file-text-o"></i> <span>KAJARI</span>
+                  <span class="pull-right-container">
+                      <i class="fa fa-angle-right pull-right"></i>
+                  </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php echo active_link_method('index', 'dokumen_telaah') ?>">
+                    <a href="<?php echo base_url('dokumen_telaah/index') ?>"><i class="fa fa-angle-double-right"></i> Dokumen Telaah Masuk </a>
+                </li>
+
+              </ul>
+          </li>
           <li class="treeview <?php echo active_link_multiple(array('perkara')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>INTELIJEN</span>
@@ -40,7 +56,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <ul class="treeview-menu">
                 <li class="<?php echo active_link_method('index', 'perkara') ?>">
                     <a href="<?php echo base_url('perkara/index') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara Masuk 
-                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperkara->get_all(null,null,'notifikasi') ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mperkara->get_all(null, null,'notifikasi') ?></span></a>
+                      <?php if ($this->mperkara->get_all(null,null,'notifikasi') !=0 ): ?>
+                        
+                     
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperkara->get_all(null,null,'notifikasi') ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mperkara->get_all(null, null,'notifikasi') ?></span>  <?php endif ?></a>
                 </li>
                 <li class="">
                     <a href=""><i class="fa fa-angle-double-right"></i> Surat Perintah Penugasan</a>

@@ -16,10 +16,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('perkara') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('perkara') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
+						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -29,47 +30,42 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="bg-green">
 						<tr>
 							<th class="text-center">No.</th>
-							<th class="text-center">NOMOR</th>
-							<th class="text-center">TANGGAL MASUK</th>
-							<th class="text-center">ASAL</th>
-							<th class="text-center">INSTRUKSI</th>
-							<th class="text-center">STATUS TELAAH</th>
+							<th class="text-center">NOMOR TELAAH</th>
+							<th class="text-center">POKOK PERMASALAHAN</th>
+							<th class="text-center">SARAN TINDAK</th>
+							<th class="text-center">PETUNJUK</th>
+							<th class="text-center">STATUS PETUNJUK</th>
 							<th width="100"></th>
 						</tr>
 					</thead>
 
 					<tbody class="hoverTable">
-						<?php foreach($perkara as $row) : ?>
+						<?php foreach($dokumen_telaah as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td><?php echo highlight_phrase($row->nomor, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
-							<td><?php echo highlight_phrase(date_id($row->tanggal_masuk), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
-							<td><?php echo highlight_phrase($row->asal, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
-							<td><?php if (!$row->instruksi) { echo '<span class="text-red">Belum di Instruksikan<span>!'; } else { echo $row->instruksi; }   ?></td>
-							<td><?php if (!$row->id_terusan_disposisi) { echo '<span class="text-red">Belum di Telaah<span>!'; } else { echo 'Telah di Telaah'; }   ?></td>
+							<td><?php echo highlight_phrase($row->no_telaah, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase(substr($row->pokok_permasalahan,0, 40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
+							<td><?php echo highlight_phrase(substr($row->saran_tindak,0,40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
+							<td><?php if (!$row->petunjuk) { echo '<span class="text-grey">Belum ada Petunjuk<span>!'; } else { echo substr($row->petunjuk, 0, 50); }   ?></td>
+							<td><?php if (!$row->petunjuk) { echo '<span class="text-red">Belum di beri petunjuk<span>!'; } else { echo 'Telah di beri'; }   ?></td>
 							<td class="text-left">
 								
-								<?php if ($this->mperkara->security($row->ID_primary_terusan_disposisi, 'cek_id_terusan_disposisi_telaah') == 1 AND $row->petunjuk == NULL ): ?>
-									<a href="<?php echo base_url('perkara/update_telaah/'.$row->ID_primary_telaah) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting Telaahan ini" style="margin-right: 10px">
-									<i class="fa fa-pencil"></i> </a>
-								<?php elseif($row->petunjuk == NULL): ?>
-								<a href="<?php echo base_url('perkara/create_telaah/'.$row->ID_primary_terusan_disposisi) ?>" data-toggle="tooltip" data-placement="top" title="Buat Telaahan Intelijen" class="btn btn-xs btn-success" style="margin-right: 10px">
+								
+								<a href="<?php echo base_url('dokumen_telaah/create_telaah/'.$row->ID_primary_terusan_disposisi) ?>" data-toggle="tooltip" data-placement="top" title="Beri Petunjuk Atas Dokumen Telaah ini atau tidak dilanjutkan" class="btn btn-xs btn-success" style="margin-right: 10px">
 								<i class="fa fa-send"></i></a>
-								<?php else: ?>
-									<a  data-toggle="tooltip" data-placement="top" title="Tidak Ada Lagi Opsi, Dokumen Telaahan telah di beri petunjuk" class="btn btn-xs btn-warning" style="margin-right: 10px"><i class="fa fa-info-circle"></i></a>
-								<?php endif ?>
+								
 							</td>
 						</tr>
 						<?php endforeach; ?>
 						<tr>
-							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($perkara) . " dari " . $num_perkara . " data"; ?></small></td>
+							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($dokumen_telaah) . " dari " . $num_dokumen_telaah . " data"; ?></small></td>
 						</tr>
 					</tbody>
 					
 				</table>
 			</div>
 			<div class="box-footer no-padding">
-			
+				
 			</div>
 		</div>
 		<div class="col-md-12 text-center">

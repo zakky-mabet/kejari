@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Mperkara extends MY_model {
+class Mdokumen_telaah extends MY_model {
 
 	public function __construct()
 	{
@@ -20,9 +20,9 @@ class Mperkara extends MY_model {
 		{
 			$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi ' );
 			
-			$this->db->from('terusan_disposisi');
+			$this->db->from('telaah');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -32,15 +32,17 @@ class Mperkara extends MY_model {
 
 			$this->db->order_by('tanggal_disposisi_masuk', 'desc');
 
+			//$this->db->where('telaah.petunjuk !=', NULL);
+
 			return $this->db->get()->result();
 
 		} if($type == 'notifikasi')
 		{
 			$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi ' );
 			
-			$this->db->from('terusan_disposisi');
+			$this->db->from('telaah');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -53,9 +55,9 @@ class Mperkara extends MY_model {
 		}
 		else {
 
-			$this->db->from('terusan_disposisi');
+			$this->db->from('telaah');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 

@@ -81,6 +81,7 @@ class Perkara extends Admin_panel {
 			redirect(base_url('perkara'));
 		}
 		$this->data['title'] = "Buat Telaahan Intelijen";
+		$this->data['param'] = $param;
 		$this->template->view('intel/create_telaah', $this->data);
 	}
 
@@ -112,5 +113,7 @@ class Perkara extends Admin_panel {
 		$this->data['title'] = "Sunting Telaahan Intelijen";
 		$this->template->view('intel/update_telaah', $this->data);
 	}
+
+	
 
 }

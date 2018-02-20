@@ -186,4 +186,21 @@ class Laporan_masyarakat extends Admin_panel {
 		$this->template->view('intel/update_instruksi_disposisi', $this->data);
 	}
 
+
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mlaporan_masyarakat->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Masyarakat";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['data_laporan'] = $this->mlaporan_masyarakat->get_all($this->per_page, $this->page, 'result');
+
+		$this->load->view('pages/intel/data_laporan_masyarakat_print', $this->data);
+	}
+
 }
