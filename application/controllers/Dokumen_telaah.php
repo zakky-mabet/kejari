@@ -52,4 +52,29 @@ class Dokumen_telaah extends Admin_panel {
 
 	}
 
+	public function create_petunjuk($param = 0)
+	{
+		if (!$param) {
+			show_404();
+		}
+
+		$this->page_title->push("Dokumen Telaah", "Buat Petunjuk Atas Dokumen Telaah Intelijen");
+
+		$this->breadcrumbs->unshift(2, 'Buat', "dokumen_telaah/create_petunjuk");
+
+		$this->form_validation->set_rules('petunjuk', 'Petunjuk', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mdokumen_telaah->create_petunjuk($param);
+
+			redirect(base_url('dokumen_telaah'));
+		}
+		$this->data['title'] = "Buat Petunjuk Atas Dokumen Telaah Intelijen";
+		$this->data['param'] = $param;
+		$this->template->view('intel/create_petunjuk', $this->data);
+	}
+
+
+
 }

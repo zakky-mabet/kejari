@@ -32,8 +32,6 @@ class Mdokumen_telaah extends MY_model {
 
 			$this->db->order_by('tanggal_disposisi_masuk', 'desc');
 
-			//$this->db->where('telaah.petunjuk !=', NULL);
-
 			return $this->db->get()->result();
 
 		} if($type == 'notifikasi')
@@ -48,7 +46,7 @@ class Mdokumen_telaah extends MY_model {
 
 			$this->db->join('laporan_masyarakat', 'disposisi.id_laporan_masyarakat = laporan_masyarakat.ID', 'LEFT');
 
-			$this->db->where('telaah.id_terusan_disposisi', NULL);
+			$this->db->where('telaah.status_petunjuk', 'belum');
 
 			return $this->db->get()->num_rows();
 
@@ -69,11 +67,6 @@ class Mdokumen_telaah extends MY_model {
 		}
 	}
 
-	public function get($param = 0)
-	{
-		return $this->db->get_where('telaah', array('ID' => $param))->row();
-	}
-
 	public function get_in_create($param = 0)
 	{
 		$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi ' );
@@ -86,44 +79,36 @@ class Mdokumen_telaah extends MY_model {
 
 			$this->db->join('laporan_masyarakat', 'disposisi.id_laporan_masyarakat = laporan_masyarakat.ID', 'LEFT');
 
-			$this->db->where('terusan_disposisi.ID', $param);
+			$this->db->where('telaah.ID', $param);
 
 			return $this->db->get()->row();
 	}
 
-	public function security($param = 0, $type = '')
-	{
-		if ($type == 'cek_id_terusan_disposisi_telaah') {
-			return $this->db->get_where('telaah', array('id_terusan_disposisi' => $param) )->num_rows();
-		}
-
-	}
-
-	public function create_telaah($param = 0)
+	public function create_petunjuk($param = 0)
 	{
 		$data = array(
-			'no_telaah'  => $this->input->post('no_telaah'),
-			'pokok_permasalahan'  => $this->input->post('pokok_permasalahan'),
-			'uraian_permasalahan' => $this->input->post('uraian_permasalahan'),
-			'telaahan' => $this->input->post('telaahan'),
-			'kesimpulan' => $this->input->post('kesimpulan'),
-			'saran_tindak' => $this->input->post('saran_tindak'),
-			'id_terusan_disposisi' => $param,
-			'group_id' => 4,
+			'petunjuk' => $this->input->post('petunjuk'),
+			'tanggal_petunjuk' => date('Y-m-d H:i:s'),
+			'status_petunjuk' => 'telah'
 		); 
 
-		$this->db->insert('telaah', $data);
+		$this->db->update('telaah', $data, array('ID' => $param));
 
+		$perintah_op = array(
+			'id_telaah' => $param,
+		); 
 
-        $this->firebase_push->setTitle("1 Laporan Perkara Masuk")
-                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Dokumen Telaah kepada anda")
+		$this->db->insert('perintah_op', $perintah_op);
+
+        $this->firebase_push->setTitle("1 Laporan Petunjuk Telaahan Intelijen Masuk")
+                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Petunjuk Telaahan Intelijen kepada anda")
                             ->setTo($this->get_firebase_token(1)) //Misal Kajari id
                             ->send();
 
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'penerima' => 1,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Dokumen Telaah kepada anda",
+			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Petunjuk Telaahan Intelijen kepada anda",
 			'tanggal' => date('Y-m-d H:i:s'),
 		); 
 
@@ -132,54 +117,18 @@ class Mdokumen_telaah extends MY_model {
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
-				' Data Telaah telah dibuat.', 
+				' Data Petunjuk telaahan intelijen disimpan.', 
 				array('type' => 'success','icon' => 'check')
 			);
 		} else {
 			$this->template->alert(
-				' Gagal membuat telaah, Coba lagi!', 
+				' Gagal menyimpan data.', 
 				array('type' => 'warning','icon' => 'times')
 			);
 		}
 	}
 
-	public function update_telaah($param = 0)
-	{
-		$telaah = array(
-			'no_telaah'  => $this->input->post('no_telaah'),
-			'pokok_permasalahan'  => $this->input->post('pokok_permasalahan'),
-			'uraian_permasalahan' => $this->input->post('uraian_permasalahan'),
-			'telaahan' => $this->input->post('telaahan'),
-			'kesimpulan' => $this->input->post('kesimpulan'),
-			'saran_tindak' => $this->input->post('saran_tindak'),
-			'group_id' => 4,
-		);
-
-		$this->db->update('telaah', $telaah, array('ID' => $param));
-
-		$notif = array(
-			'pengirim' => $this->ion_auth->user()->row()->id,
-			'penerima' => 1,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Dokumen Telaah kepada anda",
-			'tanggal' => date('Y-m-d H:i:s'),
-		); 
-
-		$this->db->insert('notifikasi', $notif);
-
-		if($this->db->affected_rows())
-		{
-			$this->template->alert(
-				' Data telaah berhasil diubah.', 
-				array('type' => 'success','icon' => 'check')
-			);
-		} else {
-			$this->template->alert(
-				' Tidak ada data yang diubah.', 
-				array('type' => 'warning','icon' => 'warning')
-			);
-		}
-	}
-
+	
 	
 }
 

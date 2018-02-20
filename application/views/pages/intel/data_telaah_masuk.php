@@ -19,7 +19,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
 						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
@@ -47,11 +46,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo highlight_phrase(substr($row->pokok_permasalahan,0, 40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
 							<td><?php echo highlight_phrase(substr($row->saran_tindak,0,40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
 							<td><?php if (!$row->petunjuk) { echo '<span class="text-grey">Belum ada Petunjuk<span>!'; } else { echo substr($row->petunjuk, 0, 50); }   ?></td>
-							<td><?php if (!$row->petunjuk) { echo '<span class="text-red">Belum di beri petunjuk<span>!'; } else { echo 'Telah di beri'; }   ?></td>
+							<td><?php if (!$row->petunjuk) { echo '<span class="text-red">Belum di beri petunjuk<span>!'; } else { echo 'Telah di beri Petunjuk'; }   ?></td>
 							<td class="text-left">
 								
-								
-								<a href="<?php echo base_url('dokumen_telaah/create_telaah/'.$row->ID_primary_terusan_disposisi) ?>" data-toggle="tooltip" data-placement="top" title="Beri Petunjuk Atas Dokumen Telaah ini atau tidak dilanjutkan" class="btn btn-xs btn-success" style="margin-right: 10px">
+								<a href="<?php echo base_url('dokumen_telaah/create_petunjuk/'.$row->ID_primary_telaah) ?>" data-toggle="tooltip" data-placement="top" title="Beri Petunjuk Atas Dokumen Telaah ini atau tidak dilanjutkan" class="btn btn-xs btn-success" style="margin-right: 10px">
 								<i class="fa fa-send"></i></a>
 								
 							</td>
@@ -65,7 +63,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</table>
 			</div>
 			<div class="box-footer no-padding">
-				
+			
 			</div>
 		</div>
 		<div class="col-md-12 text-center">

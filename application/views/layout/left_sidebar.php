@@ -41,9 +41,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </a>
               <ul class="treeview-menu">
                 <li class="<?php echo active_link_method('index', 'dokumen_telaah') ?>">
-                    <a href="<?php echo base_url('dokumen_telaah/index') ?>"><i class="fa fa-angle-double-right"></i> Dokumen Telaah Masuk </a>
+                    <a href="<?php echo base_url('dokumen_telaah/index') ?>"><i class="fa fa-angle-double-right"></i> Dokumen Telaah Masuk   <?php if ($this->mdokumen_telaah->get_all(null,null,'notifikasi') !=0 ): ?> <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mdokumen_telaah->get_all(null,null,'notifikasi') ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mdokumen_telaah->get_all(null, null,'notifikasi') ?></span>  <?php endif ?> </a>
                 </li>
-
+                
               </ul>
           </li>
           <li class="treeview <?php echo active_link_multiple(array('perkara')); ?>">

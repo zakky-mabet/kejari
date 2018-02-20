@@ -108,6 +108,7 @@ class Mperkara extends MY_model {
 			'saran_tindak' => $this->input->post('saran_tindak'),
 			'id_terusan_disposisi' => $param,
 			'group_id' => 4,
+			'tanggal_di_telaah' => date('Y-m-d H:i:s'),
 		); 
 
 		$this->db->insert('telaah', $data);
@@ -151,6 +152,7 @@ class Mperkara extends MY_model {
 			'kesimpulan' => $this->input->post('kesimpulan'),
 			'saran_tindak' => $this->input->post('saran_tindak'),
 			'group_id' => 4,
+			'tanggal_di_telaah' => date('Y-m-d H:i:s'),
 		);
 
 		$this->db->update('telaah', $telaah, array('ID' => $param));
@@ -178,6 +180,22 @@ class Mperkara extends MY_model {
 		}
 	}
 
-	
+	public function get_update_telaah($param = 0)
+	{
+		$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi ' );
+			
+			$this->db->from('terusan_disposisi');
+
+			$this->db->join('telaah', 'terusan_disposisi.ID = telaah.id_terusan_disposisi', 'LEFT');
+
+			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
+
+			$this->db->join('laporan_masyarakat', 'disposisi.id_laporan_masyarakat = laporan_masyarakat.ID', 'LEFT');
+
+			$this->db->where('telaah.id_terusan_disposisi', $param);
+
+			return $this->db->get()->row();
+	}
+
 }
 

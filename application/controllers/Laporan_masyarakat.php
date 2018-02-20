@@ -106,7 +106,7 @@ class Laporan_masyarakat extends Admin_panel {
 
 		$config = $this->template->pagination_list();
 
-		$config['base_url'] = site_url("data_laporan?per_page={$this->per_page}&query={$this->query}");
+		$config['base_url'] = site_url("laporan_masyarakat/data_laporan?per_page={$this->per_page}&query={$this->query}");
 
 		$config['per_page'] = $this->per_page;
 		$config['total_rows'] = $this->mlaporan_masyarakat->get_all(null, null, 'num');
@@ -155,6 +155,7 @@ class Laporan_masyarakat extends Admin_panel {
 			redirect(base_url('laporan_masyarakat/data_laporan'));
 		}
 		$this->data['title'] = "Buat Instruksi dan Disposisi";
+		$this->data['param'] = $param;
 		$this->template->view('intel/instruksi_disposisi', $this->data);
 	}
 
@@ -183,6 +184,7 @@ class Laporan_masyarakat extends Admin_panel {
 
 		$this->data['get'] = $this->mlaporan_masyarakat->get($param,'get_disposisi');
 		$this->data['title'] = "Sunting Instruksi dan Disposisi";
+		$this->data['param'] = $param;
 		$this->template->view('intel/update_instruksi_disposisi', $this->data);
 	}
 

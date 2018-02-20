@@ -65,6 +65,7 @@
     <script src="<?php echo base_url('public/dist/js/jquery.tableCheckbox.min.js') ?>"></script>
     <script src="<?php echo base_url('public/plugins/iCheck/icheck.min.js') ?>"></script>
     <script src="<?php echo base_url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') ?>"></script>
+    <script src="http://kecamatansimpangkatis.com/tempayan/public/dist/js/jquery.sticky.min.js"></script>
     <script>
       var base_url = '<?php echo base_url() ?>',
           base_path = '<?php echo base_url('public') ?>';
@@ -91,6 +92,8 @@
           'link' : false
         }}
         )
+
+       $("#sticker").sticky({topSpacing:100});
 
      })
     </script>

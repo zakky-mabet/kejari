@@ -1,6 +1,34 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
-	<div class="col-md-10 col-md-offset-1 col-xs-12">
+	<div class="col-md-4 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-body" style="margin-top: 10px;">
+				<table class="table" >
+					<tr class="bg-green">
+						<th colspan="2" >DATA LAPORAN MASYARAKAT</th>
+					</tr>
+					<tr >
+						<th class="small" width="40%">NOMOR</th>
+						<td class="small"><?php echo $this->mlaporan_masyarakat->get($get->id_laporan_masyarakat)->nomor ?></td>
+					</tr>
+					<tr>
+						<th class="small">TANGGAL MASUK</th>
+						<td class="small"><?php echo date_id($this->mlaporan_masyarakat->get($get->id_laporan_masyarakat)->tanggal_masuk) ?></td>
+					</tr>
+					<tr>
+						<th class="small">ASAL</th>
+						<td class="small"><?php echo $this->mlaporan_masyarakat->get($get->id_laporan_masyarakat)->asal ?></td>
+					</tr>
+					<tr>
+						<th class="small">PRIHAL</th>
+						<td class="small"><?php echo $this->mlaporan_masyarakat->get($get->id_laporan_masyarakat)->deskripsi ?></td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8 col-xs-12">
 		<div class="box box-primary">
 			<?php
 			echo form_open(current_url(), array('class' => ''));
@@ -16,10 +44,10 @@
 
               <div class="form-group">
                 	<label>Disposisi/ Diteruskan  : <strong class="text-red">*</strong> </label>
-                		<p><input type="checkbox" onfocus="" name="group_id" value="4"  class="minimal" checked >  SEKSI INTELIJEN </p>
-<!--                 		<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDSUS </p>
-                		<input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDUM <p></p>
-                		<input type="checkbox" class="minimal" disabled="disabled" >  SEKSI DATUN	 -->
+                		<p><input type="checkbox" name="group_id" value="4" class="minimal" checked >  SEKSI INTELIJEN </p>
+						<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDSUS </p>
+						<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDUM </p>
+						<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI DATUN</p>
 
 					<p class="help-block"><?php echo form_error('group_id', '<small class="text-red">', '</small>'); ?></p>
               </div>
