@@ -25,6 +25,7 @@ class Kepegawaian extends Admin_panel
 		$this->query = $this->input->get('query');
 
 		$this->load->js(base_url("public/app/kepegawaian.js"));
+		$this->load->js(base_url("public/app/diklat/kepangkatan.js"));
 	}
 	
 	public function index()
@@ -136,6 +137,7 @@ class Kepegawaian extends Admin_panel
 		$this->data['kepegawaian'] = $this->mkepegawaian->get_all($this->per_page, $this->page, 'result');
 		$this->load->view('pages/kepegawaian/data_laporan_kepegawaian_print', $this->data);
 	}
+
 }
 
 /* End of file Kepegawaian.php */

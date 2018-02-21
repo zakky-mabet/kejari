@@ -39,7 +39,7 @@ class Mkepangkatan extends CI_Model
 
 	public function cek_pangkat($param = 0)
 	{
-		return $this->db->get_where('pangkat', array('ID' => $param) )->num_rows();
+		return $this->db->get_where('kepangkatan', array('ID' => $param) )->num_rows();
 	}
 
 	public function pangkat($param = 0)
@@ -180,6 +180,9 @@ class Mkepangkatan extends CI_Model
 
 		
     }
+
+ 
+
 
 }
 

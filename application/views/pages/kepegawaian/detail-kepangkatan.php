@@ -57,8 +57,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="box box-primary">
 			<div class="box-header">
 				<div class="col-md-8 pull-right">
-					<div class="col-md-3 pull-right">
+					<div class="col-md-6 pull-right">
 						<a href="<?php echo base_url('kepangkatan/create_pangkat/'.$get->ID) ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
+						<a href="<?php echo site_url("kepangkatan/print_out_detail/{$get->ID}") ?>" class="btn btn-success btn-print_detail" id="reset-form"><i class="fa 
+							fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
