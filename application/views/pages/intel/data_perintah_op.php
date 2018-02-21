@@ -16,10 +16,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('perintah_op') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('dokumen_telaah') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo base_url('perintah_op') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -33,35 +33,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th class="text-center">POKOK PERMASALAHAN</th>
 							<th class="text-center">SARAN TINDAK</th>
 							<th class="text-center">PETUNJUK</th>
-							<th class="text-center">STATUS PETUNJUK</th>
+							<th class="text-center">STATUS</th>
 							<th width="100"></th>
 						</tr>
 					</thead>
 
 					<tbody class="hoverTable">
-						<?php foreach($dokumen_telaah as $row) : ?>
+						<?php foreach($perintah_op as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
 							<td><?php echo highlight_phrase($row->no_telaah, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
 							<td><?php echo highlight_phrase(substr($row->pokok_permasalahan,0, 40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
 							<td><?php echo highlight_phrase(substr($row->saran_tindak,0,40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
-							<td><?php if (!$row->petunjuk) { echo '<span class="text-grey">Belum ada Petunjuk<span>!'; } else { echo substr($row->petunjuk, 0, 50); }   ?></td>
-							<td><?php if (!$row->petunjuk) { echo '<span class="text-red">Belum di beri petunjuk<span>!'; } else { echo 'Telah di beri Petunjuk'; }   ?></td>
+							<td><?php echo highlight_phrase($row->petunjuk, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
+							<td><?php if (!$row->nomor_prinops) { echo '<span class="text-red">Surat belum dibuat<span>!'; } else { echo 'Surat telah dibuat'; }   ?></td>
 							<td class="text-left">
-								<?php if ($row->status_petunjuk == 'telah'): ?>
+<!-- 								
 
-									<a href="<?php echo base_url('dokumen_telaah/update_petunjuk/'.$row->ID_primary_telaah) ?>" data-toggle="tooltip" data-placement="top" title="Sunting Petunjuk ini" class="btn btn-xs btn-primary" style="margin-right: 10px">
+									<a href="<?php echo base_url('perintah_op/update_petunjuk/'.$row->ID_primary_telaah) ?>" data-toggle="tooltip" data-placement="top" title="Sunting Petunjuk ini" class="btn btn-xs btn-primary" style="margin-right: 10px">
 								<i class="fa fa-pencil"></i></a>
-								<?php else: ?>
+					 -->
 								
-								<a href="<?php echo base_url('dokumen_telaah/create_petunjuk/'.$row->ID_primary_telaah) ?>" data-toggle="tooltip" data-placement="top" title="Beri Petunjuk Atas Dokumen Telaah ini atau tidak dilanjutkan" class="btn btn-xs btn-success" style="margin-right: 10px">
+								<a href="<?php echo base_url('perintah_op/create_surat_op/'.$row->ID_primary_perintah_op) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Perintah Operasi Intelijen pada surat ini" class="btn btn-xs btn-success" style="margin-right: 10px">
 								<i class="fa fa-send"></i></a>
-								<?php endif ?>
+					
 							</td>
 						</tr>
 						<?php endforeach; ?>
 						<tr>
-							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($dokumen_telaah) . " dari " . $num_dokumen_telaah . " data"; ?></small></td>
+							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($perintah_op) . " dari " . $num_perintah_op . " data"; ?></small></td>
 						</tr>
 					</tbody>
 					

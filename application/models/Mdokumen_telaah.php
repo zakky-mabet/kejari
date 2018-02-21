@@ -128,6 +128,29 @@ class Mdokumen_telaah extends MY_model {
 		}
 	}
 
+	public function update_petunjuk($param = 0)
+	{
+		$data = array(
+			'petunjuk' => $this->input->post('petunjuk'),
+			'tanggal_petunjuk' => date('Y-m-d H:i:s'),
+		); 
+
+		$this->db->update('telaah', $data, array('ID' => $param));
+
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data Petunjuk telaahan intelijen diubah.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Tidak ada data diubah.', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+	}
+
 	
 	
 }

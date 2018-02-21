@@ -58,6 +58,10 @@ class Dokumen_telaah extends Admin_panel {
 			show_404();
 		}
 
+		if($this->mdokumen_telaah->get_in_create($param)->status_petunjuk == 'telah' ){
+			show_404();
+		}
+
 		$this->page_title->push("Dokumen Telaah", "Buat Petunjuk Atas Dokumen Telaah Intelijen");
 
 		$this->breadcrumbs->unshift(2, 'Buat', "dokumen_telaah/create_petunjuk");
@@ -75,6 +79,29 @@ class Dokumen_telaah extends Admin_panel {
 		$this->template->view('intel/create_petunjuk', $this->data);
 	}
 
+	public function update_petunjuk($param = 0)
+	{
+		if (!$param) {
+			show_404();
+		}
+		if($this->mdokumen_telaah->get_in_create($param)->status_petunjuk == 'belum' ){
+			show_404();
+		}
+		$this->page_title->push("Dokumen Telaah", "Sunting Petunjuk Atas Dokumen Telaah Intelijen");
 
+		$this->breadcrumbs->unshift(2, 'Sunting', "dokumen_telaah/update_petunjuk");
+
+		$this->form_validation->set_rules('petunjuk', 'Petunjuk', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mdokumen_telaah->update_petunjuk($param);
+
+			redirect(current_url());
+		}
+		$this->data['title'] = "Sunting Petunjuk Atas Dokumen Telaah Intelijen";
+		$this->data['param'] = $param;
+		$this->template->view('intel/update_petunjuk', $this->data);
+	}
 
 }
