@@ -16,10 +16,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('perintah_op') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('lapopsin') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('perintah_op') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo base_url('lapopsin') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -29,30 +29,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="bg-green">
 						<tr>
 							<th class="text-center">No.</th>
-							<th class="text-center">NOMOR TELAAH</th>
-							<th class="text-center">POKOK PERMASALAHAN</th>
-							<th class="text-center">SARAN TINDAK</th>
-							<th class="text-center">PETUNJUK</th>
+							<th class="text-center">NOMOR PRINOPS</th>
+							<th class="text-center">UNTUK</th>
 							<th class="text-center">STATUS</th>
 							<th width="100"></th>
 						</tr>
 					</thead>
 					<tbody class="hoverTable">
-						<?php foreach($perintah_op as $row) : ?>
+						<?php foreach($lapopsin as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td><?php echo highlight_phrase($row->no_telaah, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
-							<td><?php echo highlight_phrase(substr($row->pokok_permasalahan,0, 40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
-							<td><?php echo highlight_phrase(substr($row->saran_tindak,0,40).'...', $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
-							<td><?php echo highlight_phrase($row->petunjuk, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
-							<td><?php if (!$row->nomor_prinops) { echo '<span class="text-red">Surat belum dibuat<span>!'; } else { echo 'Surat telah dibuat'; }   ?></td>
+							<td><?php echo highlight_phrase($row->nomor_prinops, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase(substr($row->deskripsi_untuk,0, 200), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
+							
+							<td><?php if (!$row->nomor_laphosin) { echo '<span class="text-red">Laporan Belum dibuat <span>!'; } else { echo 'Laporan Telah dibuat'; }   ?></td>
 							<td class="text-left">
 								
-								<?php if (!$row->nomor_prinops): ?>
-									<a href="<?php echo base_url('perintah_op/create_surat_op/'.$row->ID_primary_perintah_op) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Perintah Operasi Intelijen" class="btn btn-xs btn-success" style="margin-right: 10px">
+								<?php if (!$row->nomor_laphosin): ?>
+									<a href="<?php echo base_url('lapopsin/create_lapopsin/'.$row->ID_primary_lapopsin) ?>" data-toggle="tooltip" data-placement="top" title="Buat Laporan Hasil Operasi Intelijen" class="btn btn-xs btn-success" style="margin-right: 10px">
 								<i class="fa fa-send"></i></a>
 								<?php else: ?>	
-									<a href="<?php echo base_url('perintah_op/update_surat_op/'.$row->ID_primary_perintah_op) ?>" data-toggle="tooltip" data-placement="top" title="Sunting Perintah Operasi ini" class="btn btn-xs btn-primary" style="margin-right: 10px">
+									<a href="<?php echo base_url('lapopsin/update_lapopsin/'.$row->ID_primary_lapopsin) ?>" data-toggle="tooltip" data-placement="top" title="Sunting Laporan Hasil Operasi Intelijen ini" class="btn btn-xs btn-primary" style="margin-right: 10px">
 								<i class="fa fa-pencil"></i></a>
 								<?php endif ?>
 								
@@ -60,14 +57,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						</tr>
 						<?php endforeach; ?>
 						<tr>
-							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($perintah_op) . " dari " . $num_perintah_op . " data"; ?></small></td>
+							<td colspan="5"><small class="pull-right">Ditampilkan <?php echo count($lapopsin) . " dari " . $num_lapopsin . " data"; ?></small></td>
 						</tr>
 					</tbody>
 					
 				</table>
 			</div>
 			<div class="box-footer no-padding">
-			
+
 			</div>
 		</div>
 		<div class="col-md-12 text-center">

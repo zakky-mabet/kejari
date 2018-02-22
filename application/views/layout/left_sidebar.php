@@ -45,7 +45,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('perkara','perintah_op')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('perkara','perintah_op','lapopsin')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>INTELIJEN</span>
                   <span class="pull-right-container">
@@ -55,14 +55,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <ul class="treeview-menu">
                 <li class="<?php echo active_link_method('index', 'perkara') ?>">
                     <a href="<?php echo base_url('perkara/index') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara Masuk 
-                      <?php if ($this->mperkara->get_all(null,null,'notifikasi') !=0 ): ?>
-                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperkara->get_all(null,null,'notifikasi') ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mperkara->get_all(null, null,'notifikasi') ?></span>  <?php endif ?></a>
+                      <?php if ($this->mperkara->notifikasi() !=0 ): ?>
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperkara->notifikasi() ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mperkara->notifikasi() ?></span>  <?php endif ?></a>
                 </li>
                 <li class="<?php echo active_link_method('index', 'perintah_op') ?>">
-                    <a href="<?php echo base_url('perintah_op/index') ?>"><i class="fa fa-angle-double-right"></i>Surat Perintah Operasi Intelijen </a>
+                    <a href="<?php echo base_url('perintah_op/index') ?>"><i class="fa fa-angle-double-right"></i>Surat Perintah Operasi  <?php if ($this->mperintah_op->notifikasi() !=0 ): ?>
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperintah_op->notifikasi() ?> Surat belum di buat" class="label label-danger pull-right"><?php echo $this->mperintah_op->notifikasi() ?></span>  <?php endif ?></a>
                 </li>
-                  <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i>  Laporan Hasil Operasi Intelijen</a>
+                  <li class="<?php echo active_link_method('index', 'lapopsin') ?>">
+                    <a href="<?php echo base_url('lapopsin/index') ?>"><i class="fa fa-angle-double-right"></i>  Laporan Hasil Operasi <?php if ($this->mlapopsin->notifikasi() !=0 ): ?>
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlapopsin->notifikasi() ?> Laporan Belum dibuat" class="label label-danger pull-right"><?php echo $this->mlapopsin->notifikasi() ?></span>  <?php endif ?></a>
                 </li>
               </ul>
           </li>

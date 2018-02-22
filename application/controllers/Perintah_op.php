@@ -57,31 +57,56 @@ class Perintah_op extends Admin_panel {
 		if (!$param) {
 			show_404();
 		}
-
-
+		if ($this->mperintah_op->get_id_telaah($param) == 0) {
+			show_404();
+		}
 		$this->page_title->push("Perintah OP", "Buat Surat Perintah OP ");
 
 		$this->breadcrumbs->unshift(2, 'Buat', "perintah_op/create_surat_op");
 
-		$this->form_validation->set_rules('no_telaah', 'Nomor', 'trim|required');
-		$this->form_validation->set_rules('pokok_permasalahan', 'Pokok Permasalahan', 'trim|required');
-		$this->form_validation->set_rules('uraian_permasalahan', 'Uraian Permasalahan', 'trim|required');
-		$this->form_validation->set_rules('telaahan', 'Telaahan', 'trim|required');
-		$this->form_validation->set_rules('kesimpulan', 'Kesimpulan', 'trim|required');
-		$this->form_validation->set_rules('saran_tindak', 'Saran Tindak', 'trim|required');
+		$this->form_validation->set_rules('nomor_prinops', 'Nomor', 'trim|required');
+		$this->form_validation->set_rules('deskripsi_untuk', 'Untuk', 'trim|required');
+		$this->form_validation->set_rules('id_user[]', 'Kepada', 'trim|required');
 
 
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->mperintah_op->create_surat_op($param);
 
-			redirect(base_url('perintah_op'));
+			redirect(site_url('perintah_op'));
 		}
 		$this->data['title'] = "Buat Telaahan Intelijen";
 		$this->data['param'] = $param;
 		$this->template->view('intel/create_surat_op', $this->data);
 	}
 
+	public function update_surat_op($param = 0)
+	{
+		if (!$param) {
+			show_404();
+		}
+		if ($this->mperintah_op->get_id_telaah($param) == 0) {
+			show_404();
+		}
+		$this->page_title->push("Perintah OP", "Sunting Surat Perintah OP ");
+
+		$this->breadcrumbs->unshift(2, 'Sunting', "perintah_op/update_surat_op");
+
+		$this->form_validation->set_rules('nomor_prinops', 'Nomor', 'trim|required');
+		$this->form_validation->set_rules('deskripsi_untuk', 'Untuk', 'trim|required');
+		$this->form_validation->set_rules('id_user[]', 'Kepada', 'trim|required');
+
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mperintah_op->update_surat_op($param);
+
+			redirect(site_url('perintah_op'));
+		}
+		$this->data['title'] = "Sunting Telaahan Intelijen";
+		$this->data['param'] = $param;
+		$this->template->view('intel/update_surat_op', $this->data);
+	}
 
 
 }

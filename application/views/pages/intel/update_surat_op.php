@@ -90,13 +90,13 @@
 				
 				<div class="form-group">
                 	<label>Nomor Perintah Operasi: <strong class="text-red">*</strong></label>
-                	<input type="text"  class="form-control" autofocus name="nomor_prinops" value="<?php echo set_value('nomor_prinops') ?>" >
+                	<input type="text"  class="form-control" autofocus name="nomor_prinops" value="<?php echo $this->mperintah_op->get_in_create($param)->nomor_prinops ?>" >
                         <p class="help-block"><?php echo form_error('nomor_prinops', '<small class="text-red">', '</small>'); ?></p>            
               	</div>
 
 				<div class="form-group">
                 	<label>Untuk  : <strong class="text-red">*</strong></label>
-                	<textarea name="deskripsi_untuk" rows="8"  placeholder="Tulis Uraian Permasalahan di sini." class=" form-control"><?php echo set_value('deskripsi_untuk') ?></textarea>
+                	<textarea name="deskripsi_untuk" rows="8"  placeholder="Tulis Uraian Permasalahan di sini." class=" form-control"><?php echo $this->mperintah_op->get_in_create($param)->deskripsi_untuk ?></textarea>
 					<p class="help-block"><?php echo form_error('deskripsi_untuk', '<small class="text-red">', '</small>'); ?></p>
               	</div>
        			

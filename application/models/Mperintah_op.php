@@ -39,8 +39,7 @@ class Mperintah_op extends MY_model {
 
 			return $this->db->get()->result();			
 
-		} 
-		else {
+		} else {
 
 			$this->db->from('perintah_op');
 
@@ -79,74 +78,97 @@ class Mperintah_op extends MY_model {
 			return $this->db->get()->row();
 	}
 
-	// public function create_petunjuk($param = 0)
-	// {
-	// 	$data = array(
-	// 		'petunjuk' => $this->input->post('petunjuk'),
-	// 		'tanggal_petunjuk' => date('Y-m-d H:i:s'),
-	// 		'status_petunjuk' => 'telah'
-	// 	); 
+	public function notifikasi()
+	{
+		return $this->db->get_where('perintah_op',array('nomor_prinops' => NULL) )->num_rows();
+	}
 
-	// 	$this->db->update('telaah', $data, array('ID' => $param));
+	public function get_id_telaah($param = 0)
+	{
+		return $this->db->get_where('telaah',array('ID' => $param) )->num_rows();
+	}
 
-	// 	$perintah_op = array(
-	// 		'id_telaah' => $param,
-	// 	); 
+	public function create_surat_op($param = 0)
+	{
+		$data = array(
+			'nomor_prinops' => $this->input->post('nomor_prinops'),
+			'tanggal_dibuat' => date('Y-m-d H:i:s'),
+			'deskripsi_untuk' => $this->input->post('deskripsi_untuk'),
+		); 
 
-	// 	$this->db->insert('perintah_op', $perintah_op);
+		$this->db->update('perintah_op', $data, array('ID' => $param));
 
- //        $this->firebase_push->setTitle("1 Laporan Petunjuk Telaahan Intelijen Masuk")
- //                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Petunjuk Telaahan Intelijen kepada anda")
- //                            ->setTo($this->get_firebase_token(1)) //Misal Kajari id
- //                            ->send();
+		$this->db->insert('lapopsin', array('id_perintah_op' => $param) );
 
- //        $notif = array(
-	// 		'pengirim' => $this->ion_auth->user()->row()->id,
-	// 		'penerima' => 1,
-	// 		'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Petunjuk Telaahan Intelijen kepada anda",
-	// 		'tanggal' => date('Y-m-d H:i:s'),
-	// 	); 
+		foreach ($this->input->post('id_user') as $value) {
+			$this->insert_kepada($param, $value);
+		}	
+   
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				'Surat Perintah Operasi Intelijen berhasil disimpan.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Gagal menyimpan surat.', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+	}
 
-	// 	$this->db->insert('notifikasi', $notif);
+	public function update_surat_op($param = 0)
+	{
+		$data = array(
+			'nomor_prinops' => $this->input->post('nomor_prinops'),
+			'tanggal_dibuat' => date('Y-m-d H:i:s'),
+			'deskripsi_untuk' => $this->input->post('deskripsi_untuk'),
+		); 
 
-	// 	if($this->db->affected_rows())
-	// 	{
-	// 		$this->template->alert(
-	// 			' Data Petunjuk telaahan intelijen disimpan.', 
-	// 			array('type' => 'success','icon' => 'check')
-	// 		);
-	// 	} else {
-	// 		$this->template->alert(
-	// 			' Gagal menyimpan data.', 
-	// 			array('type' => 'warning','icon' => 'times')
-	// 		);
-	// 	}
-	// }
+		$this->db->update('perintah_op', $data, array('ID' => $param));
 
-	// public function update_petunjuk($param = 0)
-	// {
-	// 	$data = array(
-	// 		'petunjuk' => $this->input->post('petunjuk'),
-	// 		'tanggal_petunjuk' => date('Y-m-d H:i:s'),
-	// 	); 
+		foreach ($this->input->post('id_user') as $value) {
+			$this->insert_kepada($param, $value);
+		}	
+      
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				'Surat Perintah Operasi Intelijen berhasil diubah.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Gagal menyimpan surat.', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+	}
 
-	// 	$this->db->update('telaah', $data, array('ID' => $param));
+	public function insert_kepada($param = 0, $id_user = 0)
+	{
+		$perintah_op = array(
+			'id_perintah_op' => $param,
+			'id_user' => $id_user,
+		); 
 
-	// 	if($this->db->affected_rows())
-	// 	{
-	// 		$this->template->alert(
-	// 			' Data Petunjuk telaahan intelijen diubah.', 
-	// 			array('type' => 'success','icon' => 'check')
-	// 		);
-	// 	} else {
-	// 		$this->template->alert(
-	// 			' Tidak ada data diubah.', 
-	// 			array('type' => 'warning','icon' => 'times')
-	// 		);
-	// 	}
-	// }
+		$this->db->insert('perintah_op_kepada', $perintah_op);
 
-	
+		$this->firebase_push->setTitle("1 Surat Perintah Operasi Intelijen Masuk")
+                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Surat Perintah Operasi Intelijen kepada anda")
+                            ->setTo($this->get_firebase_token($id_user)) //Misal Kajari id
+                            ->send();
+
+        $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'penerima' => $id_user,
+			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Surat Perintah Operasi Intelijen kepada anda",
+			'tanggal' => date('Y-m-d H:i:s'),
+		);
+
+		$this->db->insert('notifikasi', $notif); 
+	}
 	
 }
 
