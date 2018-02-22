@@ -34,11 +34,12 @@ class Users extends CI_Controller
 	        				'status' => 'OK', 
 	        				'message' => "Selamat datang ".$account['first_name'],
 	        				'user_ID' => $account['id'],
+	        				'jumlah_notifikasi' => $this->countNotifikasi($account['id'])
 	        			), $account);
 	        	} else {
 	        		$response =  array(
 	        			'status' => "ERROR",
-	        			'message' => "Kombinasi Email dan Password tidak cocok!"
+	        			'message' => "Kombinasi NIP dan Password tidak cocok!"
 	        		);
 	        	}
 			} else {
@@ -67,7 +68,10 @@ class Users extends CI_Controller
 	 **/
 	private function _get_account($param = 0)
 	{
+		$this->db->select('users.*, kepegawaian.*, users_groups.group_id');
+		$this->db->join('users_groups', 'users.id = users_groups.user_id', 'left');
 		$this->db->join('kepegawaian', 'users.nip = kepegawaian.nip', 'left');
+		$this->db->group_by('users.id');
 		$query = $this->db->get_where('users', array('users.nip' => $param, 'active' => 1));
 
 		if($query->num_rows() == 1)
@@ -76,6 +80,21 @@ class Users extends CI_Controller
 		} else {
 			return array('password' => '');
 		}
+	}
+
+	public function init($param = 0)
+	{
+		$response = array(
+			'status' => "OK",
+			'message' => "Pengambilan data berhasil dilakukan",
+			'jumlah_notifikasi' => $this->countNotifikasi($this->input->post('ID'))
+		);
+		return $this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	private function countNotifikasi($param = 0)
+	{
+		return $this->db->get_where('notifikasi', array('penerima' => $param, 'status' => 'unread'))->num_rows();
 	}
 }
 
