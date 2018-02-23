@@ -205,4 +205,11 @@ class Laporan_masyarakat extends Admin_panel {
 		$this->load->view('pages/intel/data_laporan_masyarakat_print', $this->data);
 	}
 
+	public function group()
+	{
+		echo "<pre>";
+		 print_r ($this->mlaporan_masyarakat->get_group(4));
+		 echo "</pre>"; 
+	}
+
 }

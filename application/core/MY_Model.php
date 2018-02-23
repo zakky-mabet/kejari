@@ -9,7 +9,7 @@ class MY_Model extends CI_Model
 
 	}
 
-	public function get_firebase_token($param = 0)
+	   public function get_firebase_token($param = 0)
     {
        return $this->db->select('firebase_token')->get_where('users', array('id' => $param))->row('firebase_token');
     }
@@ -20,13 +20,13 @@ class MY_Model extends CI_Model
 
     	$this->db->select('users.*, users_groups.*, users_groups.id AS ID_primary_users_group ' );
 
-      	$this->db->from('users');
+      $this->db->from('users');
 
-		$this->db->join('users_groups', 'users.id = users_groups.user_id', 'LEFT');
+		  $this->db->join('users_groups', 'users.id = users_groups.user_id', 'LEFT');
 
-		$this->db->where('users_groups.group_id', $param);
+		   $this->db->where('users_groups.group_id', $param);
 
-		return $this->db->get()->result();
+		  return $this->db->get()->result();
     }
 
      public function get_by_id($param = 0)

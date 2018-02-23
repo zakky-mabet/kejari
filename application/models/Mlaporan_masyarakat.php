@@ -84,18 +84,18 @@ class Mlaporan_masyarakat extends MY_model {
 
 		$id_laporan_masyarakat = $this->db->insert_id();
 
-        // $this->firebase_push->setTo($this->get_firebase_token(1));
-        // $this->firebase_push->setTitle("1 Laporan Perkara Baru");
-        // $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan perkara kepada anda");
-        // $this->firebase_push->setImage('');
-        // $this->firebase_push->setIsBackground(FALSE);
-        // $this->firebase_push->setPayload(
-        // 	array(
-        // 		'ID' => $this->db->insert_id(),
-        // 		'category' => 'lapmas'
-        // 	)
-        // );
-        // $this->firebase_push->send();
+        $this->firebase_push->setTo($this->get_firebase_token(1));
+        $this->firebase_push->setTitle("1 Laporan Perkara Baru");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan perkara kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $id_laporan_masyarakat,
+        		'category' => 'lapmas'
+        	)
+        );
+        $this->firebase_push->send();
 
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
@@ -182,6 +182,7 @@ class Mlaporan_masyarakat extends MY_model {
 		);
 	}
 
+	
 	public function instruksi_disposisi($param)
 	{
 		$disposisi = array(
@@ -191,6 +192,7 @@ class Mlaporan_masyarakat extends MY_model {
 
 		$this->db->insert('disposisi', $disposisi);
 
+		  
 		$id_disposisi = $this->db->insert_id();
 
 		$terusan_disposisi = array(
@@ -207,6 +209,12 @@ class Mlaporan_masyarakat extends MY_model {
 
 		$this->db->update('laporan_masyarakat', $data, array('ID' => $param));
 
+		foreach ($this->mlaporan_masyarakat->get_group(4) as $key => $value) {
+
+				// LOOP NOTIFIKASI
+		      	$this->insert_kepada($value->id, $param);
+		}    
+
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
@@ -219,7 +227,11 @@ class Mlaporan_masyarakat extends MY_model {
 				array('type' => 'warning','icon' => 'times')
 			);
 		}
+	}
 
+	public function get_id_laporan_in_disposisi($param = 0)
+	{
+		return $this->db->get_where('disposisi', array('ID' => $param ) )->row();
 	}
 	
 	public function update_instruksi_disposisi($param = 0)
@@ -237,18 +249,55 @@ class Mlaporan_masyarakat extends MY_model {
 
 		$this->db->update('terusan_disposisi', $terusan_disposisi, array('id_disposisi' => $param));
 
+		foreach ($this->mlaporan_masyarakat->get_group(4) as $key => $value) {
+
+			// LOOP NOTIFIKASI
+		    $this->insert_kepada($value->id, $this->get_id_laporan_in_disposisi($param)->id_laporan_masyarakat);
+		}
+
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
-				' Data berhasil diubah.', 
+				'Data berhasil diubah.', 
 				array('type' => 'success','icon' => 'check')
 			);
 		} else {
 			$this->template->alert(
-				' Tidak ada data yang diubah.', 
+				'Tidak ada data yang diubah.', 
 				array('type' => 'warning','icon' => 'warning')
 			);
 		}
+	}
+
+	public function insert_kepada($id_user = 0, $id_laporan_masyarakat = 0)
+	{
+		$this->firebase_push->setTo($this->get_firebase_token($id_user));
+        $this->firebase_push->setTitle("1 Instruksi Baru Masuk");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Instruksi kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $id_laporan_masyarakat,
+        		'category' => 'lapmas'
+        	)
+        );
+        $this->firebase_push->send();
+
+		 $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'kategori' => 'lapmas',
+			'penerima' => $id_user,
+			'deskripsi' => $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Instruksi kepada anda",
+			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $id_laporan_masyarakat,
+        		'category' => 'lapmas',
+        			)),
+		); 
+
+		$this->db->insert('notifikasi', $notif);
 	}
 
 	

@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <style type="text/css" media="screen"> 
     body { 
-          background-image: url('<?php echo base_url('public/images/BG.png') ?>'); 
+          background-image: url('<?php echo base_url('public/images/background.png') ?>'); 
           background-attachment: fixed; 
           background-repeat: no-repeat; 
           -webkit-background-size: cover; 
@@ -22,7 +22,7 @@
         } 
       .arial { font-family: arial; font-weight: normal; }
       .bg-color { background-color: #eaeaea; }
-      .bg-color { background-color: #eaeaea; }
+      .bg-color { background-color: #eaeaea`; }
 
       .merah-jambu {
         background-color: #FF1494;
@@ -30,6 +30,8 @@
       .text-white { color: white }
       .bg-datun { background-color:  #AEC00A }
       .bg-bin { background-color: yellow }
+      .text-footer { 
+      color:#EDEDEC }
   </style>
 </head>
 <body class="bg-color">
@@ -48,7 +50,7 @@
     </div>
   </div>
   <footer style="margin-top: 20px">
-    <p class="text-center"><small>&copy; Hak Cipta <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI <br> Kab. Bangka Barat, Kep. Bangka Belitung <br> Dikembangkan oleh <a href="http://www.teitramega.co.id" target="_blank" title="Go to Web CV. Teitra Mega">CV. Teitra Mega</a>, Pangkalpinang.</small></p>
+    <p class="text-center text-footer"><small>&copy; Hak Cipta <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI <br> Kab. Bangka Barat, Kep. Bangka Belitung <br> Dikembangkan oleh <a href="http://www.teitramega.co.id" class="text-orange" target="_blank" title="Go to Web CV. Teitra Mega">CV. Teitra Mega</a>, Pangkalpinang.</small></p>
   </footer>
 </div>
 
