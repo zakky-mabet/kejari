@@ -40,7 +40,7 @@ class Mdokumen_telaah extends MY_model {
 			
 			$this->db->from('telaah');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -71,9 +71,9 @@ class Mdokumen_telaah extends MY_model {
 	{
 		$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi ' );
 			
-			$this->db->from('terusan_disposisi');
+			$this->db->from('telaah');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -99,11 +99,6 @@ class Mdokumen_telaah extends MY_model {
 		); 
 
 		$this->db->insert('perintah_op', $perintah_op);
-
-        $this->firebase_push->setTitle("1 Laporan Petunjuk Telaahan Intelijen Masuk")
-                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Petunjuk Telaahan Intelijen kepada anda")
-                            ->setTo($this->get_firebase_token(1)) //Misal Kajari id
-                            ->send();
 
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,

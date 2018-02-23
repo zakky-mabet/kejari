@@ -25,7 +25,7 @@ class Mperintah_op extends MY_model {
 
 			$this->db->join('telaah', 'perintah_op.id_telaah = telaah.ID', 'LEFT');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -45,7 +45,7 @@ class Mperintah_op extends MY_model {
 
 			$this->db->join('telaah', 'perintah_op.id_telaah = telaah.ID', 'LEFT');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -67,7 +67,7 @@ class Mperintah_op extends MY_model {
 
 			$this->db->join('telaah', 'perintah_op.id_telaah = telaah.ID', 'LEFT');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -83,9 +83,9 @@ class Mperintah_op extends MY_model {
 		return $this->db->get_where('perintah_op',array('nomor_prinops' => NULL) )->num_rows();
 	}
 
-	public function get_id_telaah($param = 0)
+	public function get_id_perintah_op($param = 0)
 	{
-		return $this->db->get_where('telaah',array('ID' => $param) )->num_rows();
+		return $this->db->get_where('perintah_op', array('ID' => $param) )->num_rows();
 	}
 
 	public function create_surat_op($param = 0)
@@ -154,11 +154,6 @@ class Mperintah_op extends MY_model {
 		); 
 
 		$this->db->insert('perintah_op_kepada', $perintah_op);
-
-		$this->firebase_push->setTitle("1 Surat Perintah Operasi Intelijen Masuk")
-                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Surat Perintah Operasi Intelijen kepada anda")
-                            ->setTo($this->get_firebase_token($id_user)) //Misal Kajari id
-                            ->send();
 
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,

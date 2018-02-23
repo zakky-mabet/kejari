@@ -59,7 +59,11 @@
 					</tr>
 					<tr >
 						<th class="small">SARAN TINDAK</th>
-						<td class="small"><?php echo $this->mdokumen_telaah->get_in_create($param)->pokok_permasalahan ?></td>
+						<td class="small"><?php echo $this->mdokumen_telaah->get_in_create($param)->saran_tindak ?></td>
+					</tr>
+					<tr >
+						<th class="small">PEMBUAT TELAAHAN</th>
+						<td class="small"><?php echo  $this->mdokumen_telaah->get_by_id($this->mdokumen_telaah->get_in_create($param)->id_user_pembuat_telaah)->nip.' - '.$this->mdokumen_telaah->get_by_id($this->mdokumen_telaah->get_in_create($param)->id_user_pembuat_telaah)->first_name.' '.$this->mdokumen_telaah->get_by_id($this->mdokumen_telaah->get_in_create($param)->id_user_pembuat_telaah)->last_name ?></td>
 					</tr>
 					<tr>
 						<th class="small">TANGGAL DI TELAAH</th>
@@ -79,7 +83,7 @@
 				
 				<div class="form-group">
                 	<label>Petunjuk : <strong class="text-red">*</strong></label>
-                	<textarea name="petunjuk" rows="15"  placeholder="Tulis Petunjuk di sini." class="textarea form-control"><?php echo $this->mdokumen_telaah->get_in_create($param)->petunjuk ?></textarea>
+                	<textarea name="petunjuk" rows="15"  placeholder="Tulis Petunjuk di sini." class=" form-control"><?php echo $this->mdokumen_telaah->get_in_create($param)->petunjuk ?></textarea>
 					<p class="help-block"><?php echo form_error('petunjuk', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 

@@ -59,7 +59,7 @@
 
 				<div class="form-group">
                 	<label>Uraian Permasalahan : <strong class="text-red">*</strong></label>
-                	<textarea name="uraian_permasalahan" rows="8"  placeholder="Tulis Uraian Permasalahan di sini." class="textarea form-control"><?php echo set_value('uraian_permasalahan') ?></textarea>
+                	<textarea name="uraian_permasalahan" rows="8"  placeholder="Tulis Uraian Permasalahan di sini." class=" form-control"><?php echo set_value('uraian_permasalahan') ?></textarea>
 					<p class="help-block"><?php echo form_error('uraian_permasalahan', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 

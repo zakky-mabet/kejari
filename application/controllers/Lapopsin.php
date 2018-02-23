@@ -58,12 +58,22 @@ class Lapopsin extends Admin_panel {
 			show_404();
 		}
 
+		if ($this->mlapopsin->security($param) == 0 ) {
+			show_404();
+		}
+
 		$this->page_title->push("Laporan Hasil Operasi Intelijen", "Buat Laporan Perintah Operasi Intelijen ");
 
-		$this->breadcrumbs->unshift(2, 'Buat', "perintah_op/create_lapopsin");
+		$this->breadcrumbs->unshift(2, 'Buat', "lapopsin/create_lapopsin");
 
 		$this->form_validation->set_rules('nomor_laphosin', 'Nomor Lapopsin', 'trim|required');
-
+		$this->form_validation->set_rules('dasar', 'Dasar', 'trim|required');
+		$this->form_validation->set_rules('tugas', 'Tugas', 'trim|required');
+		$this->form_validation->set_rules('bahan_keterangan', 'Bahan Keterangan', 'trim|required');
+		$this->form_validation->set_rules('data_diperoleh', 'Data yang diperoleh', 'trim|required');
+		$this->form_validation->set_rules('telaahan', 'Telaahan', 'trim|required');
+		$this->form_validation->set_rules('kesimpulan', 'Kesimpulan', 'trim|required');
+		$this->form_validation->set_rules('saran_tindak', 'Saran Tindak', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
 		{
@@ -76,34 +86,37 @@ class Lapopsin extends Admin_panel {
 		$this->template->view('intel/create_lapopsin', $this->data);
 	}
 
-	// public function update_surat_op($param = 0)
-	// {
-	// 	if (!$param) {
-	// 		show_404();
-	// 	}
-	// 	if ($this->mlapopsin->get_id_telaah($param) == 0) {
-	// 		show_404();
-	// 	}
-	// 	$this->page_title->push("Perintah OP", "Sunting Surat Perintah OP ");
+	public function update_lapopsin($param = 0)
+	{
+		if (!$param) {
+			show_404();
+		}
 
-	// 	$this->breadcrumbs->unshift(2, 'Sunting', "perintah_op/update_surat_op");
+		if ($this->mlapopsin->security($param) == 0 ) {
+			show_404();
+		}
 
-	// 	$this->form_validation->set_rules('nomor_prinops', 'Nomor', 'trim|required');
-	// 	$this->form_validation->set_rules('deskripsi_untuk', 'Untuk', 'trim|required');
-	// 	$this->form_validation->set_rules('id_user[]', 'Kepada', 'trim|required');
+		$this->page_title->push("Laporan Hasil Operasi Intelijen", "Sunting Laporan Perintah Operasi Intelijen ");
 
+		$this->breadcrumbs->unshift(2, 'Sunting', "lapopsin/update_lapopsin");
 
-	// 	if ($this->form_validation->run() == TRUE)
-	// 	{
-	// 		$this->mlapopsin->update_surat_op($param);
+		$this->form_validation->set_rules('nomor_laphosin', 'Nomor Lapopsin', 'trim|required');
+		$this->form_validation->set_rules('dasar', 'Dasar', 'trim|required');
+		$this->form_validation->set_rules('tugas', 'Tugas', 'trim|required');
+		$this->form_validation->set_rules('bahan_keterangan', 'Bahan Keterangan', 'trim|required');
+		$this->form_validation->set_rules('data_diperoleh', 'Data yang diperoleh', 'trim|required');
+		$this->form_validation->set_rules('telaahan', 'Telaahan', 'trim|required');
+		$this->form_validation->set_rules('kesimpulan', 'Kesimpulan', 'trim|required');
+		$this->form_validation->set_rules('saran_tindak', 'Saran Tindak', 'trim|required');
 
-	// 		redirect(site_url('perintah_op'));
-	// 	}
-	// 	$this->data['title'] = "Sunting Telaahan Intelijen";
-	// 	$this->data['param'] = $param;
-	// 	$this->template->view('intel/update_surat_op', $this->data);
-	// }
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mlapopsin->update_lapopsin($param);
 
-	
-
+			redirect(site_url('lapopsin'));
+		}
+		$this->data['title'] = "Sunting Laporan Perintah Operasi Intelijen";
+		$this->data['param'] = $param;
+		$this->template->view('intel/update_lapopsin', $this->data);
+	}
 }

@@ -58,9 +58,9 @@ class Dokumen_telaah extends Admin_panel {
 			show_404();
 		}
 
-		if($this->mdokumen_telaah->get_in_create($param)->status_petunjuk == 'telah' ){
-			show_404();
-		}
+		// if($this->mdokumen_telaah->get_in_create($param)->status_petunjuk == 'telah' ){
+		// 	show_404();
+		// }
 
 		$this->page_title->push("Dokumen Telaah", "Buat Petunjuk Atas Dokumen Telaah Intelijen");
 

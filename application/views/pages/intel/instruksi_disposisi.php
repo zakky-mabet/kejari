@@ -38,7 +38,7 @@
 			<div class="box-body" style="margin-top: 10px;">
 				<div class="form-group">
 					<label>Instruksi : <strong class="text-red">*</strong></label>
-					<textarea name="instruksi" rows="8" autofocus placeholder="Tulis Instruksi di sini." class="textarea form-control"><?php echo set_value('instruksi') ?></textarea>
+					<textarea name="instruksi" rows="8" autofocus placeholder="Tulis Instruksi di sini." class=" form-control"><?php echo set_value('instruksi') ?></textarea>
 					<p class="help-block"><?php echo form_error('instruksi', '<small class="text-red">', '</small>'); ?></p>
 				</div>
 				<div class="form-group">

@@ -57,7 +57,7 @@ class Perintah_op extends Admin_panel {
 		if (!$param) {
 			show_404();
 		}
-		if ($this->mperintah_op->get_id_telaah($param) == 0) {
+		if ($this->mperintah_op->get_id_perintah_op($param) == 0) {
 			show_404();
 		}
 		$this->page_title->push("Perintah OP", "Buat Surat Perintah OP ");
@@ -85,7 +85,7 @@ class Perintah_op extends Admin_panel {
 		if (!$param) {
 			show_404();
 		}
-		if ($this->mperintah_op->get_id_telaah($param) == 0) {
+		if ($this->mperintah_op->get_id_perintah_op($param) == 0) {
 			show_404();
 		}
 		$this->page_title->push("Perintah OP", "Sunting Surat Perintah OP ");

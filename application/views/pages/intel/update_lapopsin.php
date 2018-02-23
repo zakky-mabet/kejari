@@ -119,49 +119,49 @@
 				
 				<div class="form-group">
                 	<label>Nomor Lapopsin : <strong class="text-red">*</strong></label>
-                	<input type="text"  class="form-control" autofocus name="nomor_laphosin" value="<?php echo set_value('nomor_laphosin') ?>" >
+                	<input type="text"  class="form-control" autofocus name="nomor_laphosin" value="<?php echo $this->mlapopsin->get_in_create($param)->nomor_laphosin ?>" >
                         <p class="help-block"><?php echo form_error('nomor_laphosin', '<small class="text-red">', '</small>'); ?></p>            
               	</div>
 
 				<div class="form-group">
                 	<label>Dasar  : <strong class="text-red">*</strong></label>
-                	<textarea name="dasar" rows="4"  placeholder="Tulis deskripsi dasar di sini." class=" form-control"><?php echo set_value('dasar') ?></textarea>
+                	<textarea name="dasar" rows="4"  placeholder="Tulis deskripsi dasar di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->dasar ?></textarea>
 					<p class="help-block"><?php echo form_error('dasar', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
               	<div class="form-group">
                 	<label>Tugas  : <strong class="text-red">*</strong></label>
-                	<textarea name="tugas" rows="4"  placeholder="Tulis deskripsi tugas di sini." class=" form-control"><?php echo set_value('tugas') ?></textarea>
+                	<textarea name="tugas" rows="4"  placeholder="Tulis deskripsi tugas di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->tugas ?></textarea>
 					<p class="help-block"><?php echo form_error('tugas', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
               	<div class="form-group">
                 	<label>Bahan Keterangan : <strong class="text-red">*</strong></label>
-                	<textarea name="bahan_keterangan" rows="4"  placeholder="Tulis deskripsi Bahan Keterangan di sini." class=" form-control"><?php echo set_value('bahan_keterangan') ?></textarea>
+                	<textarea name="bahan_keterangan" rows="4"  placeholder="Tulis deskripsi Bahan Keterangan di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->bahan_keterangan ?></textarea>
 					<p class="help-block"><?php echo form_error('bahan_keterangan', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
               	<div class="form-group">
                 	<label>Data yang diperoleh : <strong class="text-red">*</strong></label>
-                	<textarea name="data_diperoleh" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo set_value('data_diperoleh') ?></textarea>
+                	<textarea name="data_diperoleh" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->data_diperoleh ?></textarea>
 					<p class="help-block"><?php echo form_error('data_diperoleh', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
               	<div class="form-group">
                 	<label>Telaahan : <strong class="text-red">*</strong></label>
-                	<textarea name="telaahan" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo set_value('telaahan') ?></textarea>
+                	<textarea name="telaahan" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->telaahan_lapopsin ?></textarea>
 					<p class="help-block"><?php echo form_error('telaahan', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
               	<div class="form-group">
                 	<label>Kesimpulan : <strong class="text-red">*</strong></label>
-                	<textarea name="kesimpulan" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo set_value('kesimpulan') ?></textarea>
+                	<textarea name="kesimpulan" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->kesimpulan_lapopsin ?></textarea>
 					<p class="help-block"><?php echo form_error('kesimpulan', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
               	<div class="form-group">
                 	<label>Saran Tindak : <strong class="text-red">*</strong></label>
-                	<textarea name="saran_tindak" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo set_value('saran_tindak') ?></textarea>
+                	<textarea name="saran_tindak" rows="4"  placeholder="Tulis data data yang diperoleh di sini." class=" form-control"><?php echo $this->mlapopsin->get_in_create($param)->saran_tindak_lapopsin ?></textarea>
 					<p class="help-block"><?php echo form_error('saran_tindak', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 

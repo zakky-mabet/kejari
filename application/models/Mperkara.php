@@ -22,7 +22,7 @@ class Mperkara extends MY_model {
 			
 			$this->db->from('terusan_disposisi');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('telaah', 'terusan_disposisi.ID = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -39,7 +39,7 @@ class Mperkara extends MY_model {
 
 			$this->db->from('terusan_disposisi');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('telaah', 'terusan_disposisi.ID = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -57,7 +57,7 @@ class Mperkara extends MY_model {
 			
 			$this->db->from('terusan_disposisi');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('telaah', 'terusan_disposisi.ID = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -79,7 +79,7 @@ class Mperkara extends MY_model {
 			
 			$this->db->from('terusan_disposisi');
 
-			$this->db->join('telaah', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('telaah', 'terusan_disposisi.ID = telaah.id_terusan_disposisi', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -109,25 +109,12 @@ class Mperkara extends MY_model {
 			'saran_tindak' => $this->input->post('saran_tindak'),
 			'id_terusan_disposisi' => $param,
 			'group_id' => 4,
+			'id_user_pembuat_telaah' => $this->ion_auth->user()->row()->id,
 			'tanggal_di_telaah' => date('Y-m-d H:i:s'),
 		); 
 
 		$this->db->insert('telaah', $data);
 
-
-        $this->firebase_push->setTitle("1 Laporan Perkara Masuk")
-                            ->setMessage($this->ion_auth->user()->row()->first_name." mengirim Dokumen Telaah kepada anda")
-                            ->setTo($this->get_firebase_token(1)) //Misal Kajari id
-                            ->send();
-
-        $notif = array(
-			'pengirim' => $this->ion_auth->user()->row()->id,
-			'penerima' => 1,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Dokumen Telaah kepada anda",
-			'tanggal' => date('Y-m-d H:i:s'),
-		); 
-
-		$this->db->insert('notifikasi', $notif);
 
 		if($this->db->affected_rows())
 		{
@@ -153,6 +140,7 @@ class Mperkara extends MY_model {
 			'kesimpulan' => $this->input->post('kesimpulan'),
 			'saran_tindak' => $this->input->post('saran_tindak'),
 			'group_id' => 4,
+			'id_user_pembuat_telaah' => $this->ion_auth->user()->row()->id,
 			'tanggal_di_telaah' => date('Y-m-d H:i:s'),
 		);
 

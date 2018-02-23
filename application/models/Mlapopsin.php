@@ -25,13 +25,11 @@ class Mlapopsin extends MY_model {
 
 			$this->db->join('telaah', 'perintah_op.id_telaah = telaah.ID', 'LEFT');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
 			$this->db->join('laporan_masyarakat', 'disposisi.id_laporan_masyarakat = laporan_masyarakat.ID', 'LEFT');
-
-
 
 			$this->db->limit($limit, $offset);
 
@@ -47,25 +45,22 @@ class Mlapopsin extends MY_model {
 
 			$this->db->join('telaah', 'perintah_op.id_telaah = telaah.ID', 'LEFT');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
 			$this->db->join('laporan_masyarakat', 'disposisi.id_laporan_masyarakat = laporan_masyarakat.ID', 'LEFT');
-
-
 
 			$this->db->limit($limit, $offset);
 
 			return $this->db->get()->num_rows();
 		}
 
-
 	}
 
 	public function get_in_create($param = 0)
 	{
-		$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, perintah_op.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi, perintah_op.ID AS ID_primary_perintah_op ' );
+		$this->db->select('laporan_masyarakat.ID AS ID_laporan, laporan_masyarakat.nomor,laporan_masyarakat.tanggal_masuk,laporan_masyarakat.asal, laporan_masyarakat.deskripsi, disposisi.*, terusan_disposisi.*, telaah.*, perintah_op.*, lapopsin.*, terusan_disposisi.ID AS ID_primary_terusan_disposisi, telaah.ID AS ID_primary_telaah, disposisi.ID AS ID_primary_disposisi, perintah_op.ID AS ID_primary_perintah_op, lapopsin.telaahan AS telaahan_lapopsin, lapopsin.kesimpulan AS kesimpulan_lapopsin, lapopsin.saran_tindak AS saran_tindak_lapopsin, telaah.telaahan AS telaahan_telaah, telaah.kesimpulan AS kesimpulan_telaah, telaah.saran_tindak AS saran_tindak_telaah ' );
 			
 			$this->db->from('lapopsin');
 
@@ -73,7 +68,7 @@ class Mlapopsin extends MY_model {
 
 			$this->db->join('telaah', 'perintah_op.id_telaah = telaah.ID', 'LEFT');
 
-			$this->db->join('terusan_disposisi', 'terusan_disposisi.id_disposisi = telaah.id_terusan_disposisi', 'LEFT');
+			$this->db->join('terusan_disposisi', 'telaah.id_terusan_disposisi = terusan_disposisi.ID', 'LEFT');
 
 			$this->db->join('disposisi', 'terusan_disposisi.id_disposisi = disposisi.ID', 'LEFT');
 
@@ -89,6 +84,11 @@ class Mlapopsin extends MY_model {
 	{
 		return $this->db->get_where('lapopsin',array('nomor_laphosin' => NULL) )->num_rows();
 	}
+
+	public function security($param = 0)
+	{
+		return $this->db->get_where('lapopsin',array('ID' => $param) )->num_rows();
+	}
 	
 	public function get_kepada($param = 0)
 	{
@@ -103,6 +103,66 @@ class Mlapopsin extends MY_model {
 
 		return $this->db->get()->result();
 
+	}
+
+
+	public function create_lapopsin($param = 0)
+	{
+		$data = array(
+			'nomor_laphosin' => $this->input->post('nomor_laphosin'),
+			'dasar' => $this->input->post('dasar'),
+			'tugas' => $this->input->post('tugas'),
+			'bahan_keterangan' => $this->input->post('bahan_keterangan'),
+			'data_diperoleh' => $this->input->post('data_diperoleh'),
+			'telaahan' => $this->input->post('telaahan'),
+			'kesimpulan' => $this->input->post('kesimpulan'),
+			'saran_tindak' => $this->input->post('saran_tindak'),
+			'tanggal_laporan_dibuat' => date('Y-m-d H:i:s'),
+			'id_user_input' => $this->ion_auth->user()->row()->id
+		); 
+
+		$this->db->update('lapopsin', $data, array('ID' => $param) );
+
+		$this->firebase_push->setTo($this->get_firebase_token(1));
+        $this->firebase_push->setTitle("1 Laporan Hasil Operasi Intelijen Masuk");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Hasil Operasi Intelijen kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $param,
+        		'category' => 'lapopsin'
+        	)
+        );
+        $this->firebase_push->send();
+
+        $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'kategori' => 'lapopsin',
+			'penerima' => 1,
+			'deskripsi' => $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Hasil Operasi Intelijen kepada anda",
+			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $param,
+        		'category' => 'lapopsin',
+        			)),
+		); 
+
+		$this->db->insert('notifikasi', $notif);
+
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data Hasil Operasi Intelijen berhasil disimpan dan dikirim kepada Bagian Intelijen.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				'Maaf, Terjadi Kesalahan menyimpan data', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
 	}
 }
 

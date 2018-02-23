@@ -38,7 +38,7 @@
 
 				<div class="form-group">
                 	<label>Instruksi : <strong class="text-red">*</strong></label>
-                	<textarea name="instruksi" rows="8" placeholder="Tulis Instruksi di sini." autofocus class="textarea form-control"><?php echo $get->instruksi ?></textarea>
+                	<textarea name="instruksi" rows="8" placeholder="Tulis Instruksi di sini." autofocus class=" form-control"><?php echo $get->instruksi ?></textarea>
 					<p class="help-block"><?php echo form_error('instruksi', '<small class="text-red">', '</small>'); ?></p>
               </div>
 
@@ -54,7 +54,7 @@
 
 				<div class="box-footer with-border">
 					<div class="col-md-4 col-xs-5">
-						<a href="<?php echo site_url('laporan_masyarakat') ?>" class="btn btn-app pull-right">
+						<a href="<?php echo site_url('laporan_masyarakat/data_laporan') ?>" class="btn btn-app pull-right">
 							<i class="ion ion-reply"></i> Kembali
 						</a>
 					</div>
