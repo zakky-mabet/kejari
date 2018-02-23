@@ -100,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
 							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
 							<?php if ($this->mkepangkatan->hitungHari(date('Y-m-d'), $row->batas_akhir)  <= 30) :  ?>
-								<td><span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Anda Akan Naik Pangkat">SIAPKAN BERAS <?php echo $row->batas_akhir ?> Hari</span></td>
+								<td><span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Anda Akan Naik Pangkat">SIAPKAN BERAS <?php echo $row->batas_akhir ?></span></td>
 							<?php else: ?>
 							<td><span data-toggle="tooltip" data-placement="top" class="badge bg-blue" title="Proses Kenaikan Pangkat"><?php echo $this->mkepangkatan->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span></td>
 							<?php endif ?>
