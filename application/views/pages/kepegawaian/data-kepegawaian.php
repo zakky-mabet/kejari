@@ -38,6 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">AGAMA</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">JENIS KELAMIN</th>
 							<th  style="vertical-align: middle;">PDK. TERAKHIR</th>
+							
 							<th rowspan="2" class="text-center"></th>
 						</tr>
 
@@ -48,13 +49,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo ++$this->page ?>.</td>
 							<td><?php echo $row->nip ?></td>
 							<td><?php echo $row->nrp ?></td>
-							<td><a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->pangkat ?></td>
+							<td>
+								<span data-toggle="tooltip" data-placement="top" title="Lihat Detail Ke Pangkat">
+								<a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->pangkat ?></span>
+							</td>
 							<td><?php echo $row->jabatan ?></td>
 							<td><?php echo $row->nama ?></td>
 							<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
 							<td><?php echo strtoupper($row->agama) ?></td>
 							<td><?php echo strtoupper($row->jns_kelamin) ?></td>
 							<td class="text-center"><?php echo $row->pendidikan_terakhir ?></td>
+							
+							
 							<td>
 								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 

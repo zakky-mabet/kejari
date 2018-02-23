@@ -47,10 +47,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->batas_akhir) ?></td>
 							<td class="text-left" style="vertical-align: middle;"><?php echo $row->no_sk ?></td>
 							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>							
-							<td>						
+							<td>
+							<?php if($row->lampiran_sk != FALSE) : ?>						
 							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
 							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
 							</button>
+							<?php else : ?>
+							<span class="badge bg-red">Lampiran SK Kosong</span>
+							<?php endif; ?>
 							</td>
 							<td style="vertical-align: middle;">
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">

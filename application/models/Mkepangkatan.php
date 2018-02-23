@@ -66,20 +66,24 @@ class Mkepangkatan extends CI_Model
 
 		$btsAkhir = new DateTime($this->input->post('date'));
 		$btsAkhir->modify('+47 month');
+		
 
 		$kepangkatan = array(
 			'nip' => $this->input->post('nip'),
 			'tmt' => $this->input->post('date'),
 			'id_pangkat' => $this->input->post('id_pangkat'),
-			'batas_akhir' => $btsAkhir->format('Y-m-d'),
+			'batas_akhir' => $btsAkhir->format('Y-m-d'), 
 			'no_sk' => $this->input->post('no_sk'),
 			'lampiran_sk' => $foto,
 			'keterangan' => $this->input->post('keterangan'),
 			'date_create' => date('Y-m-d H:i:s'),
+
 			
+			//date('Y-m-d')
 		);
 
 		$this->db->insert('kepangkatan', $kepangkatan);
+
 
 		if($this->db->affected_rows())
 		{
@@ -93,6 +97,12 @@ class Mkepangkatan extends CI_Model
 				array('type' => 'warning','icon' => 'times')
 			);
 		}
+	}
+
+	public function hitungHari($datenow = '', $yad = '')
+	{	
+		return (strtotime($yad) - strtotime($datenow)) / (24*3600);
+		
 	}
 
 	public function update($param = 0)
@@ -118,7 +128,7 @@ class Mkepangkatan extends CI_Model
 		}
 
 		$btsAkhir = new DateTime($this->input->post('date'));
-		$btsAkhir->modify('+36 month');
+		$btsAkhir->modify('+47 month');
 
 		$kepangkatan = array(
 			'nip' => $this->input->post('nip'),
@@ -177,13 +187,7 @@ class Mkepangkatan extends CI_Model
 		$this->db->select('*');
 		$this->db->from('pangkat');
 		return $this->db->get()->result();
-
-		
     }
-
- 
-
-
 }
 
 /* End of file Mkepangkatan.php */

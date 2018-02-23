@@ -114,7 +114,6 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 					</div>
 				</div>
 			</div>
-
 			<div class="box-footer with-border">
 				<div class="col-md-4 col-xs-5">
 					<a href="<?php echo site_url('kepangkatan/detail_kepangkatan/'.$get->ID) ?>" class="btn btn-app pull-right">

@@ -73,16 +73,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">PANGKAT</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">GOLONGAN</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">NOMOR SK</th>
+							
 							<th colspan="2" class="text-center">TMT</th>
+							<th></th>
 							<th></th>
 													
 						</tr>
 						<tr>
 							<th class="text-center">TMT</th>
 							<th class="text-center">YAD</th>
+							<th class="text-center">PEMBERITAUAN</th>
 							<th></th>
 							
 						</tr>
+
 					</thead>
 
 					<tbody>
@@ -94,8 +98,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo $this->mkepangkatan->pangkat($row->id_pangkat)->golongan ?></td>
 							<td class="text-center"><?php echo $row->no_sk ?></td>
 							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
-							<td class="text-center"><?php echo date_id($row->batas_akhir) ?> </td>
-							<td class="text-center">
+							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
+							<?php if ($this->mkepangkatan->hitungHari(date('Y-m-d'), $row->batas_akhir)  <= 30) :  ?>
+								<td><span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Anda Akan Naik Pangkat">SIAPKAN BERAS <?php echo $row->batas_akhir ?> Hari</span></td>
+							<?php else: ?>
+							<td><span data-toggle="tooltip" data-placement="top" class="badge bg-blue" title="Proses Kenaikan Pangkat"><?php echo $this->mkepangkatan->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span></td>
+							<?php endif ?>
+	
+							<td class="text-left">
 								<a href="<?php echo base_url('kepangkatan/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>

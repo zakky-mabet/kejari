@@ -170,6 +170,9 @@ class Kepangkatan extends Admin_panel
 		$this->data['get'] = $this->db->get_where('kepegawaian', array('ID'=> $param))->row();
 		$this->load->view('pages/kepegawaian/data_laporan_kepangkatan_print', $this->data);
 	}
+
+
+
 }
 
 /* End of file Kepangkatan.php */

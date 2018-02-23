@@ -33,7 +33,7 @@
 					<td><?php echo $row->nip ?></td>
 					<td><?php echo $row->nama_pegawai ?></td>
 					<td class="text-center"><?php echo date_id($row->tmt) ?></td>
-					<td><?php echo date_id($row->batas_akhir) ?></td>
+					<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
 					<td><?php echo $row->keterangan ?></td>
 				</tr>
 								

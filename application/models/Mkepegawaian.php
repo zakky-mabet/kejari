@@ -85,6 +85,8 @@ class Mkepegawaian extends CI_Model
 		}
 	}
 
+
+
 	public function get($param = 0)
 	{
 		return $this->db->get_where('kepegawaian', array('ID' => $param))->row();
