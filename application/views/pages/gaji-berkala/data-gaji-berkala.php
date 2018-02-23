@@ -34,7 +34,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th  class="text-center">NOMOR SK</th>
 							<th class="text-center">KETERANGAN</th>
 							<th  width="100px" class="text-center">LAMPIRAN</th>
+							<th class="text-center">PEMBERITAHUAN</th>
 							<th width="8%" class="text-center"></th>
+
 						</tr>
 					</thead>
 					<tbody class="hoverTable">
@@ -56,10 +58,32 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<span class="badge bg-red">Lampiran SK Kosong</span>
 							<?php endif; ?>
 							</td>
+							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
+
+							<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) < 30): ?>
+								<td>
+									<span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Anda Akan Naik Pangkat">SIAPKAN BERAS</span>
+								</td>
+								<?php else: ?>
+								<td><span data-toggle="tooltip" data-placement="top" class="badge bg-blue" title="Proses Kenaikan Gaji">
+									<?php echo $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span>
+								</td>
+							<?php endif ?>
+
+							<?php else: ?>
+							   <td><span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Proses Kenaikan Gaji Telah Lewat">Telah Lewat Waktu</span></td>
+							<?php endif ?>
 							<td style="vertical-align: middle;">
+							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
+							<?php if ($this->ion_auth->in_group(array(1,3))) : ?>
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
+							<?php endif; ?>
+							<?php else: ?>
+								<a></i>
+								</a>
+							<?php endif ?>
 								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" 
 									data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>

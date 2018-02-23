@@ -24,7 +24,7 @@ class Mkepegawaian extends CI_Model
 																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.nip 
 																	DESC LIMIT 1) AS pangkat
 											");
-		$this->db->order_by('nip', 'desc');
+		$this->db->order_by('ID', 'DESC');
 		$this->db->group_by('kepegawaian.nip');
 
 		if($type == 'result')
