@@ -5,6 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Log in Options</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="theme-color" content="#E4E80D">
+  <link rel="icon" sizes="192x192" href="<?php echo base_url('public/images/favicon.png') ?>" type="icon" />
   <link rel="stylesheet" href="<?php echo base_url('public/dist/css/style-login.css') ?>">
   <link rel="icon" href="<?php echo base_url('public/images/favicon.png') ?>" type="icon" />
   <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap/dist/css/bootstrap.min.css') ?>">
@@ -47,6 +49,8 @@
       <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social btn-danger btn-flat"><i class="fa fa-circle-o"></i> <b>PIDUM</b></a>
       <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social text-white bg-datun btn-flat"><i class="fa fa-circle-o"></i> <b>DATUN</b></a>
       <a style="padding-top: 10px; padding-bottom: 10px" href="<?php echo site_url('welcome') ?>" class="btn btn-block btn-social text-muted bg-bin btn-flat"><i class="fa fa-circle-o"></i> <b>BIN</b> </a>
+
+   
     </div>
   </div>
   <footer style="margin-top: 20px">

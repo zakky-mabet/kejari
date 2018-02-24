@@ -165,6 +165,15 @@
 					<p class="help-block"><?php echo form_error('saran_tindak', '<small class="text-red">', '</small>'); ?></p>
               	</div>
 
+              	<div class="form-group">
+					<label>Kirim Kepada : <strong class="text-red">*</strong> </label>
+					<?php foreach ($this->mperintah_op->get_group(4) as $key => $value): ?>
+						<p><input type="checkbox" name="id_user[]" value="<?php echo $value->id ?>" class="minimal" >  <?php echo $value->nip.' - '.$value->first_name.' '.$value->last_name ?> </p>
+					<?php endforeach ?>
+					<input type="checkbox" name="id_user[]" checked="checked"  value="1" class="minimal" > <?php echo $this->mlapopsin->get_by_id(1)->nip.' - '.$this->mlapopsin->get_by_id(1)->first_name.' '.$this->mlapopsin->get_by_id(1)->last_name ?>
+					<p class="help-block"><?php echo form_error('id_user[]', '<small class="text-red">', '</small>'); ?></p>
+				</div>
+
 				<div class="box-footer with-border">
 					<div class="col-md-4 col-xs-5">
 						<a href="<?php echo site_url('lapopsin') ?>" class="btn btn-app pull-right">

@@ -123,7 +123,29 @@ class Mlapopsin extends MY_model {
 
 		$this->db->update('lapopsin', $data, array('ID' => $param) );
 
-		$this->firebase_push->setTo($this->get_firebase_token(1));
+		foreach ($this->input->post('id_user') as $value) {
+			$this->insert_kepada($param, $value);
+		}
+
+		
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data Hasil Operasi Intelijen berhasil disimpan dan dikirim kepada Bagian Intelijen.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				'Maaf, Terjadi Kesalahan menyimpan data', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+	}
+
+	public function insert_kepada($param = 0, $id_user = 0)
+	{
+	
+		$this->firebase_push->setTo($this->get_firebase_token($id_user));
         $this->firebase_push->setTitle("1 Laporan Hasil Operasi Intelijen Masuk");
         $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Hasil Operasi Intelijen kepada anda");
         $this->firebase_push->setImage('');
@@ -139,8 +161,9 @@ class Mlapopsin extends MY_model {
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'lapopsin',
-			'penerima' => 1,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Hasil Operasi Intelijen kepada anda",
+			'judul' => '1 Laporan Hasil Operasi Intelijen Masuk',
+			'penerima' => $id_user,
+			'deskripsi' => " mengirim Laporan Hasil Operasi Intelijen kepada anda",
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(
@@ -150,19 +173,6 @@ class Mlapopsin extends MY_model {
 		); 
 
 		$this->db->insert('notifikasi', $notif);
-
-		if($this->db->affected_rows())
-		{
-			$this->template->alert(
-				' Data Hasil Operasi Intelijen berhasil disimpan dan dikirim kepada Bagian Intelijen.', 
-				array('type' => 'success','icon' => 'check')
-			);
-		} else {
-			$this->template->alert(
-				'Maaf, Terjadi Kesalahan menyimpan data', 
-				array('type' => 'warning','icon' => 'times')
-			);
-		}
 	}
 }
 

@@ -115,6 +115,37 @@ class Mperkara extends MY_model {
 
 		$this->db->insert('telaah', $data);
 
+		$id_telaah = $this->db->insert_id();
+
+		$this->firebase_push->setTo($this->get_firebase_token(1)); // set to ke kajari
+        $this->firebase_push->setTitle("Dokumen Telaah Baru");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Dokumen Telaah Baru kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $id_telaah,
+        		'category' => 'telaah_intel'
+        	)
+        );
+        $this->firebase_push->send();
+
+        $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'kategori' => 'telaah_intel',
+			'penerima' => 1,
+			'judul' => '1 Laporan Perkara Baru',
+			'deskripsi' => 'mengirim Dokumen Telaah Baru kepada anda',
+			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $id_telaah,
+        		'category' => 'telaah_intel',
+        			)),
+		); 
+
+		$this->db->insert('notifikasi', $notif);
+
 
 		if($this->db->affected_rows())
 		{
@@ -146,11 +177,31 @@ class Mperkara extends MY_model {
 
 		$this->db->update('telaah', $telaah, array('ID' => $param));
 
-		$notif = array(
+		$this->firebase_push->setTo($this->get_firebase_token(1)); // set to ke kajari
+        $this->firebase_push->setTitle("Dokumen Telaah Baru");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Dokumen Telaah Baru kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $param,
+        		'category' => 'telaah_intel'
+        	)
+        );
+        $this->firebase_push->send();
+
+        $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
+			'kategori' => 'telaah_intel',
 			'penerima' => 1,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Dokumen Telaah kepada anda",
+			'judul' => '1 Laporan Perkara Baru',
+			'deskripsi' => 'mengirim Dokumen Telaah Baru kepada anda',
 			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $param,
+        		'category' => 'telaah_intel',
+        			)),
 		); 
 
 		$this->db->insert('notifikasi', $notif);

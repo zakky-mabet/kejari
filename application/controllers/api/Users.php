@@ -34,7 +34,8 @@ class Users extends CI_Controller
 	        				'status' => 'OK', 
 	        				'message' => "Selamat datang ".$account['first_name'],
 	        				'user_ID' => $account['id'],
-	        				'jumlah_notifikasi' => $this->countNotifikasi($account['id'])
+	        				'jumlah_notifikasi' => $this->countNotifikasi($account['id']),
+	        				'foto_pegawai' => base_url("public/images/pegawai/{$account['foto']}")
 	        			), $account);
 	        	} else {
 	        		$response =  array(
@@ -68,7 +69,9 @@ class Users extends CI_Controller
 	 **/
 	private function _get_account($param = 0)
 	{
-		$this->db->select('users.*, kepegawaian.*, users_groups.group_id');
+		$this->db->select('
+			users.id, users.first_name, users.password, users.email, kepegawaian.nama, kepegawaian.nip, kepegawaian.no_tlp, kepegawaian.tempat_lahir, kepegawaian.agama, kepegawaian.tgl_lahir, kepegawaian.jns_kelamin, kepegawaian.pendidikan_terakhir, kepegawaian.alamat, kepegawaian.foto, jabatan, firebase_token, users_groups.group_id
+		');
 		$this->db->join('users_groups', 'users.id = users_groups.user_id', 'left');
 		$this->db->join('kepegawaian', 'users.nip = kepegawaian.nip', 'left');
 		$this->db->group_by('users.id');

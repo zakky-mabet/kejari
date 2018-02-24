@@ -62,11 +62,47 @@ class Telaah extends CI_Controller
 				), array(
 					'ID' => $this->input->post('ID')
 				));
+				$this->db->insert('perintah_op', array(
+					'id_telaah' => $this->input->post('ID'),
+					'nomor_prinops' => null,
+					'tanggal_dibuat' => null,
+					'deskripsi_untuk' => null
+				));
 				$response = array(
 					'status' => 'OK',
 					'message' => "Petunjuk telaah berhasil dibuat."
 				);
+
+				foreach ($this->getUserInGroup(array(4)) as $key => $user) 
+				{
+					$this->firebase_push->setTo($user->firebase_token);
+					$this->firebase_push->setTitle("Petunjuk dari KAJARI");
+					$this->firebase_push->setMessage("Anda memiliki petunjuk dari dari KAJARI");
+					$this->firebase_push->setImage('');
+					$this->firebase_push->setIsBackground(TRUE);
+					$this->firebase_push->setPayload(
+						array(
+						 	'ID' => $this->input->post('ID'),
+						 	'category' => 'telaah_intel'
+						)
+					);
+					$this->firebase_push->send();
+
+					$this->db->insert('notifikasi', array(
+						'pengirim' => 1,
+						'penerima' => $user->id,
+						'kategori' => 'telaah_intel',
+						'judul' => 'Instruksi dari KAJARI',
+						'deskripsi' => 'Anda memiliki instruksi baru dari KAJARI',
+						'tanggal' => date('Y-m-d H:i:s'),
+						'payload' => json_encode(array(
+							'ID' => $this->input->post('ID')
+						)),
+						'status' => 'unread'
+					));
+				}
 			} else {
+
 				$response = array(
 					'status' => 'ERROR',
 					'message' => "Ups! terjadi kesalahan saat menyimpan data."
@@ -81,6 +117,19 @@ class Telaah extends CI_Controller
 
 		return $this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
+
+	private function get_firebase_token($param = 0)
+    {
+       return $this->db->select('firebase_token')->get_where('users', array('id' => $param))->row('firebase_token');
+    }
+
+    private function getUserInGroup($param = array())
+    {
+    	$this->db->select('users.*');
+    	$this->db->join('users_groups', 'users.id = users_groups.user_id', 'left');
+    	$this->db->where_in('users_groups.group_id', $param);
+    	return $this->db->get('users')->result();
+    }
 }
 
 /* End of file Telaah.php */

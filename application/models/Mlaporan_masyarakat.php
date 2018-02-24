@@ -101,6 +101,7 @@ class Mlaporan_masyarakat extends MY_model {
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'lapmas',
 			'penerima' => 1,
+			'judul' => '1 Laporan Perkara Baru',
 			'deskripsi' => $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan perkara kepada anda",
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
@@ -287,6 +288,7 @@ class Mlaporan_masyarakat extends MY_model {
 		 $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'lapmas',
+			'judul' => '1 Instruksi Baru Masuk',
 			'penerima' => $id_user,
 			'deskripsi' => $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Instruksi kepada anda",
 			'tanggal' => date('Y-m-d H:i:s'),

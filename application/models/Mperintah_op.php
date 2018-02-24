@@ -155,11 +155,31 @@ class Mperintah_op extends MY_model {
 
 		$this->db->insert('perintah_op_kepada', $perintah_op);
 
+		$this->firebase_push->setTo($this->get_firebase_token($id_user)); // set kebanyak
+        $this->firebase_push->setTitle("Surat Perintah Operasi Intelijen Baru Masuk");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Surat Perintah Operasi Intelijen kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $param,
+        		'category' => 'perintah_op'
+        	)
+        );
+        $this->firebase_push->send();
+
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'penerima' => $id_user,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Surat Perintah Operasi Intelijen kepada anda",
+			'judul' => 'Surat Perintah Operasi Intelijen Baru Masuk',
+			'kategori' => 'perintah_op',
+			'deskripsi' => "mengirim Surat Perintah Operasi Intelijen kepada anda",
 			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $param,
+        		'category' => 'perintah_op',
+        			)),
 		);
 
 		$this->db->insert('notifikasi', $notif); 

@@ -109,6 +109,7 @@
 					<?php foreach ($this->mperintah_op->get_group(4) as $key => $value): ?>
 						<p><input type="checkbox" name="id_user[]" value="<?php echo $value->id ?>" class="minimal" >  <?php echo $value->nip.' - '.$value->first_name.' '.$value->last_name ?> </p>
 					<?php endforeach ?>
+					<input type="hidden" name="id_user[]" checked="checked" value="1" class="minimal" >
 					<p class="help-block"><?php echo form_error('id_user[]', '<small class="text-red">', '</small>'); ?></p>
 				</div>
 

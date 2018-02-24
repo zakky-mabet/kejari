@@ -8,10 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  **/
 class Firebase_push
 {
-	protected $ci;
+    protected $ci;
 
-	private $api_key = "AAAAUCJXdIc:APA91bEldjhnbsMu36-Gf8oYzYjcJ3p_dP1RD3i5fWhAF33xRQnCV_0l43OA6HQfaHARty7eQVSY_QrX8rm1_oXtB5yf_Yp0tWM02rbU2bDsdqCxCBe4-cYuoP-gQFE2dURhEWVkAq8J";
-	private $url = 'https://fcm.googleapis.com/fcm/send';
+    private $api_key = "AAAAUCJXdIc:APA91bEldjhnbsMu36-Gf8oYzYjcJ3p_dP1RD3i5fWhAF33xRQnCV_0l43OA6HQfaHARty7eQVSY_QrX8rm1_oXtB5yf_Yp0tWM02rbU2bDsdqCxCBe4-cYuoP-gQFE2dURhEWVkAq8J";
+    private $url = 'https://fcm.googleapis.com/fcm/send';
 
     // push message title
     private $to;
@@ -26,10 +26,10 @@ class Firebase_push
     // in background when push is recevied
     private $is_background;
  
- 	public function __construct()
-	{
+    public function __construct()
+    {
         $this->ci =& get_instance();
-	}
+    }
 
     public function setTo($to) {
         $this->to = $to;
@@ -82,6 +82,8 @@ class Firebase_push
             'data' => $this->getPush(),
         );
         return $this->sendPushNotification($fields);
+        
+
     }
  
     // sending push message to multiple users by firebase registration ids
@@ -101,10 +103,10 @@ class Firebase_push
         curl_setopt($curl, CURLOPT_URL, $this->url);
         curl_setopt($curl, CURLOPT_POST, TRUE);
         curl_setopt($curl, CURLOPT_HTTPHEADER, 
-        	array(
-            	'Authorization: key='.$this->api_key,
-            	'Content-Type: application/json'
-        	)
+            array(
+                'Authorization: key='.$this->api_key,
+                'Content-Type: application/json'
+            )
         );
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
         // Disabling SSL Certificate support temporarly
