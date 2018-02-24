@@ -19,7 +19,8 @@ class Mkepangkatan extends CI_Model
 					 ->or_like('nama', $this->input->get('query'));
 
 		if($type == 'result')
-		{
+		{	
+
 			return $this->db->get('kepangkatan', $limit, $offset)->result();
 		} else {
 			return $this->db->get('kepangkatan')->num_rows();
@@ -28,8 +29,11 @@ class Mkepangkatan extends CI_Model
 
 	public function detail_kepangkatan($param = 0)
 	{
+		$this->db->order_by('date_create', 'desc');
 
 		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
+
+		
 	}
 	// cara cek bahwa data ada atau tidak
 	public function cek_data($param = 0)
@@ -99,9 +103,9 @@ class Mkepangkatan extends CI_Model
 		}
 	}
 
-	public function hitungHari($datenow = '', $yad = '')
+	public function hitungHari($datenow = '', $batas_akhir = '')
 	{	
-		return (strtotime($yad) - strtotime($datenow)) / (24*3600);
+		return (strtotime($batas_akhir) - strtotime($datenow)) / (24*3600);
 		
 	}
 

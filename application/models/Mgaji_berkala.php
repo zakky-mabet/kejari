@@ -163,6 +163,12 @@ class Mgaji_berkala extends CI_Model
 		
     }
 
+    public function hitungHari($datenow = '', $batas_akhir = '')
+	{	
+		return (strtotime($batas_akhir) - strtotime($datenow)) / (24*3600);
+		
+	}
+
     public function get($param = 0)
 	{
 		//amnil data dari data base di join dengan 2 tabel
