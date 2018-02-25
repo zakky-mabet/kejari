@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td>
 							<?php if($row->lampiran_sk != FALSE) : ?>						
 							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
-							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
+							 <img width="50%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
 							</button>
 							<?php else : ?>
 							<span class="badge bg-red">Lampiran SK Kosong</span>

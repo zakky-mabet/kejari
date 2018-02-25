@@ -20,6 +20,8 @@ class Mkepangkatan extends CI_Model
 
 		if($type == 'result')
 		{	
+			
+			$this->db->order_by('date_create', 'desc');
 
 			return $this->db->get('kepangkatan', $limit, $offset)->result();
 		} else {
