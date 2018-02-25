@@ -73,7 +73,6 @@ class Mgaji_berkala extends CI_Model
 
 		$this->db->insert('gaji_berkala', $gaji_berkala);
 
-
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(

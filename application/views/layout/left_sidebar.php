@@ -117,9 +117,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <ul class="treeview-menu">
                 <li class="<?php echo active_link_method('index','kepegawaian').active_link_method('update','kepegawaian').active_link_method('detail_kepangkatan','kepangkatan').active_link_method('create','kepangkatan').active_link_method('create_pangkat','kepangkatan').active_link_method('update','kepangkatan')?>">
 
-                  <a href="<?php echo base_url('kepegawaian') ?>"><i class="fa fa-angle-double-right"></i> Data Kepegawaian</a>
-                  
+                  <a href="<?php echo base_url('kepegawaian') ?>"><i class="fa fa-angle-double-right"></i> Data Kepegawaian
                   <span data-toggle="tooltip" data-placement="top" title="Laporan Belum dibuat" class="label label-danger pull-right"></span>
+                  </a>
+                  
+                  
                 </li>
                 <li class="<?php echo active_link_method('create','kepegawaian') ?>">
                     <a href="<?php echo base_url('kepegawaian/create') ?>"><i class="fa fa-angle-double-right"></i> Tambah Pegawai</a>
