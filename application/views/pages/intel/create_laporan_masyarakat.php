@@ -15,15 +15,12 @@ echo form_hidden('user_id', $user->id );
 				<div class="form-group">
 			
 				<div class="form-group">
-                    <label for="nomor" class="control-label col-md-3 col-xs-12">Nomor / Tanggal : <strong class="text-red">*</strong></label>
-                    <div class="col-md-4">
+                    <label for="nomor" class="control-label col-md-3 col-xs-12">Nomor : <strong class="text-red">*</strong></label>
+                    <div class="col-md-8">
                     <input type="text"  class="form-control" autofocus name="nomor" value="<?php echo set_value('nomor') ?>" placeholder="Nomor">
                         <p class="help-block"><?php echo form_error('nomor', '<small class="text-red">', '</small>'); ?></p>            
                     </div>
-                    <div class="col-md-4">
-                    <input type="text"  class="form-control" name="tanggal_masuk" value="<?php echo set_value('tanggal_masuk') ?>" id="datepicker" placeholder="Tanggal Masuk">
-                        <p class="help-block"><?php echo form_error('tanggal_masuk', '<small class="text-red">', '</small>'); ?></p>            
-                    </div>
+                   
                 </div>
                 <div class="form-group">
                     <label for="asal" class="control-label col-md-3 col-xs-12">Asal : <strong class="text-red">*</strong></label>

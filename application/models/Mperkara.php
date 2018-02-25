@@ -118,8 +118,8 @@ class Mperkara extends MY_model {
 		$id_telaah = $this->db->insert_id();
 
 		$this->firebase_push->setTo($this->get_firebase_token(1)); // set to ke kajari
-        $this->firebase_push->setTitle("Dokumen Telaah Baru");
-        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Dokumen Telaah Baru kepada anda");
+        $this->firebase_push->setTitle("SEKSI INTELIJEN");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." Mengirim Dokumen Telaah baru kepada anda, Nomor Telaah :". $this->input->post('no_telaah') );
         $this->firebase_push->setImage('');
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
@@ -134,8 +134,8 @@ class Mperkara extends MY_model {
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'telaah_intel',
 			'penerima' => 1,
-			'judul' => '1 Laporan Perkara Baru',
-			'deskripsi' => 'mengirim Dokumen Telaah Baru kepada anda',
+			'judul' => 'SEKSI INTELIJEN',
+			'deskripsi' => 'Mengirim Dokumen Telaah baru kepada anda, Nomor Telaah : '.$this->input->post('no_telaah'),
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(
@@ -178,8 +178,8 @@ class Mperkara extends MY_model {
 		$this->db->update('telaah', $telaah, array('ID' => $param));
 
 		$this->firebase_push->setTo($this->get_firebase_token(1)); // set to ke kajari
-        $this->firebase_push->setTitle("Dokumen Telaah Baru");
-        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Dokumen Telaah Baru kepada anda");
+        $this->firebase_push->setTitle("SEKSI INTELIJEN");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." Mengirim Dokumen Telaah baru kepada anda, Nomor Telaah :". $this->input->post('no_telaah') );
         $this->firebase_push->setImage('');
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
@@ -194,8 +194,8 @@ class Mperkara extends MY_model {
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'telaah_intel',
 			'penerima' => 1,
-			'judul' => '1 Laporan Perkara Baru',
-			'deskripsi' => 'mengirim Dokumen Telaah Baru kepada anda',
+			'judul' => 'SEKSI INTELIJEN',
+			'deskripsi' => 'Mengirim Dokumen Telaah baru kepada anda, Nomor Telaah : '.$this->input->post('no_telaah'),
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(

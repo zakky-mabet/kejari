@@ -18,7 +18,7 @@ class Laporan_masyarakat extends Admin_panel {
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(1, 'Laporan Masyarakat', "laporan_masyarakat");
+		$this->breadcrumbs->unshift(1, 'Laporan Perkara', "laporan_masyarakat");
 
 		$this->load->model(array('mlaporan_masyarakat'));
 
@@ -33,12 +33,12 @@ class Laporan_masyarakat extends Admin_panel {
 	
 	public function index()
 	{
-		$this->page_title->push("Laporan Masyarakat", "Buat Laporan Masyarakat");
+		$this->page_title->push("Laporan Perkara", "Buat Laporan Perkara");
 
 		$this->breadcrumbs->unshift(2, 'Buat', "laporan_masyarakat/index");
 
-		$this->form_validation->set_rules('nomor', 'Nomor', 'trim|required|callback_validate_nomor');
-		$this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'trim|required');
+		
+		$this->form_validation->set_rules('nomor', 'Nomor ', 'trim|required');
 		$this->form_validation->set_rules('asal', 'Asal', 'trim|required');
 		$this->form_validation->set_rules('deskripsi', 'Prihal', 'trim|required');
 
@@ -50,7 +50,7 @@ class Laporan_masyarakat extends Admin_panel {
 			redirect(current_url());
 		}
 
-		$this->data['title'] = "Buat Laporan Masyarakat";
+		$this->data['title'] = "Buat Laporan Perkara";
 		$this->template->view('intel/create_laporan_masyarakat', $this->data);
 	}
 
@@ -79,12 +79,12 @@ class Laporan_masyarakat extends Admin_panel {
 		if ($this->mlaporan_masyarakat->cek_nomor_laporan($param) == 0) {
 			show_404();
 		}
-		$this->page_title->push("Laporan Masyarakat", "Sunting Laporan Masyarakat");
+		$this->page_title->push("Laporan Perkara", "Sunting Laporan Perkara");
 
 		$this->breadcrumbs->unshift(2, 'Sunting', "laporan_masyarakat/update");
 
-		$this->form_validation->set_rules('nomor', 'Nomor', 'trim|required|callback_validate_nomor');
-		$this->form_validation->set_rules('tanggal_masuk', 'Tanggal Masuk', 'trim|required');
+		
+		$this->form_validation->set_rules('nomor', 'Nomor ', 'trim|required');
 		$this->form_validation->set_rules('asal', 'Asal', 'trim|required');
 		$this->form_validation->set_rules('deskripsi', 'Prihal', 'trim|required');
 
@@ -96,13 +96,13 @@ class Laporan_masyarakat extends Admin_panel {
 		}
 
 		$this->data['get'] = $this->mlaporan_masyarakat->get($param);
-		$this->data['title'] = "Sunting Laporan Masyarakat";
+		$this->data['title'] = "Sunting Laporan Perkara";
 		$this->template->view('intel/update_laporan_masyarakat', $this->data);
 	}
 
 	public function data_laporan()
 	{
-		$this->page_title->push("Laporan Masyarakat", "Data Laporan Masyarakat");
+		$this->page_title->push("Laporan Perkara", "Data Laporan Perkara");
 
 		$config = $this->template->pagination_list();
 
@@ -113,7 +113,7 @@ class Laporan_masyarakat extends Admin_panel {
 
 		$this->pagination->initialize($config);
 
-		$this->data['title'] = "Data Laporan Masyarakat";
+		$this->data['title'] = "Data Laporan Perkara";
 		$this->data['per_page'] = $config['per_page'];
 		$this->data['num_data_laporan'] = $config['total_rows'];
 		$this->data['data_laporan'] = $this->mlaporan_masyarakat->get_all($this->per_page, $this->page, 'result');
@@ -140,7 +140,7 @@ class Laporan_masyarakat extends Admin_panel {
 			show_404();
 		} 
 
-		$this->page_title->push("Laporan Masyarakat", "Buat Instruksi dan Disposisi");
+		$this->page_title->push("Laporan Perkara", "Buat Instruksi dan Disposisi");
 
 		$this->breadcrumbs->unshift(3, 'Buat', "laporan_masyarakat/instruksi_disposisi");
 
@@ -168,7 +168,7 @@ class Laporan_masyarakat extends Admin_panel {
 		if ($this->mlaporan_masyarakat->get($param, 'cek_disposisi_ID') == 0) {
 			show_404();
 		}
-		$this->page_title->push("Laporan Masyarakat", "Sunting Instruksi dan Disposisi");
+		$this->page_title->push("Laporan Perkara", "Sunting Instruksi dan Disposisi");
 
 		$this->breadcrumbs->unshift(2, 'Sunting', "laporan_masyarakat/update");
 
@@ -198,7 +198,7 @@ class Laporan_masyarakat extends Admin_panel {
 
 		$this->pagination->initialize($config);
 
-		$this->data['title'] = "Data Laporan Masyarakat";
+		$this->data['title'] = "Data Laporan Perkara";
 		$this->data['num_data_laporan'] = $config['total_rows'];
 		$this->data['data_laporan'] = $this->mlaporan_masyarakat->get_all($this->per_page, $this->page, 'result');
 

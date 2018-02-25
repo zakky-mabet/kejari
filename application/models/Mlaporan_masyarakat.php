@@ -73,7 +73,7 @@ class Mlaporan_masyarakat extends MY_model {
 	{
 		$data = array(
 			'nomor' => $this->input->post('nomor'),
-			'tanggal_masuk' => $this->input->post('tanggal_masuk'),
+			'tanggal_masuk' => date('Y-m-d'),
 			'asal' => $this->input->post('asal'),
 			'deskripsi' => $this->input->post('deskripsi'),
 			'user_id' => $this->input->post('user_id'),
@@ -85,8 +85,8 @@ class Mlaporan_masyarakat extends MY_model {
 		$id_laporan_masyarakat = $this->db->insert_id();
 
         $this->firebase_push->setTo($this->get_firebase_token(1));
-        $this->firebase_push->setTitle("1 Laporan Perkara Baru");
-        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan perkara kepada anda");
+        $this->firebase_push->setTitle("SEKSI INTELIJEN");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan perkara kepada anda, Nomor : ".$this->input->post('nomor') );
         $this->firebase_push->setImage('');
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
@@ -101,8 +101,8 @@ class Mlaporan_masyarakat extends MY_model {
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'lapmas',
 			'penerima' => 1,
-			'judul' => '1 Laporan Perkara Baru',
-			'deskripsi' => $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan perkara kepada anda",
+			'judul' => 'SEKSI INTELIJEN',
+			'deskripsi' => "mengirim Laporan perkara kepada anda, Nomor : ".$this->input->post('nomor') ,
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(
@@ -116,7 +116,7 @@ class Mlaporan_masyarakat extends MY_model {
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
-				' Data Laporan Masyarakat berhasil disimpan dan dikirim ke KAJARI', 
+				' Data Laporan Perkara berhasil disimpan dan dikirim ke KAJARI', 
 				array('type' => 'success','icon' => 'check')
 			);
 		} else {
@@ -136,7 +136,7 @@ class Mlaporan_masyarakat extends MY_model {
 	{
 		$data = array(
 			'nomor' => $this->input->post('nomor'),
-			'tanggal_masuk' => $this->input->post('tanggal_masuk'),
+			'tanggal_masuk' => date('Y-m-d'),
 			'asal' => $this->input->post('asal'),
 			'deskripsi' => $this->input->post('deskripsi'),
 			'user_id' => $this->input->post('user_id'),
@@ -148,7 +148,7 @@ class Mlaporan_masyarakat extends MY_model {
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
-				' Data Laporan Masyarakat berhasil diubah.', 
+				' Data Laporan Perkara berhasil diubah.', 
 				array('type' => 'success','icon' => 'check')
 			);
 		} else {
@@ -178,7 +178,7 @@ class Mlaporan_masyarakat extends MY_model {
 		$this->db->delete('terusan_disposisi', array('id_disposisi' => $this->input->get('disposisi')));
 
 		$this->template->alert(
-			' Data Laporan Masyarakat berhasil dihapus.', 
+			' Data Laporan Perkara berhasil dihapus.', 
 			array('type' => 'success','icon' => 'check')
 		);
 	}

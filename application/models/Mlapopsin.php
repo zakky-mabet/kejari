@@ -131,7 +131,43 @@ class Mlapopsin extends MY_model {
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
-				' Data Hasil Operasi Intelijen berhasil disimpan dan dikirim kepada Bagian Intelijen.', 
+				' Data Hasil Operasi Intelijen berhasil disimpan dan dikirim', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				'Maaf, Terjadi Kesalahan menyimpan data', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+	}
+
+	public function update_lapopsin($param = 0)
+	{
+		$data = array(
+			'nomor_laphosin' => $this->input->post('nomor_laphosin'),
+			'dasar' => $this->input->post('dasar'),
+			'tugas' => $this->input->post('tugas'),
+			'bahan_keterangan' => $this->input->post('bahan_keterangan'),
+			'data_diperoleh' => $this->input->post('data_diperoleh'),
+			'telaahan' => $this->input->post('telaahan'),
+			'kesimpulan' => $this->input->post('kesimpulan'),
+			'saran_tindak' => $this->input->post('saran_tindak'),
+			'tanggal_laporan_dibuat' => date('Y-m-d H:i:s'),
+			'id_user_input' => $this->ion_auth->user()->row()->id
+		); 
+
+		$this->db->update('lapopsin', $data, array('ID' => $param) );
+
+		foreach ($this->input->post('id_user') as $value) {
+			$this->insert_kepada($param, $value);
+		}
+
+		
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data Hasil Operasi Intelijen berhasil diubah.', 
 				array('type' => 'success','icon' => 'check')
 			);
 		} else {
@@ -146,8 +182,8 @@ class Mlapopsin extends MY_model {
 	{
 	
 		$this->firebase_push->setTo($this->get_firebase_token($id_user));
-        $this->firebase_push->setTitle("1 Laporan Hasil Operasi Intelijen Masuk");
-        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Hasil Operasi Intelijen kepada anda");
+        $this->firebase_push->setTitle("SEKSI INTELIJEN");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Hasil Operasi Intelijen kepada anda dengan nomor : ".$this->input->post('nomor_laphosin'));
         $this->firebase_push->setImage('');
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
@@ -161,9 +197,9 @@ class Mlapopsin extends MY_model {
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
 			'kategori' => 'lapopsin',
-			'judul' => '1 Laporan Hasil Operasi Intelijen Masuk',
+			'judul' => 'SEKSI INTELIJEN',
 			'penerima' => $id_user,
-			'deskripsi' => " mengirim Laporan Hasil Operasi Intelijen kepada anda",
+			'deskripsi' => " mengirim Laporan Hasil Operasi Intelijen kepada anda dengan nomor : ".$this->input->post('nomor_laphosin') ,
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(

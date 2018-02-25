@@ -148,41 +148,90 @@ class Mperintah_op extends MY_model {
 
 	public function insert_kepada($param = 0, $id_user = 0)
 	{
-		$perintah_op = array(
-			'id_perintah_op' => $param,
-			'id_user' => $id_user,
-		); 
 
-		$this->db->insert('perintah_op_kepada', $perintah_op);
+		if ($id_user != 1) {
 
-		$this->firebase_push->setTo($this->get_firebase_token($id_user)); // set kebanyak
-        $this->firebase_push->setTitle("Surat Perintah Operasi Intelijen Baru Masuk");
-        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Surat Perintah Operasi Intelijen kepada anda");
-        $this->firebase_push->setImage('');
-        $this->firebase_push->setIsBackground(FALSE);
-        $this->firebase_push->setPayload(
-        	array(
-        		'ID' => $param,
-        		'category' => 'perintah_op'
-        	)
-        );
-        $this->firebase_push->send();
+			if ($this->cek_perintah_kepada($param, $id_user) == 0) {
 
-        $notif = array(
-			'pengirim' => $this->ion_auth->user()->row()->id,
-			'penerima' => $id_user,
-			'judul' => 'Surat Perintah Operasi Intelijen Baru Masuk',
-			'kategori' => 'perintah_op',
-			'deskripsi' => "mengirim Surat Perintah Operasi Intelijen kepada anda",
-			'tanggal' => date('Y-m-d H:i:s'),
-			'payload' => json_encode(
-				array(
-        		'ID' => $param,
-        		'category' => 'perintah_op',
-        			)),
-		);
+			$perintah_op = array(
+				'id_perintah_op' => $param,
+				'id_user' => $id_user,
+			); 
 
-		$this->db->insert('notifikasi', $notif); 
+			$this->db->insert('perintah_op_kepada', $perintah_op);
+			}
+		}
+		
+		//////////// Batas cek
+
+		if ($id_user == 1) {
+
+			$this->firebase_push->setTo($this->get_firebase_token($id_user)); // set kebanyak
+	        $this->firebase_push->setTitle("SEKSI INTELIJEN");
+	        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." Surat Perintah Operasi Intelijen telah dibuat dengan nomor : ".$this->input->post('nomor_prinops')."  oleh Seksi Intelijen ");
+	        $this->firebase_push->setImage('');
+	        $this->firebase_push->setIsBackground(FALSE);
+	        $this->firebase_push->setPayload(
+	        	array(
+	        		'ID' => $param,
+	        		'category' => 'perintah_op'
+	        	)
+	        );
+	        $this->firebase_push->send();
+
+	        $notif = array(
+				'pengirim' => $this->ion_auth->user()->row()->id,
+				'penerima' => $id_user,
+				'judul' => 'SEKSI INTELIJEN',
+				'kategori' => 'perintah_op',
+				'deskripsi' => "Surat Perintah Operasi Intelijen telah dibuat dengan nomor : ".$this->input->post('nomor_prinops')." oleh Seksi Intelijen ",
+				'tanggal' => date('Y-m-d H:i:s'),
+				'payload' => json_encode(
+					array(
+	        		'ID' => $param,
+	        		'category' => 'perintah_op',
+	        			)),
+			);
+
+			$this->db->insert('notifikasi', $notif); 
+
+		} elseif(!$id_user != 1) {
+
+			$this->firebase_push->setTo($this->get_firebase_token($id_user)); // set kebanyak
+	        $this->firebase_push->setTitle("Surat Perintah Operasi Intelijen Baru Masuk");
+	        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Surat Perintah Operasi Intelijen kepada anda dengan nomor :".$this->input->post('nomor_prinops'));
+	        $this->firebase_push->setImage('');
+	        $this->firebase_push->setIsBackground(FALSE);
+	        $this->firebase_push->setPayload(
+	        	array(
+	        		'ID' => $param,
+	        		'category' => 'perintah_op'
+	        	)
+	        );
+	        $this->firebase_push->send();
+
+	        $notif = array(
+				'pengirim' => $this->ion_auth->user()->row()->id,
+				'penerima' => $id_user,
+				'judul' => 'Surat Perintah Operasi Intelijen Baru Masuk',
+				'kategori' => 'perintah_op',
+				'deskripsi' => "mengirim Surat Perintah Operasi Intelijen kepada anda dengan nomor : ".$this->input->post('nomor_prinops') ,
+				'tanggal' => date('Y-m-d H:i:s'),
+				'payload' => json_encode(
+					array(
+	        		'ID' => $param,
+	        		'category' => 'perintah_op',
+	        			)),
+			);
+
+			$this->db->insert('notifikasi', $notif); 
+		}
+		
+	}
+
+	public function cek_perintah_kepada($param = 0, $user = 0)
+	{
+		return $this->db->get_where('perintah_op_kepada', array('id_perintah_op' => $param, 'id_user' => $user) )->num_rows();
 	}
 	
 }

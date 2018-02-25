@@ -72,7 +72,7 @@
   </div>
 </div>
 <footer>
-    <p class="text-center text-footer"><small>&copy; Hak Cipta <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI <br> Kab. Bangka Barat, Kep. Bangka Belitung <br> Dikembangkan oleh <a href="http://www.teitramega.co.id" class="text-orange" target="_blank" title="Go to Web CV. Teitra Mega ">CV. Teitra Mega</a>, Pangkalpinang.</small></p>
+    <p class="text-center text-footer"><small>&copy; Hak Cipta <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI <br> Kab. Bangka Barat, Kep. Bangka Belitung <br> Dibuat oleh <a href="http://www.teitramega.co.id" class="text-orange" target="_blank" title="Go to Web CV. Teitra Mega ">CV. Teitra Mega</a>, Pangkalpinang.</small></p>
 </footer>
 <script src="<?php echo base_url('public/components/jquery/dist/jquery.min.js') ?>"></script>
 <script src="<?php echo base_url('public/components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>

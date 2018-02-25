@@ -100,14 +100,11 @@ class Mdokumen_telaah extends MY_model {
 
 		$this->db->insert('perintah_op', $perintah_op);
 
-        $notif = array(
-			'pengirim' => $this->ion_auth->user()->row()->id,
-			'penerima' => 1,
-			'deskripsi' => $this->ion_auth->user()->row()->first_name." mengirim Petunjuk Telaahan Intelijen kepada anda",
-			'tanggal' => date('Y-m-d H:i:s'),
-		); 
+		foreach ($this->mdokumen_telaah->get_group(4) as $key => $value) {
 
-		$this->db->insert('notifikasi', $notif);
+				// LOOP NOTIFIKASI
+		      	$this->insert_kepada($value->id, $param);
+		}
 
 		if($this->db->affected_rows())
 		{
@@ -132,6 +129,12 @@ class Mdokumen_telaah extends MY_model {
 
 		$this->db->update('telaah', $data, array('ID' => $param));
 
+		foreach ($this->mdokumen_telaah->get_group(4) as $key => $value) {
+
+				// LOOP NOTIFIKASI
+		      	$this->insert_kepada($value->id, $param);
+		}
+
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(
@@ -144,6 +147,38 @@ class Mdokumen_telaah extends MY_model {
 				array('type' => 'warning','icon' => 'times')
 			);
 		}
+	}
+
+	public function insert_kepada($id_user = 0, $id_laporan_masyarakat = 0)
+	{
+		$this->firebase_push->setTo($this->get_firebase_token($id_user));
+        $this->firebase_push->setTitle("Petunjuk dari KAJARI");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim petunjuk kepada anda");
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $id_laporan_masyarakat,
+        		'category' => 'telaah_intel'
+        	)
+        );
+        $this->firebase_push->send();
+
+		 $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'kategori' => 'telaah_intel',
+			'judul' => 'Petunjuk dari KAJARI',
+			'penerima' => $id_user,
+			'deskripsi' =>" mengirim petunjuk kepada anda",
+			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $id_laporan_masyarakat,
+        		'category' => 'telaah_intel',
+        			)),
+		); 
+
+		$this->db->insert('notifikasi', $notif);
 	}
 
 	

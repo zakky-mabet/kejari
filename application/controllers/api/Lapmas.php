@@ -101,7 +101,6 @@ class Lapmas extends CI_Controller
 	public function create_instruksi()
 	{
 		$disposisiData = array(2, 3, 4, 5, 6);
-
 		if($this->input->post('instruksi'))
 		{
 			if($this->db->get_where('disposisi', array('id_laporan_masyarakat' => $this->input->post('ID')))->num_rows() == FALSE)
