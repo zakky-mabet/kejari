@@ -51,7 +51,10 @@ class Pegawai extends CI_Controller
 		}
 
 		foreach ($this->getAllKepegawaian($this->input->post('limit'), $this->input->post('start')) as $key => $value) 
-			$response['results'][] = $value;
+			$response['results'][] = array_merge(
+				array(
+				'foto_pegawai' => base_url("public/images/pegawai/{$value['foto']}")
+			), $value);
 
 
 		return $this->output->set_content_type('application/json')->set_output(json_encode($response));
@@ -68,12 +71,14 @@ class Pegawai extends CI_Controller
 				'results' => array()
 			);
 		} else {
+			$pegawai = $this->getPegawai($this->input->post('ID'));
 			$response = array_merge(
 	        	array(
 					'status' => 'OK',
 					'message' => "Data kepegawain berhasil ditampilkan",
+					'foto_pegawai' => base_url("public/images/pegawai/{$pegawai['foto']}")
 	        	), 
-	        	$this->getPegawai($this->input->post('ID')) 
+	        	$pegawai
 	    	);
 		}
 
@@ -200,7 +205,7 @@ class Pegawai extends CI_Controller
 	private function getPegawai($param = 0)
 	{
 		$this->db->select("
-			kepegawaian.*, 
+			ID, kepegawaian.nip, kepegawaian.nrp, kepegawaian.nama, kepegawaian.tempat_lahir, kepegawaian.agama, kepegawaian.tgl_lahir, kepegawaian.jns_kelamin, kepegawaian.pendidikan_terakhir, kepegawaian.alamat, kepegawaian.no_tlp, kepegawaian.status_dinas, kepegawaian.jabatan, kepegawaian.foto,
 			(SELECT 
 				nama_pangkat FROM kepangkatan 
 				LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
@@ -217,7 +222,7 @@ class Pegawai extends CI_Controller
 	private function getAllKepegawaian($limit = 20, $offset = 0, $type = 'result')
 	{
 		$this->db->select("
-			kepegawaian.*, 
+			ID, kepegawaian.nip, kepegawaian.nrp, kepegawaian.nama, kepegawaian.tempat_lahir, kepegawaian.agama, kepegawaian.tgl_lahir, kepegawaian.jns_kelamin, kepegawaian.pendidikan_terakhir, kepegawaian.alamat, kepegawaian.no_tlp, kepegawaian.status_dinas, kepegawaian.jabatan, kepegawaian.foto,
 			(SELECT 
 				nama_pangkat FROM kepangkatan 
 				LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
@@ -237,7 +242,7 @@ class Pegawai extends CI_Controller
 
 		if($type == 'result')
 		{
-			return $this->db->get('kepegawaian', $limit, $offset)->result();
+			return $this->db->get('kepegawaian', $limit, $offset)->result_array();
 		} else {
 			return $this->db->get('kepegawaian')->num_rows();
 		}

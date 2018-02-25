@@ -14,18 +14,22 @@ class Lapmas extends CI_Controller
 
 	public function push()
 	{
-		$this->firebase_push->setTo($this->get_firebase_token(1));
-        $this->firebase_push->setTitle("1 Laporan Perkara Baru");
-        $this->firebase_push->setMessage("Muhammad Zakky mengirim Laporan perkara kepada anda");
-        $this->firebase_push->setImage('');
-        $this->firebase_push->setIsBackground(FALSE);
-        $this->firebase_push->setPayload(
-        	array(
-        		'ID' => 1,
-        		'category' => 'lapmas'
-        	)
-        );
-        $this->firebase_push->send();
+						foreach ($this->getUserInGroup(array(4)) as $key => $user) 
+						{
+							$this->firebase_push->setTo($user->firebase_token);
+					        $this->firebase_push->setTitle("Instruksi dari KAJARI");
+					        $this->firebase_push->setMessage("Anda memiliki 1 instruksi laporan dari KAJARI");
+					        $this->firebase_push->setImage('');
+					        $this->firebase_push->setIsBackground(FALSE);
+					        $this->firebase_push->setPayload(
+					        	array(
+					        		'ID' => 1,
+					        		'category' => 'lapmas',
+					        		'query' => $this->db->last_query()
+					        	)
+					        );
+					        $this->firebase_push->send();
+						}
 
         return $this->output->set_content_type('application/json')->set_output(json_encode($this->firebase_push->getPush()));
 	}
@@ -97,7 +101,6 @@ class Lapmas extends CI_Controller
 	public function create_instruksi()
 	{
 		$disposisiData = array(2, 3, 4, 5, 6);
-
 		if($this->input->post('instruksi'))
 		{
 			if($this->db->get_where('disposisi', array('id_laporan_masyarakat' => $this->input->post('ID')))->num_rows() == FALSE)
@@ -107,13 +110,13 @@ class Lapmas extends CI_Controller
 					'instruksi' => $this->input->post('instruksi')
 				));
 
+				$disposisiID = $this->db->insert_id();
+
 				$this->db->update('laporan_masyarakat', array(
-					'status_instruksi' => 'ya'
+					'status_instruksi' => 'telah'
 				), array(
 					'ID' => $this->input->post('ID')
 				));
-
-				$disposisiID = $this->db->insert_id();
 
 				foreach ($this->toStringArray($this->input->post('disposisi')) as $key => $value) 
 				{
@@ -127,10 +130,31 @@ class Lapmas extends CI_Controller
 
 					foreach ($this->getUserInGroup(array($disposisiData[$value['key']])) as $key => $value) 
 					{
-						$this->firebase_push->setTitle("Instruksi dari KAJARI")
-                                ->setMessage("Anda memiliki 1 instruksi laporan dari KAJARI")
-                                ->setTo($value->firebase_token)
-                                ->send();
+						$this->firebase_push->setTo($value->firebase_token);
+				        $this->firebase_push->setTitle("Instruksi dari KAJARI");
+				        $this->firebase_push->setMessage("Anda memiliki instruksi baru dari KAJARI");
+				        $this->firebase_push->setImage('');
+				        $this->firebase_push->setIsBackground(TRUE);
+				        $this->firebase_push->setPayload(
+				        	array(
+				        		'ID' => $this->input->post('ID'),
+				        		'category' => 'lapmas'
+				        	)
+				        );
+				        $this->firebase_push->send();
+
+				        $this->db->insert('notifikasi', array(
+				        	'pengirim' => 1,
+				        	'penerima' => $value->id,
+				        	'kategori' => 'lapmas',
+				        	'judul' => 'Instruksi dari KAJARI',
+				        	'deskripsi' => 'Anda memiliki instruksi baru dari KAJARI',
+				        	'tanggal' => date('Y-m-d H:i:s'),
+				        	'payload' => json_encode(array(
+				        		'ID' => $this->input->post('ID')
+				        	)),
+				        	'status' => 'unread'
+				        ));
 					}
 				}
 
@@ -154,14 +178,14 @@ class Lapmas extends CI_Controller
 					$object = array();
 
 					$groupID = array();
-					foreach ($this->toStringArray($this->input->post('disposisi')) as $key => $value) 
+					foreach (@$this->toStringArray(@$this->input->post('disposisi')) as $key => $value) 
 						$groupID[] = $disposisiData[$value['key']];
 
 					$this->db->where('id_disposisi', $disposisi->ID)
 							 ->where_not_in('group_id', $groupID)
 							 ->delete('terusan_disposisi');
 							 
-					foreach ($this->toStringArray($this->input->post('disposisi')) as $key => $value) 
+					foreach (@$this->toStringArray(@$this->input->post('disposisi')) as $key => $value) 
 					{
 						if($value['checked'] == FALSE) 
 						{
@@ -173,10 +197,31 @@ class Lapmas extends CI_Controller
 
 						foreach ($this->getUserInGroup(array($disposisiData[$value['key']])) as $key => $user) 
 						{
-							$this->firebase_push->setTitle("Instruksi dari KAJARI")
-	                                ->setMessage("Anda memiliki 1 instruksi laporan dari KAJARI")
-	                                ->setTo($user->firebase_token)
-	                                ->send();
+							$this->firebase_push->setTo($user->firebase_token);
+					        $this->firebase_push->setTitle("Instruksi dari KAJARI");
+					        $this->firebase_push->setMessage("Anda memiliki 1 instruksi laporan dari KAJARI");
+					        $this->firebase_push->setImage('');
+					        $this->firebase_push->setIsBackground(FALSE);
+					        $this->firebase_push->setPayload(
+					        	array(
+					        		'ID' => $this->input->post('ID'),
+					        		'category' => 'lapmas'
+					        	)
+					        );
+					        $this->firebase_push->send();
+
+					        $this->db->insert('notifikasi', array(
+					        	'pengirim' => 1,
+					        	'penerima' => $user->id,
+					        	'kategori' => 'lapmas',
+					        	'judul' => 'Instruksi dari KAJARI',
+					        	'deskripsi' => 'Anda memiliki instruksi baru dari KAJARI',
+					        	'tanggal' => date('Y-m-d H:i:s'),
+					        	'payload' => json_encode(array(
+					        		'ID' => $this->input->post('ID')
+					        	)),
+					        	'status' => 'unread'
+					        ));
 						}
 
 						if($this->db->get_where('terusan_disposisi', 
@@ -264,7 +309,7 @@ class Lapmas extends CI_Controller
 
     private function getUserInGroup($param = array())
     {
-    	$this->db->select('users.firebase_token, users.nip');
+    	$this->db->select('users.*');
     	$this->db->join('users_groups', 'users.id = users_groups.user_id', 'left');
     	$this->db->where_in('users_groups.group_id', $param);
     	return $this->db->get('users')->result();

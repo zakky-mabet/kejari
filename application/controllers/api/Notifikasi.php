@@ -25,7 +25,7 @@ class Notifikasi extends CI_Controller
 			$response = array(
 				'status' => 'OK',
 				'message' => "Data Notifikasi berhasil ditampilkan",
-				'jumlah_notifikasi' => $this->countNotifikasi($this->input->post('nip'))
+				'jumlah_notifikasi' => $this->countNotifikasi($this->input->post('ID')),
 			);
 		}
 
@@ -67,8 +67,10 @@ class Notifikasi extends CI_Controller
 		if($this->input->post('filter') == 'Terbaru')
 		{
 			$this->db->order_by('notifikasi.tanggal', 'desc');
-		} else {
+		} elseif($this->input->post('filter') == 'Terlama') {
 			$this->db->order_by('notifikasi.tanggal', 'asc');
+		} else {
+			$this->db->order_by('notifikasi.tanggal', 'desc');
 		}
 
 		if($this->input->post('status') == 'Terbaca')
@@ -78,11 +80,7 @@ class Notifikasi extends CI_Controller
 			$this->db->where('notifikasi.status', 'unread');
 		}
 
-		//$this->db->where('notifikasi.pengirim', 543);
-
-		$this->db->where_in('
-			notifikasi.pengirim = (SELECT users.nip FROM users WHERE notifikasi.penerima = users.id AND users.nip = '.$this->input->post('nip').')
-		');
+		$this->db->where('notifikasi.penerima', $this->input->post('ID'));
 
 		return $this->db->get('notifikasi', $limit, $offset)->result();
 	}
@@ -120,7 +118,10 @@ class Notifikasi extends CI_Controller
 		$this->db->where_in('
 			notifikasi.pengirim = (SELECT users.nip FROM users WHERE notifikasi.pengirim = users.id AND users.nip = '.$param.')
 		');
-		return $this->db->get_where('notifikasi', array('notifikasi.status' => 'unread'))->num_rows();
+		return $this->db->get_where('notifikasi', array(
+			'notifikasi.status' => 'unread',
+			'notifikasi.penerima' => $param
+		))->num_rows();
 	}
 }
 
