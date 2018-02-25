@@ -113,11 +113,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							<td class="text-left">
 							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
-								<?php if ($this->ion_auth->in_group(array(1))) : ?>
+								
 								<a href="<?php echo base_url('kepangkatan/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
-							<?php endif; ?>
+							
 								<?php else: ?>
 								<a></i>
 								</a>
