@@ -141,7 +141,7 @@ class Pegawai extends CI_Controller
 		{
 			$response['results'][] = array(
 				'ID' => $value->ID,
-				'tgl_mulai' => date_id($value->tgl_selesai),
+				'tgl_mulai' => date_id($value->tgl_mulai),
 				'tgl_selesai' => date_id($value->tgl_selesai),
 				'nama' => $value->nama,
 				'lampiran' => base_url("public/diklat-file/images/{$value->lampiran}"),

@@ -58,16 +58,19 @@ class Telaah extends CI_Controller
 				$this->db->update('telaah', array(
 					'petunjuk' => $this->input->post('petunjuk'),
 					'tanggal_petunjuk' => date('Y-m-d H:i:s'),
-					'status_petunjuk' => 'telah'
+					'status_petunjuk' => 'telah',
 				), array(
 					'ID' => $this->input->post('ID')
 				));
-				$this->db->insert('perintah_op', array(
-					'id_telaah' => $this->input->post('ID'),
-					'nomor_prinops' => null,
-					'tanggal_dibuat' => null,
-					'deskripsi_untuk' => null
-				));
+				if($this->db->get_where('perintah_op', array('id_telaah' => $this->input->post('ID')))->num_rows() == FALSE) 
+				{
+					$this->db->insert('perintah_op', array(
+						'id_telaah' => $this->input->post('ID'),
+						'nomor_prinops' => null,
+						'tanggal_dibuat' => null,
+						'deskripsi_untuk' => null
+					));
+				}
 				$response = array(
 					'status' => 'OK',
 					'message' => "Petunjuk telaah berhasil dibuat."
