@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td>
 							<?php if($row->lampiran_sk != FALSE) : ?>						
 							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
-							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
+							 <img width="50%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
 							</button>
 							<?php else : ?>
 							<span class="badge bg-red">Lampiran SK Kosong</span>
@@ -75,7 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<?php endif ?>
 							<td style="vertical-align: middle;">
 							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
-							<?php if ($this->ion_auth->in_group(array(1,3))) : ?>
+							<?php if ($this->ion_auth->in_group(array(1))) : ?>
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
