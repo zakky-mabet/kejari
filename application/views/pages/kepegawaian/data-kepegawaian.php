@@ -1,11 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 ?>
+
 <div class="row">
-<div class="col-md-8 col-md-offset-2 col-xs-12">
-  <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
-  <strong><?php echo $this->session->flashdata('alert'); ?></strong>
-</div>
+<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
 		<div class="box box-primary">
 			<?php echo form_open(current_url(), array('method' => 'GET')); ?>
@@ -20,30 +19,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3 pull-right">
 						<a href="<?php echo base_url('kepegawaian/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url('kepegawaian') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo site_url("kepegawaian/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
 			<?php echo form_close(); ?>
 			<div class="box-body no-padding">
-				<table class="table table-bordered table-stripped">
+				<table class="table table-bordered table-stripped" >
 					<thead class="bg-green">
-						<tr>
-							<th rowspan="2">No.</th>
-							<th rowspan="2" class="text-center">NIP</th>
-							<th rowspan="2" class="text-center">NRP</th>
-							<th rowspan="2" class="text-center">Jabatan</th>
-							<th rowspan="2" class="text-center">Nama Lengkap</th>
-							<th rowspan="2" class="text-center">Tempat, Tanggal</th>
-							<th rowspan="2" class="text-center">Agama</th>
-							<th rowspan="2" class="text-center">Jenis Kelamin</th>
-							<th rowspan="2" class="text-center">Pendidikan Terakhir</th>
-							<th colspan="2" class="text-center">TMT</th>
+						<tr >
+							<th rowspan="2" style="vertical-align: middle;">No.</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NIP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NRP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">PANGKAT</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">JABATAN</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NAMA LENGKAP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">TEMPAT, TANGGAL LAHIR</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">AGAMA</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">JENIS KELAMIN</th>
+							<th  style="vertical-align: middle;">PDK. TERAKHIR</th>
+							
 							<th rowspan="2" class="text-center"></th>
-						</tr>
-						<tr>
-							<th class="text-center">TMT</th>
-							<th class="text-center">YAD</th>
 						</tr>
 
 					</thead>
@@ -53,24 +49,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo ++$this->page ?>.</td>
 							<td><?php echo $row->nip ?></td>
 							<td><?php echo $row->nrp ?></td>
-							<td></td>
-							<td><a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->nama ?></td>
+							<td>
+								<span data-toggle="tooltip" data-placement="top" title="Lihat Detail Ke Pangkat">
+								<a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->pangkat ?></span>
+							</td>
+							<td><?php echo $row->jabatan ?></td>
+							<td><?php echo $row->nama ?></td>
 							<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
 							<td><?php echo strtoupper($row->agama) ?></td>
 							<td><?php echo strtoupper($row->jns_kelamin) ?></td>
-							<td><?php echo $row->pendidikan_terakhir ?></td>
-							<td></td>
-							<td></td>
-							<td class="text-center">
-								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+							<td class="text-center"><?php echo $row->pendidikan_terakhir ?></td>
+							
+							
+							<td>
+								<a href="<?php echo base_url('kepegawaian/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
+
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-pegawai" data-id="<?php echo $row->ID ?>"  class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-pegawai" data-id="<?php echo $row->ID ?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>
+						
 					</tbody>
 				</table>
 			</div>

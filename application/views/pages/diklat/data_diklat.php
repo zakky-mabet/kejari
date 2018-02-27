@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3 pull-right">
 						<a href="<?php echo base_url('diklat/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url('diklat') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo site_url("diklat/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -28,11 +28,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 							<th >No.</th>
 							<th  class="text-center">NIP</th>
-							<th  class="text-center">Nama Pegawai</th>
-							<th  class="text-center">Nama Diklat</th>
-							<th  class="text-center">Tanggal Mulai</th>
-							<th  class="text-center">Tanggal Selsai</th>
-							<th  class="text-center">Tingkat</th>
+							<th  class="text-center">NAMA PEGAWAI</th>
+							<th  class="text-center">NAMA DIKLAT</th>
+							<th  class="text-center">TANGGAL MULAI</th>
+							<th  class="text-center">TANGGAL SELESAI</th>
+							<th  class="text-center">TINGKAT</th>
 							<th  class="text-center"></th>
 						</tr>
 					</thead>
@@ -47,10 +47,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center"><?php echo date_id($row->tgl_selesai); ?></td>
 							<td class="text-center"><?php echo ucwords($row->tingkat); ?></td>
 							<td class="text-center">
-								<a href="<?php echo base_url('diklat/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+								<a href="<?php echo base_url('diklat/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting" >
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-diklat" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-diklat" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>

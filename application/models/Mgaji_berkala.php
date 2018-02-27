@@ -13,17 +13,17 @@ class Mgaji_berkala extends CI_Model
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
 		if($this->input->get('query') != '')
-			$this->db->like('nip', $this->input->get('query'))
-					 ->or_like('nrp', $this->input->get('query'))
-					 ->or_like('nama', $this->input->get('query'));
-		// tabel join
+			$this->db->like('gaji_berkala.nip', $this->input->get('query'))
+					 ->or_like('kepegawaian.nama', $this->input->get('query'));
+					// tabel join
 		$this->db->select('gaji_berkala.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai, kepegawaian.pendidikan_terakhir');
 
 		$this->db->join('kepegawaian', 'gaji_berkala.nip = kepegawaian.nip', 'left');
 		
+		$this->db->order_by('ID', 'desc');
 
 		if($type == 'result')
-		{
+		{		
 			return $this->db->get('gaji_berkala', $limit, $offset)->result();
 		} else {
 
@@ -34,6 +34,11 @@ class Mgaji_berkala extends CI_Model
 	public function gaji($param = 0)
 	{
 		return $this->db->get_where('kepangkatan', array('nip' => $param))->result();
+	}
+		// cara cek bahwa data ada atau tidak
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('gaji_berkala', array('ID' => $param) )->num_rows();
 	}
 
 	public function create()
@@ -67,7 +72,6 @@ class Mgaji_berkala extends CI_Model
 		);
 
 		$this->db->insert('gaji_berkala', $gaji_berkala);
-
 
 		if($this->db->affected_rows())
 		{
@@ -157,6 +161,12 @@ class Mgaji_berkala extends CI_Model
 		return $this->db->get()->result();
 		
     }
+
+    public function hitungHari($datenow = '', $batas_akhir = '')
+	{	
+		return (strtotime($batas_akhir) - strtotime($datenow)) / (24*3600);
+		
+	}
 
     public function get($param = 0)
 	{

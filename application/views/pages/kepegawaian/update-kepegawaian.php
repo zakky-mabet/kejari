@@ -82,9 +82,16 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="text" class="control-label col-md-3 col-xs-12">Jabatan : <strong class="text-blue">*</strong></label>
+					<div class="col-md-6">
+						<input type="text" name="jabatan" class="form-control" value="<?php echo $get->jabatan; ?>">
+						<p class="help-block"><?php echo form_error('jabatan', '<small class="text-red">', '</small>'); ?></p>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="alamat" class="control-label col-md-3">Alamat : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">
-						<textarea name="alamat" rows="3" class="form-control"><?php echo $get->alamat; ?></textarea>
+						<textarea name="alamat" rows="5" class="form-control"><?php echo $get->alamat; ?></textarea>
 						<p class="help-block"><?php echo form_error('alamat', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>

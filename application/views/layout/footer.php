@@ -4,7 +4,7 @@
   		</div>
   		<footer class="main-footer">
 	    	<div class="pull-right hidden-xs">
-           <img src="<?php echo base_url("public/images/trademark.png") ?>" alt="Tradmark" height="50">
+           <img src="<?php echo base_url("public/images/trademark.png") ?>" alt="Tradmark" height="40">
 	    	</div>
     		<strong>Versi 1.0</strong> <br>&copy; <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI Kab. Bangka Barat, Kep. Bangka Belitung.
   		</footer>

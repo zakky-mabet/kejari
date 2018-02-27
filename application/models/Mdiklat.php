@@ -11,6 +11,25 @@ class Mdiklat extends CI_Model
 		$this->load->library(array('upload'));
 	}
 
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('riwayat_diklat', array('ID' => $param) )->num_rows();
+	}
+
+	public function cek_detail($param = 0)
+	{
+		$this->db->select('
+							kepegawaian.nip,
+							kepegawaian.nama AS nama_pegawai, kepegawaian.foto, kepegawaian.nrp, kepegawaian.tempat_lahir, kepegawaian.tgl_lahir,
+							kepegawaian.jns_kelamin, kepegawaian.alamat, kepegawaian.agama, kepegawaian.pendidikan_terakhir
+						');
+
+		$this->db->where('kepegawaian.ID', $param);
+
+		return $this->db->get('kepegawaian')->num_rows();
+		return $this->db->get_where('riwayat_diklat', array('ID' => $param) )->num_rows();
+	}
+
 	public function get_all_pegawai()
     {
         // join tabel
@@ -23,14 +42,16 @@ class Mdiklat extends CI_Model
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
 		if($this->input->get('query') != '')
-			$this->db->like('nip', $this->input->get('query'))
-					 ->or_like('nrp', $this->input->get('query'))
-					 ->or_like('nama', $this->input->get('query'));
+			$this->db->like('riwayat_diklat.nip', $this->input->get('query'))
+					 ->or_like('kepegawaian.nama', $this->input->get('query'));
 		// tabel join
 		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
 
 		$this->db->join('kepegawaian', 'riwayat_diklat.nip = kepegawaian.nip', 'left');
+
+		$this->db->order_by('ID', 'desc');
 		
+		$this->db->group_by('nip');
 
 		if($type == 'result')
 		{
@@ -169,6 +190,25 @@ class Mdiklat extends CI_Model
 	{
 
 		return $this->db->get_where('riwayat_diklat', array('ID' => $param))->row();
+	}
+
+	public function get_cetak($limit = 20, $offset = 0, $type = 'result')
+	{
+		
+		// tabel join
+		$this->db->select('riwayat_diklat.*, kepegawaian.nama AS nama_pegawai, kepegawaian.ID  AS ID_pegawai, kepegawaian.ID AS id_pegawai');
+
+		$this->db->join('kepegawaian', 'riwayat_diklat.nip = kepegawaian.nip', 'left');
+
+		$this->db->order_by('ID', 'desc');
+		
+
+		if($type == 'result')
+		{
+			return $this->db->get('riwayat_diklat', $limit, $offset)->result();
+		} else {
+			return $this->db->get('riwayat_diklat')->num_rows();
+		}
 	}
 
 }

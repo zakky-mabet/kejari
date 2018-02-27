@@ -21,13 +21,9 @@ class Diklat extends Admin_panel
 		$this->load->helper(array('indonesia'));
 
 		$this->per_page = (!$this->input->get('per_page')) ? 20 : $this->input->get('per_page');
-
-		$this->data['riwayat_diklat'] = $this->mdiklat->get_all($this->per_page, $this->page, 'result');
-
-
+		
 		$this->page = $this->input->get('page');
 		$this->query = $this->input->get('query');
-
 
 		$this->load->js(base_url("public/app/diklat/diklat.js"));
 		$this->load->css(base_url("public/app/diklat/diklat.css"));
@@ -49,6 +45,7 @@ class Diklat extends Admin_panel
 		$config['total_rows'] = $this->mdiklat->get_all(null, null, 'num');
 		// untuk memanggil data dari database
 		$this->data['riwayat_diklat'] = $this->mdiklat->get_all($this->per_page, $this->page, 'result');
+		$this->data['diklat_cetak'] = $this->mdiklat->get_cetak($this->per_page, $this->page, 'result');
 
 		$this->pagination->initialize($config);
 		
@@ -60,7 +57,6 @@ class Diklat extends Admin_panel
 	public function create()
 	{
 		
-
 		$this->page_title->push("Kepegawaian", "Tambahkan Data Riwayat Diklat");
 
 		$this->breadcrumbs->unshift(3, 'Data Riwayat Diklat', "diklat/index");
@@ -87,6 +83,13 @@ class Diklat extends Admin_panel
 
 	public function update($param = 0)
 	{	
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mdiklat->cek_data($param) == 0) {
+			show_404();
+		}
 
 		$this->page_title->push("Kepegawaian", "Ubah Data Riwayat Diklat");
 
@@ -113,6 +116,14 @@ class Diklat extends Admin_panel
 
 	public function detail_pegawai($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mdiklat->cek_detail($param) == 0) {
+			show_404();
+		}
+
 		$this->page_title->push("Kepegawaian", "Detail Data Riwayat Diklat");
 
 		$this->breadcrumbs->unshift(3, 'Data Riwayat Diklat', "diklat/index");
@@ -130,6 +141,21 @@ class Diklat extends Admin_panel
 		$this->mdiklat->delete($param);
 
 		redirect('diklat');
+	}
+
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mdiklat->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Riwayat Diklat";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['diklat_cetak'] = $this->mdiklat->get_cetak($this->per_page, $this->page, 'result');
+		$this->load->view('pages/diklat/data_laporan_diklat_print', $this->data);
 	}
 
 }

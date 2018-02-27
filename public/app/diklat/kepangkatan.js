@@ -22,7 +22,7 @@ $(document).ready(function() {
       format: "yyyy-mm-dd"
     });
 
-	$('.btn-print').printPage({
+	$('.btn-print_detail').printPage({
 		url: $(this).attr('href'),
 		message: "Tunggu sebentar ..."
 	})

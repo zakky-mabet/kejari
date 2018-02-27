@@ -5,7 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Login</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <link rel="icon" href="<?php echo base_url('public/images/favicon.png') ?>" type="icon" />
+  <meta name="theme-color" content="#E4E80D">
+  <link rel="icon" sizes="192x192" href="<?php echo base_url('public/images/favicon.png') ?>" type="icon" />
   <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap/dist/css/bootstrap.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('public/components/font-awesome/css/font-awesome.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('public/components/Ionicons/css/ionicons.min.css') ?>">
@@ -15,7 +16,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
   <style type="text/css" media="screen"> 
     body { 
-          background-image: url('<?php echo base_url('public/images/BG.png') ?>'); 
+          background-image: url('<?php echo base_url('public/images/background.png') ?>'); 
           background-attachment: fixed; 
           background-repeat: no-repeat; 
           -webkit-background-size: cover; 
@@ -25,6 +26,8 @@
         } 
       .arial { font-family: arial; font-weight: normal; }
       .bg-color { background-color: #eaeaea; }
+      .text-footer {  color:#EDEDEC }
+      .text-orange {  color:#FF7700 }
   </style>
 </head>
 <body class="bg-color">
@@ -69,7 +72,7 @@
   </div>
 </div>
 <footer>
-    <p class="text-center"><small>&copy; Hak Cipta <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI <br> Kab. Bangka Barat, Kep. Bangka Belitung <br> Dikembangkan oleh <a href="http://www.teitramega.co.id" target="_blank" title="Go to Web CV. Teitra Mega">CV. Teitra Mega</a>, Pangkalpinang.</small></p>
+    <p class="text-center text-footer"><small>&copy; Hak Cipta <?php echo (date('Y')!=2018) ? date('2018 - Y') : date("Y");  ?> - KEJAKSAAN NEGERI <br> Kab. Bangka Barat, Kep. Bangka Belitung <br> Dibuat oleh <a href="http://www.teitramega.co.id" class="text-orange" target="_blank" title="Go to Web CV. Teitra Mega ">CV. Teitra Mega</a>, Pangkalpinang.</small></p>
 </footer>
 <script src="<?php echo base_url('public/components/jquery/dist/jquery.min.js') ?>"></script>
 <script src="<?php echo base_url('public/components/bootstrap/dist/js/bootstrap.min.js') ?>"></script>

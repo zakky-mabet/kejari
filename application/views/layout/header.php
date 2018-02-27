@@ -17,7 +17,9 @@
     <link rel="stylesheet" href="<?php echo base_url("public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap-daterangepicker/daterangepicker.css') ?>">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url('public/plugins/iCheck/all.css') ?>">
+    <link rel="stylesheet" href=" <?php echo base_url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') ?>">
     <style>
       .hoverTable{
             width:100%; 
@@ -61,9 +63,39 @@
     <script src="<?php echo base_url('public/dist/js/jquery.printPage.js') ?>"></script>
     <script src="<?php echo base_url('public/dist/js/jquery.sticky.min.js') ?>"></script>
     <script src="<?php echo base_url('public/dist/js/jquery.tableCheckbox.min.js') ?>"></script>
+    <script src="<?php echo base_url('public/plugins/iCheck/icheck.min.js') ?>"></script>
+    <script src="<?php echo base_url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js') ?>"></script>
+    <script src="http://kecamatansimpangkatis.com/tempayan/public/dist/js/jquery.sticky.min.js"></script>
     <script>
       var base_url = '<?php echo base_url() ?>',
           base_path = '<?php echo base_url('public') ?>';
+     $(function () {
+         //iCheck for checkbox and radio inputs
+      $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+        checkboxClass: 'icheckbox_minimal-blue',
+        radioClass   : 'iradio_minimal-blue'
+      })
+      //Red color scheme for iCheck
+      $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+        checkboxClass: 'icheckbox_minimal-red',
+        radioClass   : 'iradio_minimal-red'
+      })
+      //Flat red color scheme for iCheck
+      $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+        checkboxClass: 'icheckbox_flat-green',
+        radioClass   : 'iradio_flat-green'
+      })
+
+      $('.textarea').wysihtml5(
+        {toolbar: {
+          'image' : false,
+          'link' : false
+        }}
+        )
+
+       $("#sticker").sticky({topSpacing:100});
+
+     })
     </script>
    <?php 
    /**

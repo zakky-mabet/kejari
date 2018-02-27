@@ -1,30 +1,58 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
-	<div class="col-md-10 col-md-offset-1 col-xs-12">
+
+	<div class="col-md-4 col-xs-12">
+		<div class="box box-primary">
+			<div class="box-body" style="margin-top: 10px;">
+				<table class="table" >
+					<tr class="bg-green">
+						<th colspan="2" >DATA LAPORAN MASYARAKAT</th>
+					</tr>
+					<tr >
+						<th class="small" width="40%">NOMOR</th>
+						<td class="small"><?php echo $this->mlaporan_masyarakat->get($param)->nomor ?></td>
+					</tr>
+					<tr>
+						<th class="small">TANGGAL MASUK</th>
+						<td class="small"><?php echo date_id($this->mlaporan_masyarakat->get($param)->tanggal_masuk) ?></td>
+					</tr>
+					<tr>
+						<th class="small">ASAL</th>
+						<td class="small"><?php echo $this->mlaporan_masyarakat->get($param)->asal ?></td>
+					</tr>
+					<tr>
+						<th class="small">PRIHAL</th>
+						<td class="small"><?php echo $this->mlaporan_masyarakat->get($param)->deskripsi ?></td>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-8 col-xs-12">
 		<div class="box box-primary">
 			<?php
-			echo form_open(current_url(), array('class' => 'form-horizontal'));
+			echo form_open(current_url(), array('class' => ''));
 			?>
 			<div class="box-body" style="margin-top: 10px;">
 				<div class="form-group">
-					<label for="instruksi" class="control-label col-md-3 col-xs-12">Instruksi : <strong class="text-red">*</strong></label>
-					<div class="col-md-8">
-						<textarea name="instruksi" rows="8" class="form-control"><?php echo set_value('instruksi') ?></textarea>
-						<p class="help-block"><?php echo form_error('instruksi', '<small class="text-red">', '</small>'); ?></p>
-					</div>
+					<label>Instruksi : <strong class="text-red">*</strong></label>
+					<textarea name="instruksi" rows="8" autofocus placeholder="Tulis Instruksi di sini." class=" form-control"><?php echo set_value('instruksi') ?></textarea>
+					<p class="help-block"><?php echo form_error('instruksi', '<small class="text-red">', '</small>'); ?></p>
 				</div>
 				<div class="form-group">
-					<label for="group_id" class="control-label col-md-3 col-xs-12">Disposisi : <strong class="text-red"></strong> <a href="#" data-toggle="tooltip" data-placement="top" title="Disposisi dipilih secara otomatis"><i class="fa fa-info-circle"></i></a></label>
-					<div class="col-md-8">
-						<div class="radio radio-inline radio-primary">
-							<input name="group_id" type="radio" value="4" checked="checked"> <label for="group_id">SEKSI INTELIJEN</label>
-						</div>
-						<p class="help-block"><?php echo form_error('group_id', '<small class="text-red">', '</small>'); ?></p>
-					</div>
+					<label>Disposisi/ Diteruskan Kepada : <strong class="text-red">*</strong> </label>
+					<p><input type="checkbox" name="group_id" value="4" class="minimal" checked >  SEKSI INTELIJEN </p>
+					<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDSUS </p>
+					<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI PIDUM </p>
+					<p><input type="checkbox" class="minimal" disabled="disabled" >  SEKSI DATUN</p>
+					<p class="help-block"><?php echo form_error('group_id', '<small class="text-red">', '</small>'); ?></p>
 				</div>
+				
 				<div class="box-footer with-border">
 					<div class="col-md-4 col-xs-5">
-						<a href="<?php echo site_url('laporan_masyarakat') ?>" class="btn btn-app pull-right">
+						<a href="<?php echo site_url('laporan_masyarakat/data_laporan') ?>" class="btn btn-app pull-right">
 							<i class="ion ion-reply"></i> Kembali
 						</a>
 					</div>

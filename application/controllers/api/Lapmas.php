@@ -125,7 +125,8 @@ class Lapmas extends CI_Controller
 
 					$this->db->insert('terusan_disposisi', array(
 						'group_id' => $disposisiData[$value['key']],
-						'id_disposisi' => $disposisiID
+						'id_disposisi' => $disposisiID,
+						'tanggal_disposisi_masuk' => date('Y-m-d H:i:s')
 					));
 
 					foreach ($this->getUserInGroup(array($disposisiData[$value['key']])) as $key => $value) 

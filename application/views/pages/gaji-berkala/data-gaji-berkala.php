@@ -1,21 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<style>
-.hoverTable{
-			width:100%; 
-			border-collapse:collapse; 
-			}
-.hoverTable td
-			{ 
-			padding:7px; border:#4e95f4 1px solid;
-			}
-.hoverTable tr:hover
-			{
- 			background-color: #D8E9A7;
-			}
-
-</style> 
+?> 
 <div class="row">
 <div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
@@ -28,11 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url() ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('gaji_berkala') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
 						<a href="<?php echo base_url('gaji_berkala/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo base_url() ?>" class="btn btn-success" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo site_url("gaji_berkala/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -43,35 +28,64 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 							<th rowspan="2">No.</th>
 							<th  class="text-center">NIP</th>
-							<th  class="text-center">Nama</th>
-							<th  class="text-center">Tanggal Mulai Terdaftar</th>
-							<th  class="text-center">Batas Akhir</th>
-							<th  class="text-center">Nomor SK</th>
-							<th class="text-center">Keterangan</th>
-							<th  width="100px" class="text-center">Lampiran</th>
+							<th  class="text-center">NAMA</th>
+							<th  class="text-center">TANGGAL MULAI TERDAFTAR</th>
+							<th  class="text-center">BATAS AKHIR</th>
+							<th  class="text-center">NOMOR SK</th>
+							<th class="text-center">KETERANGAN</th>
+							<th  width="100px" class="text-center">LAMPIRAN</th>
+							<th class="text-center">PEMBERITAHUAN</th>
 							<th width="8%" class="text-center"></th>
+
 						</tr>
 					</thead>
 					<tbody class="hoverTable">
 						<?php foreach($gaji_berkala as $row ) : ?>
 						<tr>
-							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td class="text-center"><?php echo $row->nip ?></td>
-							<td class="text-center"><?php echo $row->nama_pegawai ?></td>
-							<td class="text-center"><?php echo date_id($row->tmt) ?></td>
-							<td class="text-center"><?php echo date_id($row->batas_akhir) ?></td>
-							<td class="text-center"><?php echo $row->no_sk ?></td>
-							<td class="text-center"><?php echo $row->keterangan ?></td>							
-							<td>						
-							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
-							 <img width="100%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
-							</button>
-							</td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo ++$this->page ?>.</td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo $row->nip ?></td>
+							<td style="vertical-align: middle;"><?php echo $row->nama_pegawai ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->tmt) ?></td>
+							<td class="text-center" style="vertical-align: middle;"><?php echo date_id($row->batas_akhir) ?></td>
+							<td class="text-left" style="vertical-align: middle;"><?php echo $row->no_sk ?></td>
+							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>							
 							<td>
-								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px">
+							<?php if($row->lampiran_sk != FALSE) : ?>						
+							<button class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>">
+							 <img width="50%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
+							</button>
+							<?php else : ?>
+							<span class="badge bg-red">Lampiran SK Kosong</span>
+							<?php endif; ?>
+							</td>
+							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
+
+							<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) < 30): ?>
+								<td>
+									<span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Anda Akan Naik Pangkat">SIAPKAN BERAS</span>
+								</td>
+								<?php else: ?>
+								<td><span data-toggle="tooltip" data-placement="top" class="badge bg-blue" title="Proses Kenaikan Gaji">
+									<?php echo $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span>
+								</td>
+							<?php endif ?>
+
+							<?php else: ?>
+							   <td><span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Proses Kenaikan Gaji Telah Lewat">Telah Lewat Waktu</span></td>
+							<?php endif ?>
+							<td style="vertical-align: middle;">
+							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
+							
+								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
-								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
+							
+							<?php else: ?>
+								<a></i>
+								</a>
+							<?php endif ?>
+								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" 
+									data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 

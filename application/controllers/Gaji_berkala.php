@@ -72,6 +72,13 @@ class Gaji_berkala extends Admin_panel
 
 	public function update($param = 0 )
 	{ 
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mgaji_berkala->cek_data($param) == 0) {
+			show_404();
+		}
 		$this->page_title->push("Gaji Berkala", "Ubah Data Gaji Berkala");
 
 		$this->breadcrumbs->unshift(3, 'Ubah Data', "gaji-berkala/create");
@@ -99,6 +106,21 @@ class Gaji_berkala extends Admin_panel
 		$this->mgaji_berkala->delete($param);
 
 		redirect('gaji_berkala');
+	}
+
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mgaji_berkala->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Gaji Berkala";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['gaji_berkala'] = $this->mgaji_berkala->get_all($this->per_page, $this->page, 'result');
+		$this->load->view('pages/gaji-berkala/data_laporan_gaji_berkala_print', $this->data);
 	}
 
 }

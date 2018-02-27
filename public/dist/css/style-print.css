@@ -1,6 +1,11 @@
+* {
+   font-size: 10pt;
+}
 body { 
-   font-family:'Arial', sans-serif;
-   font-size: 9pt;
+   font-family:'Arial', 'Helvetica', sans-serif; 
+   margin-left:3%; 
+   margin-right: 3%;   
+   margin-top: 3%;
 }
 h5.upper { margin: 2px; }
 .upper { text-transform: uppercase;  }
@@ -8,19 +13,26 @@ h5.upper { margin: 2px; }
 .bold { font-weight:bold; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
-.pull-right {
-   float: right;
-}
+
 .header { 
    width:100%; 
    height:10%; 
    font-weight:500; 
    margin-bottom: 3%;  
 }
-small {
-   font-size: 0.7em;
+table.mini-font { 
+  vertical-align:center;
+   font-size: 8pt;
 }
-
+table.mini-font thead th,
+table.mini-font tbody td,
+table.mini-font tbody th,
+table.mini-font tbody td span,
+table.mini-font tbody td strong,
+table.mini-font tfoot td {  
+   font-size: 8pt;
+   vertical-align: middle;
+}
 table.kop {
    position: center;
    width: 100%;
@@ -39,7 +51,7 @@ td > span.kop-heading {
 
 td > span.kop-heading-company {
    font-weight: bold;
-   font-size: 19px;
+   font-size: 16px;
    line-height: 1.4;
    text-transform: uppercase;
    letter-spacing:3px;
@@ -54,13 +66,8 @@ td > span.kop-heading-address {
 }
 
 img.logo {
-   width: 200px;
+   width: 50px;
    height: auto;
-}
-span.small-italic {
-   font-size: 9pt;
-   font-style: italic;
-   margin-left: 30px;
 }
 
 h5 { 
@@ -80,21 +87,27 @@ table.table-bordered {
    border-collapse: collapse; 
    margin-top: 30px;
 }
-table.table-bordered th {  
+table.table-bordered tr th,
+table.table-bordered thead tr th {  
    border-width: 0.1px; 
    padding: 3px; 
    border-style: solid; 
-   border-color: #757572; 
+   border-color: black; 
+   text-transform: none; 
+   vertical-align: middle;
 }
-table.table-bordered td { 
+table.table-bordered td,
+table.table-bordered tr td,
+table.table-bordered tbody tr td { 
    border-width: 0.1px; 
    border-top: 0px; 
    padding: 3px 3px 10px 3px; 
    border-style: solid; 
-   border-color: #757572; 
+   border-color: black; 
 }
 
-.content {  
+.content { 
+   font-family:'Arial', sans-serif; 
    margin-top:30px;
 }
 
@@ -113,36 +126,35 @@ small.print-at {
     text-align: center;
    display: inline-block;
    text-align: center;
-   margin-bottom: 10px;
+   margin-bottom: 20px;
 }
 
 .mail-heading > h5.mail-name {
-   font-size: 1.1em;
+   font-size: 10pt;
    line-height: 1px;
-   border-bottom: 1px solid black;
    padding-bottom: 13.5px;
    width: auto;
    display: inherit; 
+   width: 100%;
 }
 
 .mail-heading > h5.mail-number {
-   font-size: 0.9em;
-   margin-top: 0px;
+   font-size: 9pt;
+   margin-top: 10px;
    display: inherit; 
-   width: auto;
 }
 
 div.mail-content,
 div.mail-footer {
-   font-size: 1em;
+   font-size: 13px;
+   margin-top: 50px;
    display: inline;
-   width: auto
 }
 
 div.mail-content > p {
    letter-spacing: 0.7px;
    word-spacing: auto;
-   line-height: 1.3em;
+   line-height: 1.5em;
    text-align: justify;
 }
 
@@ -152,8 +164,8 @@ div.mail-content > p.indent {
 
 ul > li,
 ol > li {
-   margin-top: 8px;
-   margin-bottom:8px;
+   margin-top: 10px;
+   margin-bottom:10px;
 }
 
 ul > li > p,
@@ -173,28 +185,52 @@ ul > li > table {
 /* FOOTER MAIL */
 
 div.mail-footer > table {
-   margin-top: 30px;
+   margin-top: 50px;
 }
 
 
-.push {
-    margin-top: 50px; /* .push must be the same height as .footer */
-    text-align: center;
+#header,
+#footer {
+  position: fixed;
+  left: 0;
+   right: 0;
+   color: #aaa;
+   font-size: 0.9em;
 }
 
-@media only screen and (min-width: 768px)  {
-  .wrapper {
-      width: 800px;
-      margin: 0 auto;
-  }
+#header {
+  top: 0;
+   border-bottom: 0.1pt solid #aaa;
 }
 
-strong.surat-heading {
-  font-size: 15pt;
-  text-transform: uppercase;
+#footer {
+  bottom: 0;
+  border-top: 0.1pt solid #aaa;
 }
 
-strong.content-heading {
-  font-size: 12pt;
-  text-transform: uppercase;
+#header table,
+#footer table {
+   width: 100%;
+   border-collapse: collapse;
+   border: none;
 }
+
+#header td,
+#footer td {
+  padding: 0;
+   width: 50%;
+}
+
+.page-number {
+  text-align: center;
+}
+
+.page-number:before {
+  content: "Page " counter(page);
+}
+
+hr {
+  page-break-after: always;
+  border: 0;
+}
+

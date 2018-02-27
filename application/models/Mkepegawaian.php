@@ -12,22 +12,20 @@ class Mkepegawaian extends CI_Model
 
 	public function get_all($limit = 20, $offset = 0, $type = 'result')
 	{
-		// tabel join berdasarkan data yang terakhir
-		$this->db->select("kepegawaian.*, 	(SELECT nama_pangkat FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
-																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
-																	DESC LIMIT 1) AS pangkat,
-											(SELECT tmt FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
-																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
-																	DESC LIMIT 1) AS tmt_pangkat,
-											(SELECT batas_akhir FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
-																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.batas_akhir 
-																	DESC LIMIT 1) AS bts_pangkat
-											");
 
-		if($this->input->post('query') != '')
-			$this->db->like('nip', $this->input->post('query'))
-					 ->or_like('nrp', $this->input->post('query'))
-					 ->or_like('nama', $this->input->post('query'));
+		
+		if($this->input->get('query') != '')
+			$this->db->like('kepegawaian.nip', $this->input->get('query'))
+					 ->or_like('kepegawaian.nrp', $this->input->get('query'))
+					 ->or_like('kepegawaian.nama', $this->input->get('query'));
+
+		// tabel join berdasarkan data yang terakhir
+		$this->db->select("kepegawaian.*, (SELECT nama_pangkat FROM kepangkatan LEFT JOIN pangkat ON kepangkatan.id_pangkat = pangkat.ID 
+																	WHERE kepegawaian.nip  = kepangkatan.nip ORDER BY kepangkatan.nip 
+																	DESC LIMIT 1) AS pangkat
+											");
+		$this->db->order_by('ID', 'DESC');
+		$this->db->group_by('kepegawaian.nip');
 
 		if($type == 'result')
 		{
@@ -65,6 +63,7 @@ class Mkepegawaian extends CI_Model
 			'no_tlp' => $this->input->post('telepon'),
 			'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
 			'alamat' => $this->input->post('alamat'),
+			'jabatan' => $this->input->post('jabatan'),
 			'status_dinas' => 'active',
 			'foto' => $foto
 		);
@@ -86,9 +85,17 @@ class Mkepegawaian extends CI_Model
 		}
 	}
 
+
+
 	public function get($param = 0)
 	{
 		return $this->db->get_where('kepegawaian', array('ID' => $param))->row();
+	}
+
+
+	public function cek_data($param = 0)
+	{
+		return $this->db->get_where('kepegawaian', array('ID' => $param) )->num_rows();
 	}
 
 
@@ -126,6 +133,7 @@ class Mkepegawaian extends CI_Model
 			'alamat' => $this->input->post('alamat'),
 			'no_tlp' => $this->input->post('telepon'),
 			'status_dinas' => $this->input->post('status'),
+			'jabatan' => $this->input->post('jabatan'),
 			'foto' => $foto
 		);
 

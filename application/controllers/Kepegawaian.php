@@ -25,6 +25,7 @@ class Kepegawaian extends Admin_panel
 		$this->query = $this->input->get('query');
 
 		$this->load->js(base_url("public/app/kepegawaian.js"));
+		$this->load->js(base_url("public/app/diklat/kepangkatan.js"));
 	}
 	
 	public function index()
@@ -61,6 +62,7 @@ class Kepegawaian extends Admin_panel
 		$this->form_validation->set_rules('agama', 'Agama', 'trim|required');
 		$this->form_validation->set_rules('pendidikan_terakhir', 'Pendidikan terakhir', 'trim');
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
+		$this->form_validation->set_rules('jabatan', 'jabatan', 'trim');
 		$this->form_validation->set_rules('telepon', 'Telepon', 'trim');
 
 		if ($this->form_validation->run() == TRUE)
@@ -76,6 +78,15 @@ class Kepegawaian extends Admin_panel
 
 	public function update($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mkepegawaian->cek_data($param) == 0) {
+			show_404();
+			
+		}
+
 		$this->page_title->push("Kepegawaian", "Ubah Data Kepegawaian");
 
 		$this->breadcrumbs->unshift(3, 'Ubah', "kepegawaian/create");
@@ -90,6 +101,7 @@ class Kepegawaian extends Admin_panel
 		$this->form_validation->set_rules('pendidikan_terakhir', 'Pendidikan terakhir', 'trim');
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
 		$this->form_validation->set_rules('telepon', 'Telepon', 'trim');
+		$this->form_validation->set_rules('jabatan', 'jabatan', 'trim');
 		$this->form_validation->set_rules('status', 'Status Dinas', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
@@ -110,6 +122,22 @@ class Kepegawaian extends Admin_panel
 
 		redirect('kepegawaian');
 	}
+
+	public function print_out()
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mkepegawaian->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Kepegawaian";
+		$this->data['num_data_laporan'] = $config['total_rows'];
+		$this->data['kepegawaian'] = $this->mkepegawaian->get_all($this->per_page, $this->page, 'result');
+		$this->load->view('pages/kepegawaian/data_laporan_kepegawaian_print', $this->data);
+	}
+
 }
 
 /* End of file Kepegawaian.php */

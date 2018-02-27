@@ -21,16 +21,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         	</li>
           <li class="<?php echo active_link_method('index','laporan_masyarakat') ?>">
               <a href="<?php echo base_url('laporan_masyarakat') ?>">
-                <i class="fa fa-pencil"></i> <span>Buat Laporan Masyarakat</span>
+                <i class="fa fa-pencil"></i> <span>Buat Laporan Perkara</span>
               </a>
           </li>
-           <li class="<?php echo active_link_method('data_laporan','laporan_masyarakat') ?>">
+          <li class="<?php echo active_link_method('data_laporan','laporan_masyarakat') ?>">
               <a href="<?php echo base_url('laporan_masyarakat/data_laporan') ?>">
-                <i class="fa fa-file-text"></i> <span>Data Laporan Masyarakat</span> <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?> Data Laporan Masyarakat Belum di Instruksikan" class="label label-danger pull-right"><?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?></span>
+                <i class="fa fa-file-text"></i> <span>Data Laporan Perkara</span> <?php if ($this->mlaporan_masyarakat->notification_laporan_masyarakat() !=0): ?>
+                 <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?> Data Laporan Masyarakat Belum di Instruksikan" class="label label-danger pull-right"><?php echo $this->mlaporan_masyarakat->notification_laporan_masyarakat() ?></span> <?php endif ?>
               </a>
           </li>
           
-          <li class="treeview <?php echo active_link_multiple(array('')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('dokumen_telaah')); ?>">
+              <a href="#">
+                  <i class="fa fa-file-text-o"></i> <span>KAJARI</span>
+                  <span class="pull-right-container">
+                      <i class="fa fa-angle-right pull-right"></i>
+                  </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php echo active_link_method('index', 'dokumen_telaah') ?>">
+                    <a href="<?php echo base_url('dokumen_telaah/index') ?>"><i class="fa fa-angle-double-right"></i> Dokumen Telaah Masuk   <?php if ($this->mdokumen_telaah->get_all(null,null,'notifikasi') !=0 ): ?> <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mdokumen_telaah->get_all(null,null,'notifikasi') ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mdokumen_telaah->get_all(null, null,'notifikasi') ?></span>  <?php endif ?> </a>
+                </li>
+                
+              </ul>
+          </li>
+          <li class="treeview <?php echo active_link_multiple(array('perkara','perintah_op','lapopsin')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>INTELIJEN</span>
                   <span class="pull-right-container">
@@ -38,17 +53,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="<?php echo active_link_controller('') ?>">
-                    <a href="<?php echo base_url('') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara</a>
+                <li class="<?php echo active_link_method('index', 'perkara') ?>">
+                    <a href="<?php echo base_url('perkara/index') ?>"><i class="fa fa-angle-double-right"></i> Data Perkara Masuk 
+                      <?php if ($this->mperkara->notifikasi() !=0 ): ?>
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperkara->notifikasi() ?> Data Perkara Belum di Telaah" class="label label-danger pull-right"><?php echo $this->mperkara->notifikasi() ?></span>  <?php endif ?></a>
                 </li>
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Surat Perintah Penugasan</a>
+                <li class="<?php echo active_link_method('index', 'perintah_op') ?>">
+                    <a href="<?php echo base_url('perintah_op/index') ?>"><i class="fa fa-angle-double-right"></i>Surat Perintah Operasi  <?php if ($this->mperintah_op->notifikasi() !=0 ): ?>
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mperintah_op->notifikasi() ?> Surat belum di buat" class="label label-danger pull-right"><?php echo $this->mperintah_op->notifikasi() ?></span>  <?php endif ?></a>
                 </li>
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Surat Perintah Operasi Intelijen</a>
-                </li>
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Laporan Hasil Operasi Intelijen</a>
+                  <li class="<?php echo active_link_method('index', 'lapopsin') ?>">
+                    <a href="<?php echo base_url('lapopsin/index') ?>"><i class="fa fa-angle-double-right"></i>  Laporan Hasil Operasi <?php if ($this->mlapopsin->notifikasi() !=0 ): ?>
+                    <span data-toggle="tooltip" data-placement="top" title="<?php echo $this->mlapopsin->notifikasi() ?> Laporan Belum dibuat" class="label label-danger pull-right"><?php echo $this->mlapopsin->notifikasi() ?></span>  <?php endif ?></a>
                 </li>
               </ul>
           </li>
@@ -100,7 +116,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </a>
               <ul class="treeview-menu">
                 <li class="<?php echo active_link_method('index','kepegawaian').active_link_method('update','kepegawaian').active_link_method('detail_kepangkatan','kepangkatan').active_link_method('create','kepangkatan').active_link_method('create_pangkat','kepangkatan').active_link_method('update','kepangkatan')?>">
-                    <a href="<?php echo base_url('kepegawaian') ?>"><i class="fa fa-angle-double-right"></i> Data Kepegawaian</a>
+
+                  <a href="<?php echo base_url('kepegawaian') ?>"><i class="fa fa-angle-double-right"></i> Data Kepegawaian
+                  <span data-toggle="tooltip" data-placement="top" title="Laporan Belum dibuat" class="label label-danger pull-right"></span>
+                  </a>
+                  
+                  
                 </li>
                 <li class="<?php echo active_link_method('create','kepegawaian') ?>">
                     <a href="<?php echo base_url('kepegawaian/create') ?>"><i class="fa fa-angle-double-right"></i> Tambah Pegawai</a>

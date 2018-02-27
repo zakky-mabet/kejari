@@ -68,6 +68,13 @@ class Kepangkatan extends Admin_panel
 	// ini adalah tabel detail kepangkatan
 	public function detail_kepangkatan($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mkepangkatan->cek_data($param) == 0) {
+			show_404();
+		}
 		$this->page_title->push("Kepegawaian", "Detail Kepangkatan");
 
 		$this->breadcrumbs->unshift(3, 'kepegawaian', "kepegawaian/index");
@@ -84,6 +91,7 @@ class Kepangkatan extends Admin_panel
 
 	public function create_pangkat($param = 0)
 	{
+
 		$this->page_title->push("Tambahkan Kepangkatan");
 
 		$this->breadcrumbs->unshift(3, 'Detail Kepangkatan', "kepegawaian/create");
@@ -111,6 +119,13 @@ class Kepangkatan extends Admin_panel
 
 	public function update($param = 0)
 	{
+		if (!$param) {
+			show_404();
+		}
+
+		if ($this->mkepangkatan->cek_pangkat($param) == 0) {
+			show_404();
+		}
 		$this->page_title->push("Detail Kepangkatan","Ubah Data Kepangkatan");
 
 		$this->breadcrumbs->unshift(3, 'Detail Kepangkatan', "kepegawaian/create");
@@ -141,6 +156,22 @@ class Kepangkatan extends Admin_panel
 
 		redirect(site_url('kepangkatan/detail_kepangkatan/'.$this->input->get('back')));
 	}
+
+	public function print_out_detail($param = 0)
+	{
+		$config = $this->template->pagination_list();
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mkepangkatan->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Laporan Kepangkatan";
+		$this->data['get'] = $this->db->get_where('kepegawaian', array('ID'=> $param))->row();
+		$this->load->view('pages/kepegawaian/data_laporan_kepangkatan_print', $this->data);
+	}
+
+
 
 }
 

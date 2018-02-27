@@ -45,6 +45,29 @@ class Admin_panel extends MY_Controller
 
 		$this->breadcrumbs->unshift(0, 'Dashboard', "/");
 	}
+
+	public function empty_tables()
+	{
+		$this->db->empty_table('disposisi');
+		$this->db->empty_table('lapopsin');
+		$this->db->empty_table('laporan_masyarakat');
+		$this->db->empty_table('notifikasi');
+		$this->db->empty_table('perintah_op');
+		$this->db->empty_table('perintah_op_kepada');
+		$this->db->empty_table('telaah');
+		$this->db->empty_table('terusan_disposisi');
+
+		if($this->db->affected_rows())
+		{
+			echo 'empty tables success'; 
+				
+		} else {
+
+			echo 'Maaf, Terjadi Kesalahan'; 
+
+		}
+
+	}
 }
 /* End of file MY_Controller.php */
 /* Location: ./application/core/MY_Controller.php */
