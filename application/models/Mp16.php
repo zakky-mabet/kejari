@@ -153,23 +153,30 @@ class Mspdp extends MY_model {
 		$this->db->insert('notifikasi', $notif);
 	}
 
-	public function delete($param = 0)
-	{
-		$this->db->delete('spdp', array('ID' => $param));
+	// public function cek_kepada($id_laporan_informasi = 0, $id_user = 0)
+	// {
+	// 	return $this->db->get_where('penerima_laporan_informasi', array('id_laporan_informasi' => $id_laporan_informasi, 'id_user' => $id_user) )->num_rows();
+	// }
 
-		if($this->db->affected_rows())
-		{
-			$this->template->alert(
-				'Data SPDP berhasil dhapus.', 
-				array('type' => 'success','icon' => 'check')
-			);
-		} else {
-			$this->template->alert(
-				' Gagal menghapus data.', 
-				array('type' => 'warning','icon' => 'times')
-			);
-		}
-	}
+	// public function delete($param = 0)
+	// {
+	// 	$this->db->delete('laporan_informasi', array('ID' => $param));
+
+	// 	$this->db->delete('penerima_laporan_informasi', array('id_laporan_informasi' => $param));
+
+	// 	if($this->db->affected_rows())
+	// 	{
+	// 		$this->template->alert(
+	// 			'Data laporan informasi berhasil dhapus.', 
+	// 			array('type' => 'success','icon' => 'check')
+	// 		);
+	// 	} else {
+	// 		$this->template->alert(
+	// 			' Gagal menghapus data.', 
+	// 			array('type' => 'warning','icon' => 'times')
+	// 		);
+	// 	}
+	// }
 
 	
 }

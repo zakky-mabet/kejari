@@ -33,14 +33,29 @@ class Spdp extends Admin_panel {
 	
 	public function index()
 	{
-		
+		$this->page_title->push("SPDP", "Data Surat Pemberitahuan Dimulainya Penyidikan");
+
+		$config = $this->template->pagination_list();
+
+		$config['base_url'] = site_url("spdp?per_page={$this->per_page}&query={$this->query}");
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mspdp->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Surat Pemberitahuan Dimulainya Penyidikan";
+		$this->data['per_page'] = $config['per_page'];
+		$this->data['num_spdp'] = $config['total_rows'];
+		$this->data['spdp'] = $this->mspdp->get_all($this->per_page, $this->page, 'result');
+		$this->template->view('pidum/data_spdp', $this->data);
 	}
 
 	public function create()
 	{
-		$this->page_title->push("Surat Pemberitahuan Dimulainya Penyidikan ", "Buat Baru ");
+		$this->page_title->push("SPDP ", "Buat Baru ");
 
-		$this->breadcrumbs->unshift(2, 'Buat', "laporan_informasi/create");
+		$this->breadcrumbs->unshift(2, 'Buat', "spdp/create");
 		
 		$this->form_validation->set_rules('nomor', 'Nomor ', 'trim|required|callback_validate_nomor');
 		$this->form_validation->set_rules('asal', 'Asal ', 'trim|required');
@@ -54,7 +69,7 @@ class Spdp extends Admin_panel {
 		}
 
 		$this->data['title'] = "Buat Baru Surat Pemberitahuan Dimulainya Penyidikan ";
-		$this->template->view('intel/create_spdp', $this->data);
+		$this->template->view('pidum/create_spdp', $this->data);
 	}
 
 	public function update($param = 0)
@@ -62,21 +77,18 @@ class Spdp extends Admin_panel {
 		if (!$param) {
 			show_404();
 		}
-		if ($this->mspdp->get_num($param) == 0) {
+
+		if ($this->mspdp->get($param, 'num_rows') == 0 ) {
 			show_404();
 		}
 
-		$this->page_title->push("Laporan Informasi ", "Sunting Laporan Informasi ");
+		$this->page_title->push("SPDP", "Sunting Surat Pemberitahuan Dimulainya Penyidikan ");
 
-		$this->breadcrumbs->unshift(2, 'Sunting', "laporan_informasi/update");
+		$this->breadcrumbs->unshift(2, 'Sunting', "spdp/update");
 		
 		$this->form_validation->set_rules('nomor', 'Nomor ', 'trim|required|callback_validate_nomor');
-		$this->form_validation->set_rules('informasi_diperoleh', 'Informasi yang diperoleh', 'trim|required');
-		$this->form_validation->set_rules('sumber_informasi', 'Sumber Informasi', 'trim|required');
-		$this->form_validation->set_rules('trend_perkembangan', 'Trend Perkembangan / Perkiraan', 'trim|required');
-		$this->form_validation->set_rules('saran_tindak', 'Pendapat / Saran / Tindak', 'trim|required');
-		$this->form_validation->set_rules('kategori', 'Kategori ', 'trim|required');
-		$this->form_validation->set_rules('id_user[]', 'Kirim Kepada ', 'trim|required');
+		$this->form_validation->set_rules('asal', 'Asal ', 'trim|required');
+		$this->form_validation->set_rules('deskripsi', 'Deskripsi ', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
 		{
@@ -85,9 +97,9 @@ class Spdp extends Admin_panel {
 			redirect(current_url());
 		}
 
-		$this->data['title'] = "Sunting Laporan Informasi ";
+		$this->data['title'] = "Sunting Surat Pemberitahuan Dimulainya Penyidikan  ";
 		$this->data['param'] = $param;
-		$this->template->view('intel/update_laporan_informasi', $this->data);
+		$this->template->view('pidum/update_spdp', $this->data);
 	}
 
 	/**
@@ -110,31 +122,8 @@ class Spdp extends Admin_panel {
 	{
 		$this->mspdp->delete($param);
 
-		redirect('laporan_informasi/harian');
+		redirect('spdp');
 	}
 
-	public function notifikasi()
-	{
-		$this->page_title->push("Laporan Informasi ", "Buat Laporan Informasi ");
 
-		$this->breadcrumbs->unshift(2, 'Buat', "laporan_informasi/create");
-		
-		$this->form_validation->set_rules('nomor', 'Nomor ', 'trim|required|callback_validate_nomor');
-		$this->form_validation->set_rules('informasi_diperoleh', 'Informasi yang diperoleh', 'trim|required');
-		$this->form_validation->set_rules('sumber_informasi', 'Sumber Informasi', 'trim|required');
-		$this->form_validation->set_rules('trend_perkembangan', 'Trend Perkembangan / Perkiraan', 'trim|required');
-		$this->form_validation->set_rules('saran_tindak', 'Pendapat / Saran / Tindak', 'trim|required');
-		$this->form_validation->set_rules('kategori', 'Kategori ', 'trim|required');
-		$this->form_validation->set_rules('id_user[]', 'Kirim Kepada ', 'trim|required');
-
-		if ($this->form_validation->run() == TRUE)
-		{
-			$this->mspdp->create();
-
-			redirect(current_url());
-		}
-
-		$this->data['title'] = "Buat Laporan Informasi ";
-		$this->template->view('intel/testnotif', $this->data);
-	}
 }

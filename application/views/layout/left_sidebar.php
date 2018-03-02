@@ -113,10 +113,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('spdp')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('spdp','p16')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>PIDUM</span>
-                  <span class="pull-right-container">
+                  <span class="pull-right-container"> 
                       <i class="fa fa-angle-right pull-right"></i>
                   </span>
               </a>
@@ -126,6 +126,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
                 <li class="<?php echo active_link_method('index', 'spdp') ?>">
                     <a href="<?php echo base_url('spdp/index') ?>"><i class="fa fa-angle-double-right"></i> Data SPDP</a>
+                </li>
+                 <li class="<?php echo active_link_method('create', 'p16') ?>">
+                    <a href="<?php echo base_url('p16/create') ?>"><i class="fa fa-angle-double-right"></i> Surat P-16</a>
                 </li>
               </ul>
           </li>
