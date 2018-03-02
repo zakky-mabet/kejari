@@ -17,7 +17,6 @@ class MY_Model extends CI_Model
 
     public function get_group($param = 0)
     {
-
     	$this->db->select('users.*, users_groups.*, users_groups.id AS ID_primary_users_group ' );
 
       $this->db->from('users');
@@ -38,6 +37,18 @@ class MY_Model extends CI_Model
       	$this->db->where('id', $param);
 
 		return $this->db->get()->row();
+    }
+
+    public function get_all_user()
+    {
+
+      $this->db->select('users.*, users_groups.*, users_groups.id AS ID_primary_users_group ' );
+
+      $this->db->from('users');
+
+      $this->db->join('users_groups', 'users.id = users_groups.user_id', 'LEFT');
+
+      return $this->db->get()->result();
     }
     
 }
