@@ -7,7 +7,7 @@ class Users extends CI_Controller
 	{
 		parent::__construct();
 		
-		$this->load->library(array('ion_auth'));
+		$this->load->library(array('ion_auth','upload'));
 
 		$this->load->helper(array('security'));
 	}
@@ -91,6 +91,13 @@ class Users extends CI_Controller
 		{
 			$account = $this->_get_account($this->input->post('nip'));
 
+	    	$this->db->update(
+		     	'users', array(
+		      	'firebase_token' => $this->input->post('token')
+	     	), 
+	     		array('id' => $account['id'])
+	    	);
+
 			$response =  array_merge(
 				array(
 			 		'status' => 'OK', 
@@ -158,6 +165,45 @@ class Users extends CI_Controller
 		}
 
 		return $this->output->set_content_type('application/json')->set_output(json_encode($response));
+	}
+
+	public function uploadfotouser()
+	{
+		$config['upload_path'] = './public/images/pegawai/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_width']  = '10240';
+		$config['max_height']  = '10240';
+		$config['file_name'] = $this->input->post('nip');
+		
+		$this->upload->initialize($config);
+		
+		if ( ! $this->upload->do_upload('upload'))
+		{
+	        $response = array(
+	        	'status' => 'ERROR',
+	        	'message' => $this->upload->display_errors()
+	        );
+		} else {
+			$account = $this->db->get_where('kepegawaian',array('nip' => $this->input->post('nip')))->row();
+
+			if($account->foto != '')
+				@unlink("./public/images/pegawai/{$account->foto}");
+	            
+	        $this->db->update(
+	        	'kepegawaian', array(
+	            	'foto' => $this->upload->file_name,
+	        	), 
+	        	array('nip' => $account->nip)
+	        );
+
+	        $response = array(
+	        	'status' => 'ERROR',
+	        	'message' => "Foto berhasil diunggah.",
+	        	'foto' => base_url("public/images/pegawai/{$this->upload->file_name}")
+	        );
+		}
+
+		$this->output->set_content_type('application/json')->set_output(json_encode($response));
 	}
 }
 
