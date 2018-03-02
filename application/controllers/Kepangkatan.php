@@ -19,6 +19,7 @@ class Kepangkatan extends Admin_panel
 
 		$this->load->js(base_url("public/app/kepegawaian.js"));
 		$this->load->js(base_url("public/app/diklat/kepangkatan.js"));
+		
 
 	}
 

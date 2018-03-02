@@ -140,19 +140,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li> -->
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('users')); ?>">
-              <a href="#">
+          <li class="treeview <?php echo active_link_multiple(array('pengguna')); ?>">
+              <a href="">
                   <i class="fa fa-wrench"></i> <span>Pengaturan</span>
                   <span class="pull-right-container">
                       <i class="fa fa-angle-right pull-right"></i>
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Pengguna Sistem</a>
+                <li class="<?php echo active_link_method('index','pengguna') ?>">
+                    <a href="<?php echo base_url('pengguna') ?>"><i class="fa fa-angle-double-right"></i> Pengguna Sistem</a>
                 </li>
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Pengaturan Akun</a>
+                <li class="<?php echo active_link_method('update','pengguna') ?>">
+                    <a href="<?php echo base_url('pengguna/update') ?>"><i class="fa fa-angle-double-right"></i> Pengaturan Akun</a>
                 </li>
               </ul>
           </li>

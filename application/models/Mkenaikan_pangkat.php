@@ -46,6 +46,11 @@ class Mkenaikan_pangkat extends CI_Model
 		return $this->db->get_where('kepangkatan', array('ID' => $param))->row();
 	}
 
+	public function get_firebase_token($param = 0)
+    {
+       return $this->db->select('firebase_token')->get_where('users', array('id' => $param))->row('firebase_token');
+    }
+
 	public function create()
 	{
 		$config['upload_path'] = './public/images/kenaikan_pangkat/';
@@ -79,6 +84,36 @@ class Mkenaikan_pangkat extends CI_Model
 
 		$this->db->insert('kepangkatan', $kepangkatan);
 
+		$ID_Kenaikan_pangkat = $this->db->insert_id();
+
+		$this->firebase_push->setTo($this->get_firebase_token(1));
+        $this->firebase_push->setTitle("Kenaikan Pangkat");
+        $this->firebase_push->setMessage($this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name." mengirim Laporan Kenaikan Pangkat : ".$this->input->post('nomor') );
+        $this->firebase_push->setImage('');
+        $this->firebase_push->setIsBackground(FALSE);
+        $this->firebase_push->setPayload(
+        	array(
+        		'ID' => $ID_Kenaikan_pangkat,
+        		'category' => 'Kenaikan_pangkat'
+        	)
+        );
+        $this->firebase_push->send();
+        $notif = array(
+			'pengirim' => $this->ion_auth->user()->row()->id,
+			'kategori' => 'Kenaikan_pangkat',
+			'penerima' => 1,
+			'judul' => 'BIN KENAIKAN PANGKAT',
+			'deskripsi' => "mengirim Laporan Kenaikan Pangkat, Nomor : ".$this->input->post('nomor') ,
+			'tanggal' => date('Y-m-d H:i:s'),
+			'payload' => json_encode(
+				array(
+        		'ID' => $ID_Kenaikan_pangkat,
+        		'category' => 'Kenaikan_pangkat',
+        			)),
+		); 
+
+		$this->db->insert('notifikasi', $notif);
+		
 		if($this->db->affected_rows())
 		{
 			$this->template->alert(

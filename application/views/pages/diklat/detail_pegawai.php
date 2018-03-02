@@ -85,9 +85,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td class="text-center" style="vertical-align: middle;"><?php echo $row->tingkat ?></td>
 							<td style="vertical-align: middle;"><?php echo $row->keterangan ?></td>
 							<td>
+							<?php if ($row->lampiran != FALSE) :  ?>
 							<button  class="btn" id="lihat-gambar" data-src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>">
 							 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">
 							</button>
+							<?php else : ?>
+							<span class="badge bg-red">Lampiran SK Kosong</span>
+							<?php endif; ?>
 							</td>
 						</tr>
 					<?php endforeach; ?>

@@ -55,23 +55,40 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							 <img width="50%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
 							</button>
 							<?php else : ?>
-							<span class="badge bg-red">Lampiran SK Kosong</span>
+							<span class="label label-danger">Lampiran SK Kosong</span>
 							<?php endif; ?>
+
 							</td>
 							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
+								<!-- warna hijau -->
+								<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) >= 150 ): ?>
+									<td class="text-center">
+										<span data-toggle="tooltip" data-placement="top" class="label label-success" >
+										<?php echo $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span>
+									</td>
+								<?php endif ?>
+								<!-- warna kuning -->
+								<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) < 150 AND $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) >= 60  ): ?>
+									<td class="text-center">
+										<span data-toggle="tooltip" data-placement="top" class="label label-warning" >
+										<?php echo $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span>
+									</td>
+								<?php endif ?>
+								<!-- jika kondisi merah peingatan -->
+								<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) < 60 AND $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) >= 30 ): ?>
+									<td class="text-center">
+										<span data-toggle="tooltip" data-placement="top" class="label label-danger" >
+										SIAPKAN BERKAS</span>
+									</td>
+								<?php endif ?>
+								<!-- jika kondisi telah lewat -->
+								<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) < 30): ?>
+									<td class="text-center">
+										<span id="textkedip" data-toggle="tooltip" data-placement="top" class="label label-danger" >
+										Waktu Telah Lewat</span>
+									</td>
+								<?php endif ?>
 
-							<?php if ($this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) < 30): ?>
-								<td>
-									<span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Anda Akan Naik Pangkat">SIAPKAN BERAS</span>
-								</td>
-								<?php else: ?>
-								<td><span data-toggle="tooltip" data-placement="top" class="badge bg-blue" title="Proses Kenaikan Gaji">
-									<?php echo $this->mgaji_berkala->hitungHari(date('Y-m-d'), $row->batas_akhir) ?> Hari</span>
-								</td>
-							<?php endif ?>
-
-							<?php else: ?>
-							   <td><span data-toggle="tooltip" data-placement="top" class="badge bg-red" title="Proses Kenaikan Gaji Telah Lewat">Telah Lewat Waktu</span></td>
 							<?php endif ?>
 							<td style="vertical-align: middle;">
 							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
@@ -79,7 +96,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
-							
 							<?php else: ?>
 								<a></i>
 								</a>

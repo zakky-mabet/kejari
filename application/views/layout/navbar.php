@@ -14,7 +14,7 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#" data-toggle="modal" data-target="#logoff" title="Keluar Aplikasi"><i class="fa fa-user"></i></a>
+                        <a href="<?php echo base_url('pengguna/update') ?>" title="Pengaturan Account"><i class="fa fa-user"></i></a>
                     </li>
                     <li>
                         <a href="#" data-toggle="modal" data-target="#logoff" title="Keluar Aplikasi"><i class="fa fa-power-off"></i></a>

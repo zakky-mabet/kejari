@@ -33,4 +33,10 @@ $(".group3").colorbox({rel:'group3', transition:"none", width:"75%", height:"aut
 });
 //]]>
 
+	var kedipan = 200; 
+	var dumet = setInterval(function () {
+    var ele = document.getElementById('textkedip');
+    ele.style.visibility = (ele.style.visibility == 'hidden' ? '' : 'hidden');
+	}, kedipan);
+
 });
