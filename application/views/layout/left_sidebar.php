@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               <img src="<?php echo base_url('public/images/users/default.png') ?>" class="img-circle" alt="User Image">
         	</div>
         	<div class="pull-left info">
-          		<p><?php echo $user->first_name ?></p>
+          		<p><?php echo $user->first_name.' '.$user->last_name ?></p>
           		<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         	</div>
       	</div>
@@ -68,6 +68,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
           </li>
+          <li class="treeview <?php echo active_link_multiple(array('laporan_informasi')); ?>">
+              <a href="#">
+                  <i class="fa fa-file-text-o"></i> <span>Laporan Informasi </span>
+                  <span class="pull-right-container">
+                      <i class="fa fa-angle-right pull-right"></i>
+                  </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php echo active_link_method('create', 'laporan_informasi') ?>">
+                    <a href="<?php echo base_url('laporan_informasi/create') ?>"><i class="fa fa-angle-double-right"></i> Buat Laporan Informasi </a>
+                </li>
+                <li class="<?php echo active_link_method('harian', 'laporan_informasi') ?>">
+                    <a href="<?php echo base_url('laporan_informasi/harian') ?>"><i class="fa fa-angle-double-right"></i> Laporan Informasi Harian </a>
+                </li>
+                 <li class="<?php echo active_link_method('khusus', 'laporan_informasi') ?>">
+                    <a href="<?php echo base_url('laporan_informasi/khusus') ?>"><i class="fa fa-angle-double-right"></i> Laporan Informasi Khusus </a>
+                </li>
+              </ul>
+          </li>
           <li class="treeview <?php echo active_link_multiple(array()); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>PIDSUS</span>
@@ -94,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array()); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('spdp')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>PIDUM</span>
                   <span class="pull-right-container">
@@ -102,8 +121,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="">
-                    <a href=""><i class="fa fa-angle-double-right"></i> Data Laporan Masyarakat</a>
+                <li class="<?php echo active_link_method('create', 'spdp') ?>">
+                    <a href="<?php echo base_url('spdp/create') ?>"><i class="fa fa-angle-double-right"></i> Buat SPDP</a>
+                </li>
+                <li class="<?php echo active_link_method('index', 'spdp') ?>">
+                    <a href="<?php echo base_url('spdp/index') ?>"><i class="fa fa-angle-double-right"></i> Data SPDP</a>
                 </li>
               </ul>
           </li>

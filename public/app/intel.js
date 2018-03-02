@@ -13,6 +13,13 @@ $(document).ready(function() {
 		$('a#delete-yes').attr('href', base_url + 'laporan_masyarakat/delete/' + $(this).data('id')+'?disposisi='+ $(this).data('disposisi') )
 	});
 
+	$('a#delete-laporan-informasi').click(function() 
+	{
+		$('div#modal-delete-laporan-informasi').modal('show');
+
+		$('a#delete-yes').attr('href', base_url + 'laporan_informasi/delete/' + $(this).data('id') )
+	});
+
     $('#datepicker, #datepicker1').datepicker({
       autoclose: true,
       format: "yyyy-mm-dd"
