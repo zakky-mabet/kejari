@@ -12,28 +12,6 @@ class Lapmas extends CI_Controller
 		$this->load->helper(array('security','indonesia'));
 	}
 
-	public function push()
-	{
-						foreach ($this->getUserInGroup(array(4)) as $key => $user) 
-						{
-							$this->firebase_push->setTo($user->firebase_token);
-					        $this->firebase_push->setTitle("Instruksi dari KAJARI");
-					        $this->firebase_push->setMessage("Anda memiliki 1 instruksi laporan dari KAJARI");
-					        $this->firebase_push->setImage('');
-					        $this->firebase_push->setIsBackground(FALSE);
-					        $this->firebase_push->setPayload(
-					        	array(
-					        		'ID' => 1,
-					        		'category' => 'lapmas',
-					        		'query' => $this->db->last_query()
-					        	)
-					        );
-					        $this->firebase_push->send();
-						}
-
-        return $this->output->set_content_type('application/json')->set_output(json_encode($this->firebase_push->getPush()));
-	}
-
 	public function index()
 	{
 		$response = array();
