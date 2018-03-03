@@ -11,12 +11,17 @@ class Pengguna extends admin_panel
 
 		$this->load->model(array('ion_auth_model'));
 
+		$this->load->model(array('mpengguna'));
+
+		$this->load->model(array('mkepegawaian'));
+
 		$this->load->helper(array('indonesia'));
 
 		$this->per_page = (!$this->input->get('per_page')) ? 20 : $this->input->get('per_page');
 		
 		$this->page = $this->input->get('page');
 		$this->query = $this->input->get('query');
+		$this->load->js(base_url("public/app/pengguna.js"));
 	}
 
 	public function index()
@@ -31,14 +36,9 @@ class Pengguna extends admin_panel
 		
 		$config['per_page'] = $this->per_page;
 		
-		//$config['total_rows'] = $this->ion_auth_model->get_all(null, null, 'num');
+		$config['total_rows'] = $this->ion_auth_model->get_users_groups(null, null, 'num');
 		// untuk memanggil data dari database
 		$this->data['users'] = $this->ion_auth->users()->result();
-		foreach ($this->data['users'] as $k => $user)
-		{
-			$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-		}
-		
 		$this->pagination->initialize($config);
 		
 		$this->data['title'] = "Pengguna Sistem";
@@ -53,9 +53,33 @@ class Pengguna extends admin_panel
 
 		$this->breadcrumbs->unshift(3, 'Pengguna Account', "pengguna/index");
 
+		$this->form_validation->set_rules('first_name', 'Nama Depan', 'trim|required');
+		$this->form_validation->set_rules('last_name', 'Nama Belakang', 'trim|required');
+		$this->form_validation->set_rules('new_pass', 'Password Baru', 'trim|min_length[5]');
+		$this->form_validation->set_rules('repeat_pass', 'Ini', 'trim|matches[new_pass]');
+		$this->form_validation->set_rules('old_pass', 'Password Lama', 'trim|required|callback_validate_password');
+		$this->form_validation->set_rules('email', 'E-mail', 'trim|required');
+		$this->form_validation->set_rules('old_pass', 'Password Lama', 'trim|required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mpengguna->update($param);
+
+			redirect(current_url());
+		}
+
 		$this->data['title'] = "account";
+		$this->data['get'] = $this->mkepegawaian->get($param);
 		$this->template->view('pengguna/update-user', $this->data);
 		
+	}
+
+	public function delete($id)
+	{
+		$this->ion_auth->delete_user($id);
+
+		redirect('pengguna');
+	
 	}
 
 }

@@ -93,7 +93,7 @@ class Mkepangkatan extends CI_Model
 
 		$this->db->insert('kepangkatan', $kepangkatan);
 
-		$ID_Kenaikan_pangkat = $this->db->insert_id();
+		$pegawai = $this->db->get_where('kepegawaian', array('nip' => $this->input->post('nip')))->row();
 
 		$this->firebase_push->setTo($this->get_firebase_token(1));
         $this->firebase_push->setTitle("Kenaikan Pangkat");
@@ -102,22 +102,24 @@ class Mkepangkatan extends CI_Model
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
         	array(
-        		'ID' => $ID_Kenaikan_pangkat,
-        		'category' => 'Kenaikan_pangkat'
+        		'ID' => $pegawai->ID,
+        		'category' => 'kepegawaian',
+        		'name'	=> $pegawai->nama
         	)
         );
         $this->firebase_push->send();
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
-			'kategori' => 'Kenaikan_pangkat',
+			'kategori' => 'kepegawaian',
 			'penerima' => 1,
-			'judul' => 'BIN KENAIKAN PANGKAT',
+			'judul' => 'KENAIKAN PANGKAT',
 			'deskripsi' => "mengirim Laporan Kenaikan Pangkat, Nomor : ".$this->input->post('nomor') ,
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(
-        		'ID' => $ID_Kenaikan_pangkat,
-        		'category' => 'Kenaikan_pangkat',
+        		'ID' => $pegawai->ID,
+        		'category' => 'kepegawaian',
+        		'name'	=> $pegawai->nama
         			)),
 		); 
 
