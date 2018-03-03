@@ -16,11 +16,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('spdp') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('p16') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
-						<a href="<?php echo base_url('spdp/create') ?>" class="btn btn-success" id="reset-form"><i class="fa fa-plus"></i> Tambahkan</a>
-						<a href="<?php echo site_url("spdp/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+	
+						<a href="<?php echo site_url("p16/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -29,49 +29,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<table class="table table-bordered table-stripped table-condensed">
 					<thead class="bg-green">
 						<tr>
-							<th class="text-center">No.</th>
-							<th class="text-center">NOMOR</th>
-							<th class="text-center">TANGGAL MASUK</th>
-							<th class="text-center">ASAL</th>
-							<th class="text-center">STATUS P-16</th>
+							<th class="text-center">NO</th>
+							<th class="text-center">NOMOR PRINT</th>
+							<th class="text-center">DASAR</th>
+							<th class="text-center">UNTUK</th>
+							<th class="text-center">TANGGAL DIBUAT</th>
 							<th width="100"></th>
 						</tr>
 					</thead>
 
 					<tbody class="hoverTable">
-						<?php foreach($spdp as $row) : ?>
+						<?php foreach($p16 as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td><?php echo highlight_phrase($row->nomor, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase($row->nomor_print, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo $row->dasar ?>  </td>
+							<td><?php echo highlight_phrase($row->untuk, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
 							<td><?php echo highlight_phrase(date_id($row->tanggal_masuk), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
-							<td><?php echo highlight_phrase($row->asal, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
-							<td> <?php if ($this->mspdp->get($row->ID, 'spdp_on_p16') == 0): ?>
-							   <span class="text-red"> Surat P-16 belum dibuat </span> <?php else: ?> Surat P-16 telah dibuat	<?php endif ?> </td>
+													
 							<td class="text-left">
 
-								
-								<a href="<?php echo base_url('spdp/create_p16/'.$row->ID) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Printah Penujukan Jaksa Penuntut Umum" class="btn btn-xs btn-success" style="margin-right: 10px">
-									<i class="fa fa-send"></i>
-								</a>
-						
-								<a href="<?php echo base_url('spdp/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting SPDP ini." style="margin-right: 10px">
+								<a href="<?php echo base_url('p16/update/'.$row->ID_primary_p16) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting P-16 ini." style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
 								
-								<a href="javascript:void(0)" id="delete-spdp" data-toggle="tooltip" data-placement="top" title="Hapus SPDP ini." data-id="<?php echo $row->ID ?>" data-disposisi="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-p16" data-toggle="tooltip" data-placement="top" title="Hapus P-16 ini." data-id="<?php echo $row->ID_primary_p16 ?>" class="btn btn-xs btn-danger">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>
 						<tr>
-							<td colspan="6"><small class="pull-right">Ditampilkan <?php echo count($spdp) . " dari " . $num_spdp . " data"; ?></small></td>
+							<td colspan="6"><small class="pull-right">Ditampilkan <?php echo count($p16) . " dari " . $num_p16 . " data"; ?></small></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 			<div class="box-footer no-padding">
-
+				<pre>
+					<?php print_r($p16); ?>	
+				</pre>
 			</div>
 		</div>
 		<div class="col-md-12 text-center">
@@ -81,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 
-<div class="modal fade in modal-danger" id="modal-delete-spdp" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade in modal-danger" id="modal-delete-p16" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
