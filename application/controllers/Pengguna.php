@@ -39,6 +39,7 @@ class Pengguna extends admin_panel
 		$config['total_rows'] = $this->ion_auth_model->get_users_groups(null, null, 'num');
 		// untuk memanggil data dari database
 		$this->data['users'] = $this->ion_auth->users()->result();
+		
 		$this->pagination->initialize($config);
 		
 		$this->data['title'] = "Pengguna Sistem";

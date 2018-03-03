@@ -62,9 +62,8 @@ class Mpengguna extends MY_Model
 		}
 
 		$data = array(
-			'nama' => $this->input->post('name'),
+			'nama' => $this->input->post('first_name'). ' ' .$this->input->post('last_name'),
 			'alamat' => $this->input->post('alamat'),
-			'no_tlp' => $this->input->post('no_tlp'),
 			'foto' => $foto
 		);
 
@@ -74,10 +73,13 @@ class Mpengguna extends MY_Model
 			
 			'first_name' => $this->input->post('first_name'),
 			'last_name' => $this->input->post('last_name'),
+			'phone' => $this->input->post('no_tlp'),
+			'email' => $this->input->post('email'),
+			'phone' => $this->input->post('phone'),
 			
 		);
 		if($this->input->post('new_pass') != '')
-			$data['password'] = password_hash($this->input->post('new_pass'), PASSWORD_DEFAULT);
+			$data2['password'] = password_hash($this->input->post('new_pass'), PASSWORD_DEFAULT);
 
 		$this->db->update('users', $data2, array('ID' => $this->input->post('id')));
 

@@ -28,7 +28,6 @@ echo form_hidden('id', $user->id);
 					<div class="col-md-4">
 						<input type="text" name="last_name" class="form-control" value="<?php echo $user->last_name ?>">
 						<p class="help-block"><?php echo form_error('last_name', '<small class="text-red">', '</small>'); ?></p>
-						<input type="show" name="name" class="form-control" value="<?php echo $user->first_name.' '.$user->last_name ?>">
 					</div>
 				</div>
 				<div class="form-group">
@@ -48,7 +47,7 @@ echo form_hidden('id', $user->id);
 				<div class="form-group">
 					<label for="phone" class="control-label col-md-3 col-xs-12">Nomor Telepon : <strong class="text-primary">*</strong></label>
 					<div class="col-md-8">
-						<input type="text" name="no_tlp" class="form-control" value="<?php echo $user->phone ?>">
+						<input type="text" name="phone" class="form-control" value="<?php echo $user->phone ?>">
 						<p class="help-block"></p>
 					</div>
 				</div>
