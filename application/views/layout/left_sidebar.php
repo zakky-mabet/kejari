@@ -127,8 +127,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="<?php echo active_link_method('index', 'spdp') ?>">
                     <a href="<?php echo base_url('spdp/index') ?>"><i class="fa fa-angle-double-right"></i> Data SPDP</a>
                 </li>
-                 <li class="<?php echo active_link_method('create', 'p16') ?>">
-                    <a href="<?php echo base_url('p16/create') ?>"><i class="fa fa-angle-double-right"></i> Surat P-16</a>
+                 <li class="<?php echo active_link_method('index', 'p16') ?>">
+                    <a href="<?php echo base_url('p16/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-16</a>
                 </li>
               </ul>
           </li>

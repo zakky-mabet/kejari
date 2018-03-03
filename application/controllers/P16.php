@@ -18,9 +18,9 @@ class P16 extends Admin_panel {
 	{
 		parent::__construct();
 
-		$this->breadcrumbs->unshift(1, 'Surat Pemberitahuan Dimulainya Penyidikan', "spdp");
+		$this->breadcrumbs->unshift(1, 'Surat Perintah Penujukan Jaksa Penuntuan Umum', "p16");
 
-		$this->load->model(array('mspdp'));
+		$this->load->model(array('mp16'));
 
 		$this->per_page = (!$this->input->get('per_page')) ? 20 : $this->input->get('per_page');
 
@@ -31,56 +31,82 @@ class P16 extends Admin_panel {
 		$this->load->js(base_url("public/app/pidum.js"));
 	}
 	
-	// public function index()
-	// {
-	// 	$this->page_title->push("SPDP", "Data Surat Pemberitahuan Dimulainya Penyidikan");
-
-	// 	$config = $this->template->pagination_list();
-
-	// 	$config['base_url'] = site_url("spdp?per_page={$this->per_page}&query={$this->query}");
-
-	// 	$config['per_page'] = $this->per_page;
-	// 	$config['total_rows'] = $this->mspdp->get_all(null, null, 'num');
-
-	// 	$this->pagination->initialize($config);
-
-	// 	$this->data['title'] = "Data Surat Pemberitahuan Dimulainya Penyidikan";
-	// 	$this->data['per_page'] = $config['per_page'];
-	// 	$this->data['num_spdp'] = $config['total_rows'];
-	// 	$this->data['spdp'] = $this->mspdp->get_all($this->per_page, $this->page, 'result');
-	// 	$this->template->view('pidum/data_spdp', $this->data);
-	// }
-
-	public function create()
+	public function index()
 	{
-		$this->page_title->push("SPDP ", "Buat Baru ");
+		$this->page_title->push("P-16", "Data Surat Perintah Penujukan Jaksa Penuntuan Umum");
 
-		$this->breadcrumbs->unshift(2, 'Buat', "spdp/create");
+		$config = $this->template->pagination_list();
+
+		$config['base_url'] = site_url("p16?per_page={$this->per_page}&query={$this->query}");
+
+		$config['per_page'] = $this->per_page;
+		$config['total_rows'] = $this->mp16->get_all(null, null, 'num');
+
+		$this->pagination->initialize($config);
+
+		$this->data['title'] = "Data Surat Perintah Penujukan Jaksa Penuntuan Umum";
+		$this->data['per_page'] = $config['per_page'];
+		$this->data['num_p16'] = $config['total_rows'];
+		$this->data['p16'] = $this->mp16->get_all($this->per_page, $this->page, 'result');
+		$this->template->view('pidum/data_p16', $this->data);
+	}
+
+	public function create($param = 0)
+	{
+		$this->page_title->push("P-16 ", "Buat P-16 ");
+
+		$this->breadcrumbs->unshift(2, 'Buat', "p16/create");
 		
-		$this->form_validation->set_rules('nomor', 'Nomor ', 'trim|required|callback_validate_nomor');
-		$this->form_validation->set_rules('asal', 'Asal ', 'trim|required');
-		$this->form_validation->set_rules('deskripsi', 'Deskripsi ', 'trim|required');
+		$this->form_validation->set_rules('nomor_print', 'NOMOR PRINT', 'trim|required|callback_validate_nomor');
+		$this->form_validation->set_rules('dasar', 'DASAR ', 'trim|required');
+		$this->form_validation->set_rules('pertimbangan', 'PERTIMBANGAN ', 'trim|required');
+		$this->form_validation->set_rules('untuk', 'UNTUK ', 'trim|required');
+		$this->form_validation->set_rules('id_user[]', 'MEMERINTAHKAN KEPADA ', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)
 		{
-			$this->mspdp->create();
+			$this->mp16->create($param);
 
 			redirect(current_url());
 		}
 
-		$this->data['title'] = "Buat Baru Surat Pemberitahuan Dimulainya Penyidikan ";
-		$this->template->view('pidum/create_spdp', $this->data);
+		$this->data['title'] = "Buat Surat Perintah Penujukan Jaksa Penuntuan Umum ";
+		$this->data['param'] = $param;
+		$this->template->view('pidum/create_p16', $this->data);
+	}
+
+	public function update($param = 0)
+	{
+		$this->page_title->push("P-16 ", "Sunting P-16 ");
+
+		$this->breadcrumbs->unshift(2, 'Sunting', "p16/update");
+		
+		$this->form_validation->set_rules('nomor_print', 'NOMOR PRINT', 'trim|required|callback_validate_nomor');
+		$this->form_validation->set_rules('dasar', 'DASAR ', 'trim|required');
+		$this->form_validation->set_rules('pertimbangan', 'PERTIMBANGAN ', 'trim|required');
+		$this->form_validation->set_rules('untuk', 'UNTUK ', 'trim|required');
+		$this->form_validation->set_rules('id_user[]', 'MEMERINTAHKAN KEPADA ', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mp16->update($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['title'] = "Sunting Surat Perintah Penujukan Jaksa Penuntuan Umum ";
+		$this->data['param'] = $param;
+		$this->template->view('pidum/update_p16', $this->data);
 	}
 
 	
-
 	/**
 	 *
 	 * @return string
 	 **/
 	public function validate_nomor()
 	{
-		if($this->mspdp->nomor_cek($this->input->post('ID')) == TRUE)
+		if($this->mp16->nomor_cek($this->input->post('ID')) == TRUE)
 		{
 			$this->form_validation->set_message('validate_nomor', 'Maaf Nomor ini telah digunakan.');
 			return false;
@@ -91,7 +117,7 @@ class P16 extends Admin_panel {
 
 	// public function delete($param = 0)
 	// {
-	// 	$this->mspdp->delete($param);
+	// 	$this->mp16->delete($param);
 
 	// 	redirect('laporan_informasi/harian');
 	// }

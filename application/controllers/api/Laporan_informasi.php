@@ -56,7 +56,7 @@ class Laporan_informasi extends CI_Controller
 			$this->db->order_by('tanggal_create', 'asc');
 		}
 
-		$this->db->where('users.id', $this->input->post('ID'));
+		//$this->db->where('users.id', $this->input->post('ID'));
 
 		return $this->db->get('laporan_informasi', $limit, $offset)->result();
 	}

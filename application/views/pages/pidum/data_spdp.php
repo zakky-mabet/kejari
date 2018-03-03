@@ -43,24 +43,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
 							<td><?php echo highlight_phrase($row->nomor, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
-							<td><?php echo highlight_phrase(date_id($row->tanggal_masuk), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
+							<td><?php echo date_id($row->tanggal_masuk) ?></td>
 							<td><?php echo highlight_phrase($row->asal, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?> </td>
 							<td> <?php if ($this->mspdp->get($row->ID, 'spdp_on_p16') == 0): ?>
 							   <span class="text-red"> Surat P-16 belum dibuat </span> <?php else: ?> Surat P-16 telah dibuat	<?php endif ?> </td>
 							<td class="text-left">
-
 								
-								<a href="<?php echo base_url('p16/create'.$row->ID) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Printah Penujukan Jaksa Penuntut Umum" class="btn btn-xs btn-success" style="margin-right: 10px">
+								<a href="<?php echo base_url('p16/create/'.$row->ID) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Printah Penujukan Jaksa Penuntut Umum" class="btn btn-xs btn-success" style="margin-right: 10px">
 									<i class="fa fa-send"></i>
 								</a>
 						
 								<a href="<?php echo base_url('spdp/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting SPDP ini." style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
-								
-								<a href="javascript:void(0)" id="delete-spdp" data-toggle="tooltip" data-placement="top" title="Hapus SPDP ini." data-id="<?php echo $row->ID ?>" data-disposisi="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
+
+								<?php if ($this->mspdp->get($row->ID, 'spdp_on_p16') == 0): ?> 
+									<a href="javascript:void(0)" id="delete-spdp" data-toggle="tooltip" data-placement="top" title="Hapus SPDP ini." data-id="<?php echo $row->ID ?>" data-disposisi="<?php echo $row->ID ?>" class="btn btn-xs btn-danger">
 									<i class="fa fa-trash-o"></i>
 								</a>
+								<?php else: ?> 
+
+								<?php endif ?>
+								
+
 							</td>
 						</tr>
 						<?php endforeach; ?>
