@@ -129,7 +129,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										Waktu Telah Lewat</span>
 									</td>
 								<?php endif ?>
-							
+								<?php else: ?>
+									<td class="text-center">
+										<span id="textkedip" data-toggle="tooltip" data-placement="top" class="label label-danger" >
+										Waktu Telah Lewat</span>
+									</td>
 							<?php endif ?>
 							<td class="text-left">
 								<a href="<?php echo base_url('kepangkatan/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">

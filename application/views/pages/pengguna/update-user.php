@@ -9,46 +9,51 @@
  * @var string
  **/
 echo form_open(current_url(), array('class' => 'form-horizontal'));
-
+echo form_hidden('id', $user->id);
 ?>
 			<div class="box-body" style="margin-top: 10px;">
 				<div class="form-group">
 					<label for="nip" class="control-label col-md-3 col-xs-12">NIP : <strong class="text-red">*</strong></label>
 					<div class="col-md-8">
-						<input type="text" name="nip" class="form-control" value="">
+						<input type="text" name="nip" class="form-control" value="<?php echo $user->nip ?>" disabled>
 						<p class="help-block"></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="name" class="control-label col-md-3 col-xs-12">Nama Pengguna : <strong class="text-red">*</strong></label>
-					<div class="col-md-8">
-						<input type="text" name="name" class="form-control" value="">
-						<p class="help-block"></p>
+					<div class="col-md-4">
+						<input type="text" name="first_name" class="form-control" value="<?php echo $user->first_name ?>">
+						<p class="help-block"><?php echo form_error('first_name', '<small class="text-red">', '</small>'); ?></p>
+					</div>
+					<div class="col-md-4">
+						<input type="text" name="last_name" class="form-control" value="<?php echo $user->last_name ?>">
+						<p class="help-block"><?php echo form_error('last_name', '<small class="text-red">', '</small>'); ?></p>
+						<input type="show" name="name" class="form-control" value="<?php echo $user->first_name.' '.$user->last_name ?>">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="name" class="control-label col-md-3 col-xs-12">Alamat : <strong class="text-primary">*</strong></label>
 					<div class="col-md-8">
-						<textarea name="alamat" class="form-control" rows="3"></textarea>
-						<p class="help-block"></p>
+						<textarea name="alamat" rows="5" class="form-control"></textarea>
+						<p class="help-block"><?php echo form_error('alamat', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="email" class="control-label col-md-3 col-xs-12">E-Mail : <strong class="text-red">*</strong></label>
 					<div class="col-md-8">
-						<input type="email" name="email" class="form-control" value="">
-						<p class="help-block"></p>
+						<input type="email" name="email" class="form-control" value="<?php echo $user->email ?>">
+						<p class="help-block"><?php echo form_error('email', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="phone" class="control-label col-md-3 col-xs-12">Nomor Telepon : <strong class="text-primary">*</strong></label>
 					<div class="col-md-8">
-						<input type="text" name="phone" class="form-control" value="">
+						<input type="text" name="no_tlp" class="form-control" value="<?php echo $user->phone ?>">
 						<p class="help-block"></p>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="file_excel" class="control-label col-md-3 col-xs-12">Foto : <strong class="text-red">*</strong></label>
+					<label for="file_excel" class="control-label col-md-3 col-xs-12">Foto : <strong class="text-blue">*</strong></label>
 					<div class="col-md-8">
 						<input type="file" name="file_foto" class="form-control" id="file-excel">
 						<p class="help-block"></p>
@@ -72,14 +77,14 @@ echo form_open(current_url(), array('class' => 'form-horizontal'));
 					<label for="old_pass" class="control-label col-md-3 col-xs-12">Password Lama : <strong class="text-red">*</strong></label>
 					<div class="col-md-8">
 						<input type="password" name="old_pass" class="form-control" value="">
-						<p class="help-block"></p>
+						<p class="help-block"><?php echo form_error('old_pass', '<small class="text-red">', '</small>'); ?></p>
 					</div>
 				</div>
 			</div>
 
 			<div class="box-footer with-border">
 				<div class="col-md-4 col-xs-5">
-					<a href="" class="btn btn-app hvr-shadow pull-right">
+					<a href="<?php echo site_url('pengguna') ?>" class="btn btn-app hvr-shadow pull-right">
 						<i class="ion ion-reply"></i> Kembali
 					</a>
 				</div>

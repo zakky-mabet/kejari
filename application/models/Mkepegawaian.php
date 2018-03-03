@@ -85,7 +85,7 @@ class Mkepegawaian extends CI_Model
 			$this->input->post('group')
 		);
 
-		$this->db->insert('users', $additional_data);
+		$this->db->update('users', $additional_data);
 
 		if($this->db->affected_rows())
 		{
@@ -150,12 +150,27 @@ class Mkepegawaian extends CI_Model
 			'no_tlp' => $this->input->post('telepon'),
 			'status_dinas' => $this->input->post('status'),
 			'jabatan' => $this->input->post('jabatan'),
-			'bidang' => $this->input->post('bidang'),
+			//'bidang' => $this->input->post('bidang'),
 			'foto' => $foto
 		);
 
 		$this->db->update('kepegawaian', $kepegawaian, array('ID' => $param));
 
+		// $additional_data = array(
+		// 						'first_name' => $this->input->post('name'),
+		// 						'nip' => $this->input->post('nip'),
+		// 						'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT), 
+		// 						);
+
+		// 	$this->ion_auth->register(
+		// 	null, 
+		// 	null,
+		// 	null, 
+		// 	$additional_data, 
+		// 	$this->input->post('group')
+		// );
+
+		// $this->db->update('users', $additional_data);
 
 		if($this->db->affected_rows())
 		{

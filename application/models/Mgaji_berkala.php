@@ -78,7 +78,7 @@ class Mgaji_berkala extends CI_Model
 
 		$this->db->insert('gaji_berkala', $gaji_berkala);
 
-		$ID_gaji_berkala = $this->db->insert_id();
+		$pegawai = $this->db->get_where('kepegawaian', array('nip' => $this->input->post('nip')))->row();
 
 		$this->firebase_push->setTo($this->get_firebase_token(1));
         $this->firebase_push->setTitle("Gaji Berkala");
@@ -87,22 +87,24 @@ class Mgaji_berkala extends CI_Model
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
         	array(
-        		'ID' => $ID_gaji_berkala,
-        		'category' => 'gaji_berkala'
+        		'ID' => $pegawai->ID,
+        		'category' => 'kepegawaian',
+        		'name'	=> $pegawai->nama
         	)
         );
         $this->firebase_push->send();
         $notif = array(
 			'pengirim' => $this->ion_auth->user()->row()->id,
-			'kategori' => 'gaji_berkala',
+			'kategori' => 'gaji berkala',
 			'penerima' => 1,
-			'judul' => 'BIN GAJI BERKALA',
+			'judul' => 'GAJI BERKALA',
 			'deskripsi' => "mengirim Laporan Gaji Berkala, Nomor : ".$this->input->post('nomor') ,
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(
-        		'ID' => $ID_gaji_berkala,
-        		'category' => 'gaji_berkala',
+        		'ID' => $pegawai->ID,
+        		'category' => 'kepegawaian',
+        		'name'	=> $pegawai->nama
         			)),
 		); 
 

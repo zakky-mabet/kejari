@@ -31,9 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th rowspan="2" style="vertical-align: middle;">No.</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">NIP</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">NRP</th>
+							<th rowspan="2" class="text-center" style="vertical-align: middle;">NAMA LENGKAP</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">PANGKAT</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">JABATAN</th>
-							<th rowspan="2" class="text-center" style="vertical-align: middle;">NAMA LENGKAP</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">TEMPAT, TANGGAL LAHIR</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">AGAMA</th>
 							<th rowspan="2" class="text-center" style="vertical-align: middle;">JENIS KELAMIN</th>
@@ -49,12 +49,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td><?php echo ++$this->page ?>.</td>
 							<td><?php echo $row->nip ?></td>
 							<td><?php echo $row->nrp ?></td>
+							<td><?php echo $row->nama ?></td>
 							<td>
 								<span data-toggle="tooltip" data-placement="top" title="Lihat Detail Ke Pangkat">
 								<a href="<?php echo base_url('kepangkatan/detail_kepangkatan/'.$row->ID) ?>"><?php echo $row->pangkat ?></span>
 							</td>
 							<td><?php echo $row->jabatan ?></td>
-							<td><?php echo $row->nama ?></td>
 							<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
 							<td><?php echo strtoupper($row->agama) ?></td>
 							<td><?php echo strtoupper($row->jns_kelamin) ?></td>

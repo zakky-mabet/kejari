@@ -24,10 +24,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<tr>
 							<th>No.</th>
 							<th class="text-center">NIP</th>
-							<th class="text-center">NAMA LENGKAP</th>
-							<th class="text-center">EMAIL</th>
-							<th class="text-center">USERNAME</th>
+							<th class="text-center">NAMA PENGGUNA</th>
 							<th class="text-center">ALAMAT</th>
+							<th class="text-center">E-MAIL</th>
+							<th class="text-center">TELEPON</th>
+							<th class="text-center">USERNAME</th>
+							
 							<th></th>
 
 						</tr>
@@ -37,18 +39,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<tr>
 								<td><?php echo ++$this->page ?>.</td>
 								<td><?php echo $user->nip ?></td>
-								<td><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8').' '. htmlspecialchars($user->last_name,ENT_QUOTES,'UTF-8'); ?></td>
-								
-								<td><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
-								<td><?php echo htmlspecialchars($user->username,ENT_QUOTES,'UTF-8');?></td>
+								<td><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8').' '. htmlspecialchars($user->last_name,ENT_QUOTES,'UTF-8'); ?>
+								</td>
+
 								<td></td>
+								<td><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
+								<td></td>
+								<td><?php echo htmlspecialchars($user->username,ENT_QUOTES,'UTF-8');?></td>
+								
 
 								<td class="text-left">
 								<a href="" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
 						
-								<a href="javascript:void(0)" id="delete-kepangkatan" data-id="" data-back="" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
+								<a href="javascript:void(0)" id="delete-pengguna" data-id="<?php echo $user->id ?>" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>		

@@ -88,18 +88,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 										Waktu Telah Lewat</span>
 									</td>
 								<?php endif ?>
-
+								<?php else: ?>
+									<td class="text-center">
+										<span id="textkedip" data-toggle="tooltip" data-placement="top" class="label label-danger" >
+										Waktu Telah Lewat</span>
+									</td>
 							<?php endif ?>
 							<td style="vertical-align: middle;">
-							<?php if ($row->batas_akhir >= date('Y-m-d')): ?>
+							<!-- <?php //if ($row->batas_akhir >= date('Y-m-d')): ?> -->
 							
 								<a href="<?php echo base_url('gaji_berkala/update/'.$row->ID)?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
-							<?php else: ?>
+							<!-- <?php //else: ?>
 								<a></i>
 								</a>
-							<?php endif ?>
+							<?php //endif ?> -->
 								<a href="javascript:void(0)" id="delete-gaji" data-id="<?php echo $row->ID ?>" class="btn btn-xs btn-danger" 
 									data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
