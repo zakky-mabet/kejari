@@ -197,7 +197,7 @@ class Users extends CI_Controller
 	        );
 
 	        $response = array(
-	        	'status' => 'ERROR',
+	        	'status' => 'OK',
 	        	'message' => "Foto berhasil diunggah.",
 	        	'foto' => base_url("public/images/pegawai/{$this->upload->file_name}")
 	        );

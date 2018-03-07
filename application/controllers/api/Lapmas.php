@@ -212,8 +212,7 @@ class Lapmas extends CI_Controller
 
 						$object[] = array(
 							'id_disposisi' => $disposisi->ID,
-							'group_id' => $disposisiData[$value['key']],
-							'tanggal_disposisi_masuk' => date('Y-m-d H:i:s')
+							'group_id' => $disposisiData[$value['key']] 
 						);
 					}
 
