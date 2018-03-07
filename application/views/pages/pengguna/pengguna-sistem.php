@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?> 
+//$user = $this->db->get_where('kepegawaian', array('id'=> $user->id))->row();?> 
 <div class="row">
 <div class="col-md-8 col-md-offset-2 col-xs-12"><?php echo $this->session->flashdata('alert'); ?></div>
 	<div class="col-md-12">
@@ -25,10 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<th>No.</th>
 							<th class="text-center">NIP</th>
 							<th class="text-center">NAMA PENGGUNA</th>
-							<th class="text-center">ALAMAT</th>
 							<th class="text-center">E-MAIL</th>
 							<th class="text-center">TELEPON</th>
-							<th class="text-center">USERNAME</th>
+							<th class="text-center">LEVEL</th>
 							
 							<th></th>
 
@@ -41,14 +40,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<td><?php echo $user->nip ?></td>
 								<td><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8').' '. htmlspecialchars($user->last_name,ENT_QUOTES,'UTF-8'); ?>
 								</td>
-
-								<td></td>
 								<td><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
-								<td></td>
+								<td><?php echo htmlspecialchars($user->phone,ENT_QUOTES,'UTF-8');?></td>
 								<td><?php echo htmlspecialchars($user->username,ENT_QUOTES,'UTF-8');?></td>
 								
 
 								<td class="text-left">
+									
 								<a href="" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
@@ -56,6 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								<a href="javascript:void(0)" id="delete-pengguna" data-id="<?php echo $user->id ?>" class="btn btn-xs btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus">
 									<i class="fa fa-trash-o"></i>
 								</a>
+							
 							</td>		
 							</tr>
 						<?php endforeach;?>

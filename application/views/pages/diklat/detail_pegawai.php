@@ -90,7 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							 <img width="100%" src="<?php echo base_url('public/diklat-file/images/'.$row->lampiran) ?>" class="img-rounded" alt="User Image">
 							</button>
 							<?php else : ?>
-							<span class="badge bg-red">Lampiran SK Kosong</span>
+							<span data-toggle="tooltip" data-placement="top" class="label label-warning">Lampiran SK Kosong</span>
 							<?php endif; ?>
 							</td>
 						</tr>

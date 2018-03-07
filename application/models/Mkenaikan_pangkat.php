@@ -84,7 +84,7 @@ class Mkenaikan_pangkat extends CI_Model
 
 		$this->db->insert('kepangkatan', $kepangkatan);
 
-		$ID_Kenaikan_pangkat = $this->db->insert_id();
+		$pegawai = $this->db->get_where('kepegawaian', array('nip' => $this->input->post('nip')))->row();
 
 		$this->firebase_push->setTo($this->get_firebase_token(1));
         $this->firebase_push->setTitle("Kenaikan Pangkat");
@@ -93,8 +93,9 @@ class Mkenaikan_pangkat extends CI_Model
         $this->firebase_push->setIsBackground(FALSE);
         $this->firebase_push->setPayload(
         	array(
-        		'ID' => $ID_Kenaikan_pangkat,
-        		'category' => 'Kenaikan_pangkat'
+        		'ID' => $pegawai->ID,
+        		'category' => 'kepegawaian',
+        		'name'	=> $pegawai->nama
         	)
         );
         $this->firebase_push->send();
@@ -107,8 +108,9 @@ class Mkenaikan_pangkat extends CI_Model
 			'tanggal' => date('Y-m-d H:i:s'),
 			'payload' => json_encode(
 				array(
-        		'ID' => $ID_Kenaikan_pangkat,
-        		'category' => 'Kenaikan_pangkat',
+        		'ID' => $pegawai->ID,
+        		'category' => 'kepegawaian',
+        		'name'	=> $pegawai->nama
         			)),
 		); 
 

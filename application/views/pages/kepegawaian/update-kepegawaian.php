@@ -121,23 +121,22 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 					</div>
 				</div>
 
-				<!-- <div class="form-group">
+				 <div class="form-group">
 					<label for="Bidang" class="control-label col-md-3 col-xs-12">Bidang : <strong class="text-red">*</strong></label>
 					<div class="col-md-4">
 						<select name="bidang" class="form-control">
 							<option value="">-- PILIH --</option>
-							
 							<option value="2" <?php if($get->bidang == 'PIDSUS') echo "selected"; ?>>PIDSUS</option>
 							<option value="3" <?php if($get->bidang == 'PEMBINAAN') echo "selected"; ?>>PEMBINAAN</option>
 							<option value="4" <?php if($get->bidang == 'INTELEJEN') echo "selected"; ?>>INTELEJEN</option>
 							<option value="5" <?php if($get->bidang == 'DATUN') echo "selected"; ?>>DATUN</option>
 							<option value="6" <?php if($get->bidang == 'PIDUM') echo "selected"; ?>>PIDUM</option>
 							<option value="7" <?php if($get->bidang == 'KEJARI') echo "selected"; ?>>KEJARI</option>
-							</option>
+							
 						</select>
 						<p class="help-block"><?php echo form_error('bidang', '<small class="text-red">', '</small>'); ?></p>
 					</div>
-				</div> -->
+				</div>
 			</div>
 
 			<div class="box-footer with-border">
