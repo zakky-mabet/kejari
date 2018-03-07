@@ -173,7 +173,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </span>
               </a>
               <ul class="treeview-menu">
-                <li class="<?php echo active_link_method('index','pengguna') ?>">
+                <li class="<?php echo active_link_method('index','pengguna').active_link_method('update_user','pengguna') ?>">
                     <a href="<?php echo base_url('pengguna') ?>"><i class="fa fa-angle-double-right"></i> Pengguna Sistem</a>
                 </li>
                 <li class="<?php echo active_link_method('update','pengguna') ?>">

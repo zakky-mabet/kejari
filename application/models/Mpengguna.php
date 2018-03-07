@@ -12,26 +12,22 @@ class Mpengguna extends MY_Model
 	{
 
 		if($this->input->get('query') != '')
-			$this->db->like('kepegawaian.nip', $this->input->get('query'))
-					 ->or_like('kepegawaian.nrp', $this->input->get('query'))
-					 ->or_like('kepegawaian.nama', $this->input->get('query'));
+			$this->db->like('users.nip', $this->input->get('query'))
+					 ->or_like('users.nama', $this->input->get('query'));
 
 		// tabel join berdasarkan data yang terakhir
-		$this->db->select("kepegawaian.* ");
-		$this->db->order_by('ID', 'DESC');
-		$this->db->group_by('kepegawaian.nip');
-
+		$this->db->select("users.* ");
 		if($type == 'result')
 		{
-			return $this->db->get('kepegawaian', $limit, $offset)->result();
+			return $this->db->get('users', $limit, $offset)->result();
 		} else {
-			return $this->db->get('kepegawaian')->num_rows();
+			return $this->db->get('users')->num_rows();
 		}
 	}
 
-	public function user($param = 0)
+	public function get($param = 0)
 	{
-		return $this->db->get_where('kepegawaian', array('ID' => $param))->row();
+		return $this->db->get_where('users', array('id' => $param))->row();
 	}
 
 
@@ -106,6 +102,32 @@ class Mpengguna extends MY_Model
 			);
 		}
 
+	}
+
+	public function update_user($param = 0)
+	{
+		$user = array(
+			'nip' => $this->input->post('nip'),
+			'first_name' => $this->input->post('first_name'),
+			'last_name' => $this->input->post('last_name'),
+			'active' => $this->input->post('status'),
+			
+		);
+
+		$this->db->update('users', $user, array('id' => $param));
+
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				' Data Pengguna berhasil di update.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Gagal menyimpan data.', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
 	}
 		
 }

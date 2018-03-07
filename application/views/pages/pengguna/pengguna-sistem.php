@@ -9,11 +9,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="box-header">
 				<div class="col-md-12">
 					<div class="col-md-4">
-						<input type="text" class="form-control" name="query" placeholder="Pencarian...." value="">
+						<input type="text" class="form-control" name="query" placeholder="Pencarian...." value="<?php echo $this->input->get('query') ?>">
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('pengguna') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 				</div>
 			</div>
@@ -47,7 +47,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 								<td class="text-left">
 									
-								<a href="" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
+								<a href="<?php echo site_url('pengguna/update_user/'.$user->id) ?>" class="btn btn-xs btn-primary" style="margin-right: 10px" data-toggle="tooltip" data-placement="top" title="Sunting">
 									<i class="fa fa-pencil"></i>
 								</a>
 						

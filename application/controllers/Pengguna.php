@@ -70,8 +70,31 @@ class Pengguna extends admin_panel
 		}
 
 		$this->data['title'] = "account";
-		$this->data['get'] = $this->mkepegawaian->get($param);
+		
 		$this->template->view('pengguna/update-account', $this->data);
+		
+	}
+
+	public function update_user($param = 0)
+	{	
+		
+		$this->page_title->push("Pengguna", "Data Pengguna");
+
+		$this->form_validation->set_rules('nip', 'NIP', 'trim|required');
+		$this->form_validation->set_rules('first_name', 'Nama Depan', 'trim|required');
+		$this->form_validation->set_rules('last_name', 'Nama Belakang', 'trim|required');
+		$this->form_validation->set_rules('status', 'Status', 'trim|required');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->mpengguna->update_user($param);
+
+			redirect(current_url());
+		}
+
+		$this->data['title'] = "account";
+		$this->data['get'] = $this->mpengguna->get($param);
+		$this->template->view('pengguna/update-user', $this->data);
 		
 	}
 
