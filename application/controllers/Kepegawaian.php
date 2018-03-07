@@ -63,7 +63,7 @@ class Kepegawaian extends Admin_panel
 		$this->form_validation->set_rules('pendidikan_terakhir', 'Pendidikan terakhir', 'trim');
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
 		$this->form_validation->set_rules('jabatan', 'jabatan', 'trim');
-		$this->form_validation->set_rules('bidang', 'bidang', 'trim');
+		$this->form_validation->set_rules('bidang', 'bidang', 'trim|required');
 		$this->form_validation->set_rules('telepon', 'Telepon', 'trim');
 
 		if ($this->form_validation->run() == TRUE)
@@ -103,7 +103,7 @@ class Kepegawaian extends Admin_panel
 		$this->form_validation->set_rules('alamat', 'Alamat', 'trim');
 		$this->form_validation->set_rules('telepon', 'Telepon', 'trim');
 		$this->form_validation->set_rules('jabatan', 'jabatan', 'trim');
-		//$this->form_validation->set_rules('bidang', 'bidang', 'trim');
+		$this->form_validation->set_rules('bidang', 'bidang', 'trim|required');
 		$this->form_validation->set_rules('status', 'Status Dinas', 'trim|required');
 
 		if ($this->form_validation->run() == TRUE)

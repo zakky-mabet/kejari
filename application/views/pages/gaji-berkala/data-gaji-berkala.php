@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							 <img width="50%" src="<?php echo base_url('public/images/gaji-berkala/'.$row->lampiran_sk) ?>" class="img-rounded">
 							</button>
 							<?php else : ?>
-							<span class="label label-danger">Lampiran SK Kosong</span>
+							<span class="label label-warning">Lampiran SK Kosong</span>
 							<?php endif; ?>
 
 							</td>

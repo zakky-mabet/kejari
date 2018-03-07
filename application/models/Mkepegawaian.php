@@ -74,7 +74,8 @@ class Mkepegawaian extends CI_Model
 		$additional_data = array(
 								'first_name' => $this->input->post('name'),
 								'nip' => $this->input->post('nip'),
-								'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT), 
+								'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT),
+								'active' => 1
 								);
 
 			$this->ion_auth->register(

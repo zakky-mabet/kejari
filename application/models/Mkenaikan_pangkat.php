@@ -84,7 +84,7 @@ class Mkenaikan_pangkat extends CI_Model
 
 		$this->db->insert('kepangkatan', $kepangkatan);
 
-		$ID_Kenaikan_pangkat = $this->db->insert_id();
+		$pegawai = $this->db->get_where('kepegawaian', array('nip' => $this->input->post('nip')))->row();
 
 		$this->firebase_push->setTo($this->get_firebase_token(1));
         $this->firebase_push->setTitle("Kenaikan Pangkat");

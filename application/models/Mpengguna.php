@@ -104,9 +104,9 @@ class Mpengguna extends MY_Model
 				' Password Lama Anda Salah.', 
 				array('type' => 'danger','icon' => 'times')
 			);
-	}
+		}
 
-}
+	}
 
 		
 }
