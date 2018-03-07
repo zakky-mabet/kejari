@@ -112,10 +112,10 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 					<label for="status" class="control-label col-md-3">Status Dinas : <strong class="text-red">*</strong></label>
 					<div class="col-md-6">
 				       	<div class="radio radio-inline radio-primary">
-				           <input name="status" type="radio" value="aktif" <?php if($get->status_dinas=='aktif') echo "checked"; ?>> <label for="status"> Aktif</label>
+				           <input name="status" type="radio" value="1" <?php if($get->status_dinas =='1') echo "checked"; ?>> <label for="status"> Aktif</label>
 				       	</div>
 				       	<div class="radio radio-inline radio-primary">
-				           <input name="status" type="radio" value="tidak aktif" <?php if($get->status_dinas=='tidak aktif') echo "checked"; ?>> <label for="status"> Tidak Aktif</label>
+				           <input name="status" type="radio" value="0" <?php if($get->status_dinas =='0') echo "checked"; ?>> <label for="status"> Tidak Aktif</label>
 				       	</div>
 				       	<p class="help-block"><?php echo form_error('status', '<small class="text-red">', '</small>'); ?></p>
 					</div>
@@ -126,12 +126,12 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 					<div class="col-md-4">
 						<select name="bidang" class="form-control">
 							<option value="">-- PILIH --</option>
-							<option value="2" <?php if($get->bidang == 'PIDSUS') echo "selected"; ?>>PIDSUS</option>
-							<option value="3" <?php if($get->bidang == 'PEMBINAAN') echo "selected"; ?>>PEMBINAAN</option>
-							<option value="4" <?php if($get->bidang == 'INTELEJEN') echo "selected"; ?>>INTELEJEN</option>
-							<option value="5" <?php if($get->bidang == 'DATUN') echo "selected"; ?>>DATUN</option>
-							<option value="6" <?php if($get->bidang == 'PIDUM') echo "selected"; ?>>PIDUM</option>
-							<option value="7" <?php if($get->bidang == 'KEJARI') echo "selected"; ?>>KEJARI</option>
+							<option value="2" <?php if($get->bidang == '2') echo "selected"; ?>>PIDSUS</option>
+							<option value="3" <?php if($get->bidang == '3') echo "selected"; ?>>PEMBINAAN</option>
+							<option value="4" <?php if($get->bidang == '4') echo "selected"; ?>>INTELEJEN</option>
+							<option value="5" <?php if($get->bidang == '5') echo "selected"; ?>>DATUN</option>
+							<option value="6" <?php if($get->bidang == '6') echo "selected"; ?>>PIDUM</option>
+							<option value="7" <?php if($get->bidang == '7') echo "selected"; ?>>KEJARI</option>
 							
 						</select>
 						<p class="help-block"><?php echo form_error('bidang', '<small class="text-red">', '</small>'); ?></p>

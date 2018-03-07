@@ -121,7 +121,7 @@ class Kepegawaian extends Admin_panel
 	public function delete($param = 0)
 	{
 		$this->mkepegawaian->delete($param);
-
+	
 		redirect('kepegawaian');
 	}
 

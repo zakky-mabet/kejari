@@ -107,7 +107,6 @@ class Mpengguna extends MY_Model
 		}
 
 	}
-
 		
 }
 

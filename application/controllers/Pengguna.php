@@ -71,7 +71,7 @@ class Pengguna extends admin_panel
 
 		$this->data['title'] = "account";
 		$this->data['get'] = $this->mkepegawaian->get($param);
-		$this->template->view('pengguna/update-user', $this->data);
+		$this->template->view('pengguna/update-account', $this->data);
 		
 	}
 

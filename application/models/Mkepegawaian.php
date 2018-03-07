@@ -65,7 +65,7 @@ class Mkepegawaian extends CI_Model
 			'alamat' => $this->input->post('alamat'),
 			'jabatan' => $this->input->post('jabatan'),
 			'bidang' => $this->input->post('bidang'),
-			'status_dinas' => 'active',
+			'status_dinas' => '1',
 			'foto' => $foto
 		);
 
@@ -160,7 +160,8 @@ class Mkepegawaian extends CI_Model
 		$additional_data = array(
 								'first_name' => $this->input->post('name'),
 								'nip' => $this->input->post('nip'),
-								'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT), 
+								'password' => password_hash($this->input->post('nip'), PASSWORD_DEFAULT),
+								'active' => $this->input->post('status') ,
 								);
 
 			$this->ion_auth->register(
@@ -189,6 +190,7 @@ class Mkepegawaian extends CI_Model
 
 	public function delete($param = 0)
 	{
+		
 		$get = $this->get($param);
 
 		if($get->foto != FALSE)
@@ -196,7 +198,7 @@ class Mkepegawaian extends CI_Model
 
 		
 		$this->db->delete('kepegawaian', array('ID' => $param));
-
+		
 		$this->template->alert(
 			' Data kepegawaian berhasil Hapus.', 
 			array('type' => 'success','icon' => 'check')

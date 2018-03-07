@@ -71,7 +71,7 @@ echo form_open_multipart(current_url(), array('class' => 'form-horizontal'));
 
 			<div class="box-footer with-border">
 				<div class="col-md-4 col-xs-5">
-					<a href="" class="btn btn-app pull-right">
+					<a href="<?php echo site_url('kepegawaian') ?>" class="btn btn-app pull-right">
 						<i class="ion ion-reply"></i> Kembali
 					</a>
 				</div>

@@ -16,9 +16,9 @@
 					<th rowspan="2" style="vertical-align: middle;">No.</th>
 					<th class="text-center" style="vertical-align: middle;">NIP</th>
 					<th class="text-center" style="vertical-align: middle;">NRP</th>
+					<th class="text-center" style="vertical-align: middle;">NAMA LENGKAP</th>
 					<th class="text-center" style="vertical-align: middle;">PANGKAT</th>
 					<th class="text-center" style="vertical-align: middle;">JABATAN</th>
-					<th class="text-center" style="vertical-align: middle;">NAMA LENGKAP</th>
 					<th class="text-center" style="vertical-align: middle;">TEMPAT, TANGGAL LAHIR</th>
 					<th class="text-center" style="vertical-align: middle;">AGAMA</th>
 					<th class="text-center" style="vertical-align: middle;">JENIS KELAMIN</th>
@@ -38,9 +38,9 @@
 					<td class="text-center"><?php echo ++$this->page ?>.</td>
 					<td><?php echo $row->nip ?></td>
 					<td><?php echo $row->nrp ?></td>
+					<td><?php echo $row->nama ?></td>
 					<td><?php echo $row->pangkat ?></td>
 					<td><?php echo $row->jabatan ?></td>
-					<td><?php echo $row->nama ?></td>
 					<td><?php echo $row->tempat_lahir ?>, <?php echo date_id($row->tgl_lahir) ?></td>
 					<td><?php echo ucwords($row->agama) ?></td>
 					<td><?php echo $row->jns_kelamin ?></td>
