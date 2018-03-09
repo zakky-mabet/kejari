@@ -113,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('spdp','p16')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('spdp','p16','p17','p18','p19')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>PIDUM</span>
                   <span class="pull-right-container"> 
@@ -126,9 +126,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
                 <li class="<?php echo active_link_method('index', 'spdp') ?>">
                     <a href="<?php echo base_url('spdp/index') ?>"><i class="fa fa-angle-double-right"></i> Data SPDP</a>
-                </li>
+                </li>                                      
                  <li class="<?php echo active_link_method('index', 'p16') ?>">
                     <a href="<?php echo base_url('p16/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-16</a>
+                </li>
+                 <li class="<?php echo active_link_method('index', 'p17') ?>">
+                    <a href="<?php echo base_url('p17/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-17</a>
+                </li>
+                 <li class="<?php echo active_link_method('index', 'p18') ?>">
+                    <a href="<?php echo base_url('p18/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-18</a>
+                </li>
+                 <li class="<?php echo active_link_method('index', 'p19') ?>">
+                    <a href="<?php echo base_url('p19/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-19</a>
                 </li>
               </ul>
           </li>
@@ -141,12 +150,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </a>
               <ul class="treeview-menu">
                 <li class="<?php echo active_link_method('index','kepegawaian').active_link_method('update','kepegawaian').active_link_method('detail_kepangkatan','kepangkatan').active_link_method('create','kepangkatan').active_link_method('create_pangkat','kepangkatan').active_link_method('update','kepangkatan')?>">
-
                   <a href="<?php echo base_url('kepegawaian') ?>"><i class="fa fa-angle-double-right"></i> Data Kepegawaian
                   <span data-toggle="tooltip" data-placement="top" title="Laporan Belum dibuat" class="label label-danger pull-right"></span>
                   </a>
-                  
-                  
                 </li>
                 <li class="<?php echo active_link_method('create','kepegawaian') ?>">
                     <a href="<?php echo base_url('kepegawaian/create') ?>"><i class="fa fa-angle-double-right"></i> Tambah Pegawai</a>
@@ -160,7 +166,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="<?php echo active_link_method('index','diklat').active_link_method('create','diklat').active_link_method('update','diklat').active_link_method('detail_pegawai','diklat') ?>">
                     <a href="<?php echo base_url('diklat') ?>"><i class="fa fa-angle-double-right"></i> Diklat Pegawai</a>
                 </li>
-<!--                 <li class="">
+<!--            <li class="">
                     <a href=""><i class="fa fa-angle-double-right"></i> Usulan Satya Lencana</a>
                 </li> -->
               </ul>

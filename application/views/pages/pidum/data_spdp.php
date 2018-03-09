@@ -48,10 +48,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							<td> <?php if ($this->mspdp->get($row->ID, 'spdp_on_p16') == 0): ?>
 							   <span class="text-red"> Surat P-16 belum dibuat </span> <?php else: ?> Surat P-16 telah dibuat	<?php endif ?> </td>
 							<td class="text-left">
-								
+								<?php if ($this->mspdp->get($row->ID, 'spdp_on_p16') == 0): ?>
 								<a href="<?php echo base_url('p16/create/'.$row->ID) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Printah Penujukan Jaksa Penuntut Umum" class="btn btn-xs btn-success" style="margin-right: 10px">
 									<i class="fa fa-send"></i>
 								</a>
+
+								<?php endif ?> 
 						
 								<a href="<?php echo base_url('spdp/update/'.$row->ID) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting SPDP ini." style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>

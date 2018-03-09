@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="<?php echo base_url("public/plugins/bootstrap-checkbox/awesome-bootstrap-checkbox.min.css"); ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('public/components/bootstrap-daterangepicker/daterangepicker.css') ?>">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700" rel="stylesheet"> -->
     <link rel="stylesheet" href="<?php echo base_url('public/plugins/iCheck/all.css') ?>">
     <link rel="stylesheet" href=" <?php echo base_url('public/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') ?>">
     <style>
