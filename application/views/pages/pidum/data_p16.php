@@ -66,7 +66,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</table>
 			</div>
 			<div class="box-footer no-padding">
-				
+				<pre>
+					<?php print_r($p16); ?>	
+				</pre>
 			</div>
 		</div>
 		<div class="col-md-12 text-center">
