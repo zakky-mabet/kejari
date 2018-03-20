@@ -15,4 +15,6 @@ class Welcome extends Admin_panel
 		$this->data['title'] = "Dashboard";
 		$this->template->view('dashboard', $this->data);
 	}
+
+	
 }

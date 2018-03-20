@@ -20,7 +20,7 @@ class Mp16 extends MY_model {
 		{
 			$this->db->order_by('p16.ID', 'desc');
 
-			$this->db->select('p16.ID AS ID_primary_p16, p16.*, spdp.*');
+			$this->db->select('p16.ID AS ID_primary_p16, p16.*, spdp.*, ');
 
 			$this->db->from('p16');
 
@@ -51,7 +51,7 @@ class Mp16 extends MY_model {
 
 			return $this->db->get_where('p16', array('id_spdp' => $param))->num_rows();
 
-		}else{
+		} elseif ($type == 'get_p16') {
 
 			$this->db->select('p16.ID AS ID_primary_p16, p16.*, spdp.*');
 
@@ -62,7 +62,25 @@ class Mp16 extends MY_model {
 			$this->db->where('p16.ID', $param);
 
 			return $this->db->get()->row();
+
+		} 
+		else{
+
+			$this->db->select('p16.ID AS ID_primary_p16, p16.*, spdp.*');
+
+			$this->db->from('spdp');
+
+			$this->db->join('p16', 'spdp.ID = p16.id_spdp', 'LEFT');
+
+			$this->db->where('spdp.ID', $param);
+
+			return $this->db->get()->row();
 		}
+	}
+
+	public  function cek_id_p16_on_p17($param = 0)
+	{
+		return $this->db->get_where('p17', array('id_p16' => $param) )->num_rows();
 	}
 
 	public function nomor_cek($param = 0)
@@ -80,9 +98,9 @@ class Mp16 extends MY_model {
 		$data = array(
 			'nomor_print' => $this->input->post('nomor_print'),
 			'id_spdp' => $param ,
-			'dasar' => $this->input->post('dasar'),
-			'untuk' => $this->input->post('untuk'),
-			'pertimbangan' => $this->input->post('pertimbangan'),
+			'dasar' => htmlspecialchars($this->input->post('dasar')),
+			'untuk' => htmlspecialchars($this->input->post('untuk')),
+			'pertimbangan' => htmlspecialchars($this->input->post('pertimbangan')),
 			'user_id' => $this->ion_auth->user()->row()->id,
 			'tanggal_create' => date('Y-m-d'),
 		); 
@@ -115,9 +133,9 @@ class Mp16 extends MY_model {
 	{
 		$data = array(
 			'nomor_print' => $this->input->post('nomor_print'),
-			'dasar' => $this->input->post('dasar'),
-			'untuk' => $this->input->post('untuk'),
-			'pertimbangan' => $this->input->post('pertimbangan'),
+			'dasar' => htmlspecialchars($this->input->post('dasar')),
+			'untuk' => htmlspecialchars($this->input->post('untuk')),
+			'pertimbangan' => htmlspecialchars($this->input->post('pertimbangan')),
 			'user_id' => $this->ion_auth->user()->row()->id,
 			'tanggal_update' => date('Y-m-d'),
 		); 
@@ -145,39 +163,6 @@ class Mp16 extends MY_model {
 		}
 	}
 
-	// public function update($param = 0)
-	// {
-	// 	$data = array(
-	// 		'nomor' => $this->input->post('nomor'),
-	// 		'asal' => $this->input->post('asal'),
-	// 		'deskripsi' => $this->input->post('deskripsi'),
-	// 		'user_id' => $this->ion_auth->user()->row()->id,
-	// 		'tanggal_update' => date('Y-m-d'),
-	// 	); 
-
-	// 	$this->db->update('spdp',  $data, array('ID' => $param) );
-
-	// 	$id_spdp = $param;
-
-	// 	foreach ($this->mspdp->get_group(6) as $key => $value) {
-
-	// 		// LOOP NOTIFIKASI
-	// 	    $this->insert_kepada($value->id, $id_spdp);
-	// 	}		
-
-	// 	if($this->db->affected_rows())
-	// 	{
-	// 		$this->template->alert(
-	// 			'Data SPDP berhasil diubah.', 
-	// 			array('type' => 'success','icon' => 'check')
-	// 		);
-	// 	} else {
-	// 		$this->template->alert(
-	// 			' Gagal menyimpan data.', 
-	// 			array('type' => 'warning','icon' => 'times')
-	// 		);
-	// 	}
-	// }
 
 	public function insert_kepada($param = 0, $id_user = 0)
 	{
@@ -267,25 +252,25 @@ class Mp16 extends MY_model {
 		return $this->db->get_where('diperintahkan_jpu', array('id_p16' => $param, 'id_user' => $user) )->num_rows();
 	}
 
-	// public function delete($param = 0)
-	// {
-	// 	$this->db->delete('laporan_informasi', array('ID' => $param));
+	public function delete($param = 0)
+	{
+		$this->db->delete('p16', array('ID' => $param));
 
-	// 	$this->db->delete('penerima_laporan_informasi', array('id_laporan_informasi' => $param));
+		$this->db->delete('diperintahkan_jpu', array('id_p16' => $param));
 
-	// 	if($this->db->affected_rows())
-	// 	{
-	// 		$this->template->alert(
-	// 			'Data laporan informasi berhasil dhapus.', 
-	// 			array('type' => 'success','icon' => 'check')
-	// 		);
-	// 	} else {
-	// 		$this->template->alert(
-	// 			' Gagal menghapus data.', 
-	// 			array('type' => 'warning','icon' => 'times')
-	// 		);
-	// 	}
-	// }
+		if($this->db->affected_rows())
+		{
+			$this->template->alert(
+				'Data P-16 berhasil dhapus.', 
+				array('type' => 'success','icon' => 'check')
+			);
+		} else {
+			$this->template->alert(
+				' Gagal menghapus data.', 
+				array('type' => 'warning','icon' => 'times')
+			);
+		}
+	}
 
 	
 }

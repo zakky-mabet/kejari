@@ -113,7 +113,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
               </ul>
           </li>
-          <li class="treeview <?php echo active_link_multiple(array('spdp','p16')); ?>">
+          <li class="treeview <?php echo active_link_multiple(array('spdp','p16','p17','p18','p19')); ?>">
               <a href="#">
                   <i class="fa fa-file-text-o"></i> <span>PIDUM</span>
                   <span class="pull-right-container"> 
@@ -127,8 +127,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li class="<?php echo active_link_method('index', 'spdp') ?>">
                     <a href="<?php echo base_url('spdp/index') ?>"><i class="fa fa-angle-double-right"></i> Data SPDP</a>
                 </li>
-                 <li class="<?php echo active_link_method('index', 'p16') ?>">
+                <li class="<?php echo active_link_method('index', 'p16') ?>">
                     <a href="<?php echo base_url('p16/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-16</a>
+                </li>
+                <li class="<?php echo active_link_method('index', 'p17') ?>">
+                    <a href="<?php echo base_url('p17/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-17</a>
+                </li>
+                <li class="<?php echo active_link_method('index', 'p18') ?>">
+                    <a href="<?php echo base_url('p18/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-18</a>
+                </li>
+                <li class="<?php echo active_link_method('index', 'p19') ?>">
+                    <a href="<?php echo base_url('p19/index') ?>"><i class="fa fa-angle-double-right"></i> Data Surat P-19</a>
                 </li>
               </ul>
           </li>

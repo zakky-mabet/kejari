@@ -13,4 +13,9 @@ class Main extends CI_Controller
 		$this->data['title'] = "Dashboard";
 		$this->load->view('pages/main');
 	}
+
+	public  function hash()
+	{
+		print_r(password_hash('password', PASSWORD_DEFAULT));
+	}
 }

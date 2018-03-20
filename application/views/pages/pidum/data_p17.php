@@ -16,11 +16,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					</div>
 					<div class="col-md-3">
 						<button type="submit" class="btn btn-success" id="search"><i class="fa fa-search"></i> Cari Data</button>
-						<a href="<?php echo base_url('p16') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
+						<a href="<?php echo base_url('p17') ?>" class="btn btn-default" id="reset-form"><i class="fa fa-times"></i> Reset</a>
 					</div>
 					<div class="col-md-3 pull-right">
 	
-						<a href="<?php echo site_url("p16/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
+						<a href="<?php echo site_url("p17/print_out?{$this->input->server('QUERY_STRING')}") ?>" class="btn btn-success btn-print" id="reset-form"><i class="fa fa-print"></i> Cetak</a>
 					</div>
 				</div>
 			</div>
@@ -30,44 +30,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<thead class="bg-green">
 						<tr>
 							<th class="text-center">NO</th>
-							<th class="text-center">NOMOR PRINT</th>
-							<th class="text-center">DASAR</th>
-							<th class="text-center">UNTUK</th>
+							<th class="text-center">NOMOR</th>
+							<th class="text-center">SIFAT</th>
+							<th class="text-center">PERIHAL</th>
+							<th class="text-center">KEPADA</th>
 							<th class="text-center">TANGGAL DIBUAT</th>
-
 							<th width="100"></th>
 						</tr>
 					</thead>
 
 					<tbody class="hoverTable">
-						<?php foreach($p16 as $row) : ?>
+						<?php foreach($p17 as $row) : ?>
 						<tr style="vertical-align: top">
 							<td class="text-center"><?php echo ++$this->page ?>.</td>
-							<td><?php echo highlight_phrase($row->nomor_print, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
-							<td><?php echo $row->dasar ?>  </td>
-							<td><?php echo highlight_phrase($row->untuk, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
-							<td><?php echo highlight_phrase(date_id($row->tanggal_masuk), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
-											
+							<td><?php echo highlight_phrase($row->nomor_p17, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase($row->sifat, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase($row->perihal, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase($row->dikirim_kepada, $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?>  </td>
+							<td><?php echo highlight_phrase(date_id($row->tanggal_create_p17), $this->input->get('query'),'<span style="color:red; font-weight: bold;">', '</span>'); ?></td>
+													
 							<td class="text-left">
 
-								<?php if ($this->mp16->cek_id_p16_on_p17($row->ID_primary_p16) == 0): ?> 
-								<a href="<?php echo base_url('p17/create/'.$row->ID_primary_p16) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Permintaan Perkembangan Hasil Penyidikan" class="btn btn-xs btn-success" style="margin-right: 10px">
+								<?php if ($this->mp17->cek_id_p17_on_p18($row->ID_primary_p17) == 0): ?> 
+								<a href="<?php echo base_url('p18/create/'.$row->ID_primary_p17) ?>" data-toggle="tooltip" data-placement="top" title="Buat Surat Permintaan Hasil Penyidikan Belum Lengkap" class="btn btn-xs btn-success" style="margin-right: 10px">
 									<i class="fa fa-send"></i> </a>
 								<?php else: ?>
 
 								<?php endif ?>
-								<a href="<?php echo base_url('p16/update/'.$row->ID_primary_p16) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting P-16 ini." style="margin-right: 10px">
+
+								<a href="<?php echo base_url('p17/update/'.$row->ID_primary_p17) ?>" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" title="Sunting P-16 ini." style="margin-right: 10px">
 									<i class="fa fa-pencil"></i>
 								</a>
 								
-								<a href="javascript:void(0)" id="delete-p16" data-toggle="tooltip" data-placement="top" title="Hapus P-16 ini." data-id="<?php echo $row->ID_primary_p16 ?>" class="btn btn-xs btn-danger">
+								<a href="javascript:void(0)" id="delete-p17" data-toggle="tooltip" data-placement="top" title="Hapus P-17 ini." data-id="<?php echo $row->ID_primary_p17 ?>" class="btn btn-xs btn-danger">
 									<i class="fa fa-trash-o"></i>
 								</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>
 						<tr>
-							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($p16) . " dari " . $num_p16 . " data"; ?></small></td>
+							<td colspan="7"><small class="pull-right">Ditampilkan <?php echo count($p17) . " dari " . $num_p17 . " data"; ?></small></td>
 						</tr>
 					</tbody>
 				</table>
@@ -83,7 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 
-<div class="modal fade in modal-danger" id="modal-delete-p16" tabindex="-1" data-backdrop="static" data-keyboard="false">
+<div class="modal fade in modal-danger" id="modal-delete-p17" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">

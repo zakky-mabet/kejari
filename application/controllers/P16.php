@@ -67,7 +67,7 @@ class P16 extends Admin_panel {
 		{
 			$this->mp16->create($param);
 
-			redirect(current_url());
+			redirect(base_url('p16'));
 		}
 
 		$this->data['title'] = "Buat Surat Perintah Penujukan Jaksa Penuntuan Umum ";
@@ -81,7 +81,7 @@ class P16 extends Admin_panel {
 
 		$this->breadcrumbs->unshift(2, 'Sunting', "p16/update");
 		
-		$this->form_validation->set_rules('nomor_print', 'NOMOR PRINT', 'trim|required|callback_validate_nomor');
+		$this->form_validation->set_rules('nomor_print', 'NOMOR PRINT', 'trim|required');
 		$this->form_validation->set_rules('dasar', 'DASAR ', 'trim|required');
 		$this->form_validation->set_rules('pertimbangan', 'PERTIMBANGAN ', 'trim|required');
 		$this->form_validation->set_rules('untuk', 'UNTUK ', 'trim|required');
@@ -115,12 +115,12 @@ class P16 extends Admin_panel {
 		}
 	}
 
-	// public function delete($param = 0)
-	// {
-	// 	$this->mp16->delete($param);
+	public function delete($param = 0)
+	{
+		$this->mp16->delete($param);
 
-	// 	redirect('laporan_informasi/harian');
-	// }
+		redirect('p16');
+	}
 
 	
 }

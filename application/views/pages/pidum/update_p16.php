@@ -9,33 +9,33 @@
 					</tr>
 					<tr>
 						<th class="small">NOMOR</th>
-						<td class="small"><?php echo $this->mp16->get($param)->nomor ?></td>
+						<td class="small"><?php echo $this->mp16->get($param,'get_p16')->nomor ?></td>
 					</tr>
 					<tr>
 						<th class="small">ASAL</th>
-						<td class="small"><?php echo $this->mp16->get($param)->asal ?></td>
+						<td class="small"><?php echo $this->mp16->get($param,'get_p16')->asal ?></td>
 					</tr>
 					<tr>
 						<th class="small">DESKRIPSI</th>
-						<td class="small"><?php echo $this->mp16->get($param)->deskripsi ?></td>
+						<td class="small"><?php echo $this->mp16->get($param,'get_p16')->deskripsi ?></td>
 					</tr>
 					<tr>
 						<th class="small">TANGGAL DIBUAT</th>
-						<td class="small"><?php echo date_id($this->mp16->get($param)->tanggal_masuk) ?></td>
+						<td class="small"><?php echo date_id($this->mp16->get($param,'get_p16')->tanggal_masuk) ?></td>
 					</tr>
 					<tr>
 						<th class="small">TANGGAL DIUBAH</th>
 						<td class="small">
-							<?php if ($this->mp16->get($param)->tanggal_update == NULL): ?>
+							<?php if ($this->mp16->get($param,'get_p16')->tanggal_update == NULL): ?>
 								<i>Belum ada perubahan</i>
 							<?php else: ?>
-								<?php echo date_id($this->mp16->get($param)->tanggal_update) ?>
+								<?php echo date_id($this->mp16->get($param,'get_p16')->tanggal_update) ?>
 							<?php endif ?>
 						</td>
 					</tr>
 					<tr>
 						<th class="small">PENJABAT PEMBUAT</th>
-						<td class="small"><?php echo $this->mp16->get_by_id($this->mp16->get($param)->user_id)->nip.' - '.$this->mp16->get_by_id($this->mp16->get($param)->user_id)->first_name.' '.$this->mp16->get_by_id($this->mp16->get($param)->user_id)->last_name ?> </td>
+						<td class="small"><?php echo $this->mp16->get_by_id($this->mp16->get($param,'get_p16')->user_id)->nip.' - '.$this->mp16->get_by_id($this->mp16->get($param,'get_p16')->user_id)->first_name.' '.$this->mp16->get_by_id($this->mp16->get($param,'get_p16')->user_id)->last_name ?> </td>
 					</tr>
 					
 				</table>
@@ -53,22 +53,22 @@ echo form_open(current_url(), array('class' => ''));
 
 				<div class="form-group">
                     <label for="nomor_print" class="control-label">NOMOR PRINT : <strong class="text-red">*</strong></label>
-                    <input type="text"  class="form-control" autofocus name="nomor_print" value="<?php echo  $this->mp16->get($param)->nomor_print ?>">
+                    <input type="text"  class="form-control" autofocus name="nomor_print" value="<?php echo  $this->mp16->get($param,'get_p16')->nomor_print ?>">
                         <p class="help-block"><?php echo form_error('nomor_print', '<small class="text-red">', '</small>'); ?></p>            
                 </div>
                 <div class="form-group">
                     <label for="dasar" class="control-label">DASAR : <strong class="text-red">*</strong></label>
-                   	<textarea name="dasar" rows="8" class="form-control textarea"><?php echo  $this->mp16->get($param)->dasar ?></textarea>
+                   	<textarea name="dasar" rows="8" class="form-control textarea"><?php echo  $this->mp16->get($param,'get_p16')->dasar ?></textarea>
                         <p class="help-block"><?php echo form_error('dasar', '<small class="text-red">', '</small>'); ?></p>            
                 </div>
                 <div class="form-group">
                     <label for="pertimbangan" class="control-label">PERTIMBANGAN : <strong class="text-red">*</strong></label>
-                   	<textarea name="pertimbangan" rows="8" class="form-control textarea"><?php  echo $this->mp16->get($param)->pertimbangan ?></textarea>
+                   	<textarea name="pertimbangan" rows="8" class="form-control textarea"><?php  echo $this->mp16->get($param,'get_p16')->pertimbangan ?></textarea>
                         <p class="help-block"><?php echo form_error('pertimbangan', '<small class="text-red">', '</small>'); ?></p>            
                 </div>
                 <div class="form-group">
                     <label for="untuk" class="control-label">UNTUK : <strong class="text-red">*</strong></label>
-                   	<textarea name="untuk" rows="8" class="form-control textarea"><?php  echo $this->mp16->get($param)->untuk ?></textarea>
+                   	<textarea name="untuk" rows="8" class="form-control textarea"><?php  echo $this->mp16->get($param,'get_p16')->untuk ?></textarea>
                         <p class="help-block"><?php echo form_error('untuk', '<small class="text-red">', '</small>'); ?></p>            
                 </div>
                 <div class="form-group">
@@ -83,7 +83,7 @@ echo form_open(current_url(), array('class' => ''));
 
 			<div class="box-footer with-border">
 				<div class="col-md-4 col-xs-5">
-					<a href="<?php echo site_url('spdp') ?>" class="btn btn-app pull-right">
+					<a href="<?php echo site_url('p16') ?>" class="btn btn-app pull-right">
 							<i class="ion ion-reply"></i> Kembali
 						</a>
 				</div>
